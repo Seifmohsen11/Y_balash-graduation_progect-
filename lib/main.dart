@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/otp_verification_view.dart';
+import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 
 void main() {
@@ -29,6 +30,7 @@ class YBalashApp extends StatelessWidget {
             LoginView.id: (context) => const LoginView(),
             ForgetPasswordView.id: (context) => const ForgetPasswordView(),
             OtpVerificationView.id: (context) => const OtpVerificationView(),
+            ResetPasswordView.id: (context) => const ResetPasswordView(),
           },
           initialRoute: SignUpView.id,
         );

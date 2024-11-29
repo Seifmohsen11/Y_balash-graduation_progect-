@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
@@ -90,6 +91,7 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
               borderColor: kTextFieldAndButtomColor,
               onTap: () {
                 print("Entered OTP: $otp");
+                Navigator.popAndPushNamed(context, ResetPasswordView.id);
               },
             ),
             SizedBox(
