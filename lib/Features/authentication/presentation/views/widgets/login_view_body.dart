@@ -72,6 +72,7 @@ class LoginViewBody extends StatelessWidget {
               backgorundColor: kTextFieldAndButtomColor,
               textColor: Colors.white,
               borderColor: kTextFieldAndButtomColor,
+              onTap: () {},
             ),
             SizedBox(
               height: 22.h,
@@ -100,6 +101,7 @@ class LoginViewBody extends StatelessWidget {
               backgorundColor: Colors.transparent,
               textColor: Colors.black,
               borderColor: kmainTextColor,
+              onTap: () {},
             ),
           ],
         ),

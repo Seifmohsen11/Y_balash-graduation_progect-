@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
+import 'package:y_balash/Features/authentication/presentation/views/otp_verification_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -51,6 +52,9 @@ class ForgetPasswordViewBody extends StatelessWidget {
               backgorundColor: kTextFieldAndButtomColor,
               textColor: Colors.white,
               borderColor: kTextFieldAndButtomColor,
+              onTap: () {
+                Navigator.popAndPushNamed(context, OtpVerificationView.id);
+              },
             ),
             SizedBox(
               height: 22.h,

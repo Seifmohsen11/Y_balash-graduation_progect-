@@ -12,6 +12,7 @@ class CustomButtom extends StatelessWidget {
     required this.textColor,
     required this.borderColor,
     this.image,
+    required this.onTap,
   });
   final String label;
   final dynamic height;
@@ -20,10 +21,11 @@ class CustomButtom extends StatelessWidget {
   final Color textColor;
   final Color borderColor;
   final String? image;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             color: backgorundColor,

@@ -61,6 +61,7 @@ class SignUpViewBody extends StatelessWidget {
               backgorundColor: kTextFieldAndButtomColor,
               textColor: Colors.white,
               borderColor: kTextFieldAndButtomColor,
+              onTap: () {},
             ),
             SizedBox(
               height: 15.h,
@@ -86,6 +87,7 @@ class SignUpViewBody extends StatelessWidget {
               backgorundColor: Colors.transparent,
               textColor: Colors.black,
               borderColor: kmainTextColor,
+              onTap: () {},
             ),
           ],
         ),

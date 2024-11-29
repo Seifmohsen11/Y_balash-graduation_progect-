@@ -4,14 +4,11 @@ import 'package:y_balash/core/constants/constants.dart';
 
 class TextUnderButtom extends StatelessWidget {
   const TextUnderButtom(
-      {super.key,
-      required this.firstText,
-      this.secondText,
-      required this.onTap});
+      {super.key, required this.firstText, this.secondText, this.onTap});
 
   final String firstText;
   final String? secondText;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
