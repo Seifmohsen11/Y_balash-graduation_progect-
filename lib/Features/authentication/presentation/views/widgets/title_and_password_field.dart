@@ -4,10 +4,16 @@ import 'package:y_balash/Features/authentication/presentation/views/widgets/cust
 import 'package:y_balash/Features/authentication/presentation/views/widgets/text_field_title.dart';
 
 class TitleAndPasswordField extends StatelessWidget {
-  const TitleAndPasswordField(
-      {super.key, required this.title, required this.hintText});
+  const TitleAndPasswordField({
+    super.key,
+    required this.title,
+    required this.hintText,
+    this.onChange,
+  });
   final String title;
   final String hintText;
+  final Function(String)? onChange;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,6 +26,7 @@ class TitleAndPasswordField extends StatelessWidget {
         ),
         CustomPasswordField(
           hintText: '  $hintText',
+          onChange: onChange,
         )
       ],
     );

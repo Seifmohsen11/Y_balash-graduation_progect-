@@ -4,10 +4,16 @@ import 'package:y_balash/Features/authentication/presentation/views/widgets/cust
 import 'package:y_balash/Features/authentication/presentation/views/widgets/text_field_title.dart';
 
 class TitleAndTextField extends StatelessWidget {
-  const TitleAndTextField(
-      {super.key, required this.title, required this.hintText});
+  const TitleAndTextField({
+    super.key,
+    required this.title,
+    required this.hintText,
+    this.onChange,
+  });
   final String title;
   final String hintText;
+  final Function(String)? onChange;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,8 +24,9 @@ class TitleAndTextField extends StatelessWidget {
         SizedBox(
           height: 15.h,
         ),
-        CustomTextField(
+        CustomTextFormField(
           hintText: '  $hintText',
+          onChange: onChange,
         )
       ],
     );

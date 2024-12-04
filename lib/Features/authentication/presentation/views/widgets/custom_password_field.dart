@@ -3,9 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CustomPasswordField extends StatefulWidget {
-  const CustomPasswordField({super.key, required this.hintText});
+  const CustomPasswordField({
+    super.key,
+    required this.hintText,
+    this.onChange,
+  });
 
   final String hintText;
+  final Function(String)? onChange;
 
   @override
   State<CustomPasswordField> createState() => _CustomPasswordFieldState();
@@ -20,7 +25,14 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       padding: EdgeInsets.symmetric(horizontal: 14.w),
       child: SizedBox(
         height: 55.h,
-        child: TextField(
+        child: TextFormField(
+          validator: (data) {
+            if (data!.isEmpty) {
+              return "field is required";
+            }
+            return null;
+          },
+          onChanged: widget.onChange,
           obscureText: secureText, // This controls the visibility of the text
           decoration: InputDecoration(
             suffixIcon: IconButton(

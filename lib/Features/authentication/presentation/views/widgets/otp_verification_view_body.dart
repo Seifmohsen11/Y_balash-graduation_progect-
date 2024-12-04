@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
 
@@ -90,8 +91,15 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
               textColor: Colors.white,
               borderColor: kTextFieldAndButtomColor,
               onTap: () {
-                print("Entered OTP: $otp");
-                Navigator.popAndPushNamed(context, ResetPasswordView.id);
+                if (otp.isEmpty || otp.length < 6) {
+                  showSnackBar(
+                    context,
+                    'Please enter a valid OTP code.',
+                  );
+                } else {
+                  print("Entered OTP: $otp");
+                  Navigator.popAndPushNamed(context, ResetPasswordView.id);
+                }
               },
             ),
             SizedBox(
