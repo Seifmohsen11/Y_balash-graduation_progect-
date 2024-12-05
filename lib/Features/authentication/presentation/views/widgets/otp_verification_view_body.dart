@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/verify_otp_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
@@ -17,6 +18,7 @@ class OtpVerificationViewBody extends StatefulWidget {
 
 class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
   String otp = "";
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,25 +85,43 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
             SizedBox(
               height: 39.h,
             ),
-            CustomButtom(
-              height: 58.h,
-              width: 216.w,
-              label: 'Verify & proceed',
-              backgorundColor: kTextFieldAndButtomColor,
-              textColor: Colors.white,
-              borderColor: kTextFieldAndButtomColor,
-              onTap: () {
-                if (otp.isEmpty || otp.length < 6) {
-                  showSnackBar(
-                    context,
-                    'Please enter a valid OTP code.',
-                  );
-                } else {
-                  print("Entered OTP: $otp");
-                  Navigator.popAndPushNamed(context, ResetPasswordView.id);
-                }
-              },
-            ),
+            _isLoading
+                ? const CircularProgressIndicator(
+                    color: kTextFieldAndButtomColor,
+                  )
+                : CustomButtom(
+                    height: 58.h,
+                    width: 216.w,
+                    label: 'Verify & proceed',
+                    backgorundColor: kTextFieldAndButtomColor,
+                    textColor: Colors.white,
+                    borderColor: kTextFieldAndButtomColor,
+                    onTap: () async {
+                      if (otp.isEmpty || otp.length < 6) {
+                        showSnackBar(
+                          context,
+                          'Please enter a valid OTP code.',
+                        );
+                      } else {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        try {
+                          await verifyOTP(otp);
+                          showSnackBar(context, 'Verified Successful!',
+                              backgroundColor: Colors.green);
+                          Navigator.popAndPushNamed(
+                              context, ResetPasswordView.id);
+                        } catch (error) {
+                          showSnackBar(context, error.toString());
+                        } finally {
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }
+                      }
+                    },
+                  ),
             SizedBox(
               height: 29.h,
             ),

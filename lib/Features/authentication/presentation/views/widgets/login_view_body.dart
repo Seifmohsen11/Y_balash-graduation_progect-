@@ -4,7 +4,10 @@ import 'package:y_balash/Features/authentication/presentation/views/forget_passw
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
+import 'package:y_balash/Features/home/presentation/views/home_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/login_service.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/custom_text_divider.dart';
 import 'package:y_balash/core/widgets/logo_name.dart';
@@ -20,6 +23,7 @@ class LoginViewBody extends StatefulWidget {
 class _LoginViewBodyState extends State<LoginViewBody> {
   String? email, password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +86,39 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               SizedBox(
                 height: 50.h,
               ),
-              CustomButtom(
-                  height: 58.h,
-                  width: 153.w,
-                  label: 'Login',
-                  backgorundColor: kTextFieldAndButtomColor,
-                  textColor: Colors.white,
-                  borderColor: kTextFieldAndButtomColor,
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      print("Email: $email");
-                      print("Password: $password");
-                    }
-                  }),
+              _isLoading
+                  ? const CircularProgressIndicator(
+                      color: kTextFieldAndButtomColor,
+                    )
+                  : CustomButtom(
+                      height: 58.h,
+                      width: 153.w,
+                      label: 'Login',
+                      backgorundColor: kTextFieldAndButtomColor,
+                      textColor: Colors.white,
+                      borderColor: kTextFieldAndButtomColor,
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          try {
+                            await loginUser(email!, password!);
+                            showSnackBar(context, 'Login Successful!',
+                                backgroundColor: Colors.green);
+                            Navigator.popAndPushNamed(context, HomeView.id);
+                          } catch (error) {
+                            showSnackBar(context, error.toString());
+                          } finally {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          }
+                        } else {
+                          showSnackBar(
+                              context, 'Please fill all required fields.');
+                        }
+                      }),
               SizedBox(
                 height: 22.h,
               ),
