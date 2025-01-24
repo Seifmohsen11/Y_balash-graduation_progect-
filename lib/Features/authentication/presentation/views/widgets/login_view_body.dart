@@ -4,7 +4,7 @@ import 'package:y_balash/Features/authentication/presentation/views/forget_passw
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
-import 'package:y_balash/Features/home/presentation/views/home_view.dart';
+import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/login_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
@@ -106,7 +106,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                             await loginUser(email!, password!);
                             showSnackBar(context, 'Login Successful!',
                                 backgroundColor: Colors.green);
-                            Navigator.popAndPushNamed(context, HomeView.id);
+                            Navigator.popAndPushNamed(context, MainView.id);
                           } catch (error) {
                             showSnackBar(context, error.toString());
                           } finally {
