@@ -104,6 +104,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           });
                           try {
                             await loginUser(email!, password!);
+
                             showSnackBar(context, 'Login Successful!',
                                 backgroundColor: Colors.green);
                             Navigator.popAndPushNamed(context, MainView.id);
