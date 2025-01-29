@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -37,7 +39,52 @@ class HomeViewBody extends StatelessWidget {
                   ],
                 ),
               ),
+              const Location(),
             ],
+          ),
+          Positioned(
+            top: screenHeight * (168 / 932),
+            left: screenWidth * (16 / 430),
+            child: ItemOfCategory(
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              image: "assets/images/Dairy.png",
+              title: 'Dairy',
+              onTap: () {},
+            ),
+          ),
+          Positioned(
+            top: screenHeight * (211 / 932),
+            left: screenWidth * (126 / 430),
+            child: ItemOfCategory(
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              image: 'assets/images/bakery.png',
+              title: 'Bakery',
+              onTap: () {},
+            ),
+          ),
+          Positioned(
+            top: screenHeight * (211 / 932),
+            left: screenWidth * (245 / 430),
+            child: ItemOfCategory(
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              image: 'assets/images/desert.png',
+              title: 'Dessert',
+              onTap: () {},
+            ),
+          ),
+          Positioned(
+            top: screenHeight * (166 / 932),
+            left: screenWidth * (346 / 430),
+            child: ItemOfCategory(
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              image: 'assets/images/beverages.png',
+              title: 'Beverages',
+              onTap: () {},
+            ),
           )
         ],
       ),

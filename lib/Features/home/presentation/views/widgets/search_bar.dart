@@ -13,8 +13,9 @@ class CustomSearchBar extends StatelessWidget {
       height: screenHeight * (53 / 932),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Search...',
-          prefixIcon: Icon(Icons.search),
+          hintText: 'Search',
+          hintStyle: const TextStyle(color: Color(0xff8A8A8A)),
+          prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32),
           ),
