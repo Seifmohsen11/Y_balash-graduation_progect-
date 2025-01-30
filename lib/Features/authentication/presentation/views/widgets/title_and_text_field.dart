@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/custom_text_field.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/text_field_title.dart';
 
@@ -16,13 +15,15 @@ class TitleAndTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
         TitleOfTextField(
           title: title,
         ),
         SizedBox(
-          height: 15.h,
+          height: screenHeight * (15 / 932),
         ),
         CustomTextFormField(
           hintText: '  $hintText',

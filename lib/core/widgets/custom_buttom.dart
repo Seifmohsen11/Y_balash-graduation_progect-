@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CustomButtom extends StatelessWidget {
@@ -24,13 +23,17 @@ class CustomButtom extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             color: backgorundColor,
             border: Border.all(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(50.w))),
+            borderRadius:
+                BorderRadius.all(Radius.circular(screenWidth * (50 / 430)))),
         height: height,
         width: width,
         child: Center(
@@ -40,11 +43,12 @@ class CustomButtom extends StatelessWidget {
               if (image != null)
                 Padding(
                   padding: EdgeInsets.only(
-                      right: 8.w), // Space between image and text
+                      right: screenWidth *
+                          (8 / 430)), // Space between image and text
                   child: Image.asset(
                     image!,
-                    height: 24.h, // Adjust size if needed
-                    width: 24.w,
+                    height: screenHeight * (24 / 930), // Adjust size if needed
+                    width: screenWidth * (24 / 430),
                   ),
                 ),
               Text(

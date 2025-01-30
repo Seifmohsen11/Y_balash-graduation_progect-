@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class TitleOfTextField extends StatelessWidget {
@@ -7,20 +6,23 @@ class TitleOfTextField extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: 16.w,
+          width: screenWidth * (16 / 430),
         ),
         SizedBox(
-          height: 29.h,
+          height: screenHeight * (29 / 932),
           child: Text(
             title,
             style: TextStyle(
                 fontFamily: kIneraFont,
                 fontWeight: FontWeight.w400,
-                fontSize: 24.sp,
+                fontSize: screenWidth * (24 / 430),
                 color: kTextFieldAndButtomColor),
           ),
         ),

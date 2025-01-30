@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class TextUnderButtom extends StatelessWidget {
@@ -12,6 +11,8 @@ class TextUnderButtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -24,7 +25,7 @@ class TextUnderButtom extends StatelessWidget {
         ),
         if (secondText != null)
           Padding(
-            padding: EdgeInsets.only(left: 4.w),
+            padding: EdgeInsets.only(left: screenWidth * (4 / 430)),
             child: GestureDetector(
               onTap: onTap,
               child: Text(

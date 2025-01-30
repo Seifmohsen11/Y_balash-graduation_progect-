@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -21,10 +20,13 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * (14 / 430)),
       child: SizedBox(
-        height: 55.h,
+        height: screenHeight * (55 / 932),
         child: TextFormField(
           validator: (data) {
             if (data!.isEmpty) {
@@ -37,23 +39,23 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             suffixIcon: widget.icon,
             hintText: widget.hintText,
             hintStyle: TextStyle(
-              fontSize: 16.sp,
+              fontSize: screenWidth * (16 / 430),
               color: kmainTextColor,
               fontFamily: kIneraFont,
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
                 borderSide: BorderSide(
-                  width: 2.sp,
+                  width: screenWidth * (2 / 430),
                   color: kTextFieldAndButtomColor,
                 )),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
                 borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
                 borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),

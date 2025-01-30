@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CustomPasswordField extends StatefulWidget {
@@ -21,10 +20,13 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * (14 / 430)),
       child: SizedBox(
-        height: 55.h,
+        height: screenHeight * (55 / 932),
         child: TextFormField(
           validator: (data) {
             if (data!.isEmpty) {
@@ -42,7 +44,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                 });
               },
               icon: Padding(
-                padding: EdgeInsets.only(right: 8.w),
+                padding: EdgeInsets.only(right: screenWidth * (8 / 430)),
                 child: ColorFiltered(
                   colorFilter: const ColorFilter.mode(
                     Color(0xff8A8A8A), // Set the color to red
@@ -52,32 +54,33 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                     secureText
                         ? 'assets/icons/closedEyeIcon.png' // Icon when password is hidden
                         : 'assets/icons/openEyeIcon.png', // Icon when password is visible
-                    width: 24.w, // Adjust the icon size if needed
-                    height: 24.h,
+                    width: screenWidth *
+                        (24 / 430), // Adjust the icon size if needed
+                    height: screenHeight * (24 / 932),
                   ),
                 ),
               ),
             ),
             hintText: widget.hintText,
             hintStyle: TextStyle(
-              fontSize: 16.sp,
+              fontSize: screenWidth * (16 / 430),
               color: kmainTextColor,
               fontFamily: kIneraFont,
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
                 borderSide: BorderSide(
-                  width: 2.sp,
+                  width: screenWidth * (2 / 430),
                   color: kTextFieldAndButtomColor,
                 )),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
                 borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50.w),
-                borderSide: BorderSide(
+                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
+                borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),
           ),

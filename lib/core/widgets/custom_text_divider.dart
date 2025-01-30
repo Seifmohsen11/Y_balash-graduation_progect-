@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CusttomTextDivider extends StatelessWidget {
@@ -18,13 +17,15 @@ class CusttomTextDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
       children: [
         Expanded(
           child: Divider(
             color: dividerColor,
             thickness: thickness,
-            indent: 22.w,
+            indent: screenWidth * (22 / 430),
           ),
         ),
         Padding(
@@ -41,7 +42,7 @@ class CusttomTextDivider extends StatelessWidget {
           child: Divider(
             color: dividerColor,
             thickness: thickness,
-            endIndent: 22.w,
+            endIndent: screenWidth * (22 / 430),
           ),
         ),
       ],

@@ -8,7 +8,6 @@ import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/custom_text_divider.dart';
 import 'package:y_balash/core/widgets/logo_name.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
 
 class SignUpViewBody extends StatefulWidget {
@@ -25,6 +24,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: SingleChildScrollView(
@@ -33,11 +35,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           child: Column(
             children: [
               SizedBox(
-                height: 57.h,
+                height: screenHeight * (57 / 932),
               ),
               const LogoName(),
               SizedBox(
-                height: 37.h,
+                height: screenHeight * (37 / 932),
               ),
               TitleAndTextField(
                 title: 'Email address',
@@ -47,7 +49,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: 15.h,
+                height: screenHeight * (15 / 932),
               ),
               TitleAndTextField(
                 title: 'Phone Number',
@@ -57,7 +59,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: 15.h,
+                height: screenHeight * (15 / 932),
               ),
               TitleAndPasswordField(
                 title: 'Password',
@@ -67,7 +69,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: 15.h,
+                height: screenHeight * (15 / 932),
               ),
               TitleAndPasswordField(
                 title: 'Confirm Password',
@@ -77,15 +79,15 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: 37.h,
+                height: screenHeight * (37 / 932),
               ),
               _isLoading
                   ? const CircularProgressIndicator(
                       color: kTextFieldAndButtomColor,
                     )
                   : CustomButtom(
-                      height: 58.h,
-                      width: 191.w,
+                      height: screenHeight * (58 / 932),
+                      width: screenWidth * (191 / 430),
                       label: 'Sign Up',
                       backgorundColor: kTextFieldAndButtomColor,
                       textColor: Colors.white,
@@ -115,7 +117,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       },
                     ),
               SizedBox(
-                height: 15.h,
+                height: screenHeight * (15 / 932),
               ),
               TextUnderButtom(
                 onTap: () {
@@ -128,11 +130,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 text: "or",
               ),
               SizedBox(
-                height: 59.h,
+                height: screenHeight * (48 / 932),
               ),
               CustomButtom(
-                height: 46.h,
-                width: 292.w,
+                height: screenHeight * (46 / 932),
+                width: screenWidth * (292 / 430),
                 label: 'Sign up with google',
                 image: 'assets/icons/google.png',
                 backgorundColor: Colors.transparent,

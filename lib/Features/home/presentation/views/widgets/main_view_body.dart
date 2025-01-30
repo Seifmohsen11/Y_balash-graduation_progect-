@@ -16,31 +16,34 @@ class MainViewBody extends StatefulWidget {
 
 class _MainViewBodyState extends State<MainViewBody> {
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+        buttonBackgroundColor: const Color(0xFF2C9066),
         backgroundColor: kPrimaryColor,
-        items: const <Widget>[
+        items: <Widget>[
           ImageIcon(
-            AssetImage("assets/icons/home.png"),
-            size: 50,
+            const AssetImage("assets/icons/home.png"),
+            size: screenWidth * (50 / 430),
           ),
           ImageIcon(
-            AssetImage("assets/icons/search.png"),
-            size: 50,
+            const AssetImage("assets/icons/search.png"),
+            size: screenWidth * (50 / 430),
           ),
           ImageIcon(
-            AssetImage("assets/icons/chatBot.png"),
-            size: 50,
+            const AssetImage("assets/icons/chatBot.png"),
+            size: screenWidth * (50 / 430),
           ),
           ImageIcon(
-            AssetImage("assets/icons/favourite.png"),
-            size: 50,
+            const AssetImage("assets/icons/favourite.png"),
+            size: screenWidth * (50 / 430),
           ),
           ImageIcon(
-            AssetImage("assets/icons/account.png"),
-            size: 50,
+            const AssetImage("assets/icons/account.png"),
+            size: screenWidth * (50 / 430),
           ),
         ],
         onTap: (index) {
