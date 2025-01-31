@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.
 import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays_offers.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/tittle_of_section_and_see_all.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -101,41 +102,12 @@ class HomeViewBody extends StatelessWidget {
             left: screenWidth * (5 / 430),
             right: screenWidth * (28 / 430),
             child: SizedBox(
-              height: screenHeight * (200 / 932), // Adjust height as needed
+              height: screenHeight * (243 / 932), // Adjust height as needed
               child: const ListOfTodaysOffers(),
             ),
           )
         ],
       ),
     );
-  }
-}
-
-class ListOfTodaysOffers extends StatelessWidget {
-  const ListOfTodaysOffers({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.only(right: screenWidth * (15 / 430)),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius:
-                      BorderRadius.circular(screenWidth * (18 / 430))),
-              height: screenHeight * (243 / 932),
-              width: screenWidth * (175 / 430),
-              child: Image.asset("assets/images/Dairy.png"),
-            ),
-          );
-        });
   }
 }
