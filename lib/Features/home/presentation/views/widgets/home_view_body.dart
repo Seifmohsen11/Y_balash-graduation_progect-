@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.
 import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/list_of_gift_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_restaurants.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_best_selling.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_groceries_card.dart';
@@ -202,12 +203,29 @@ class HomeViewBody extends StatelessWidget {
                       child: ListOfGroceriesCard(
                           screenHeight: screenHeight,
                           screenWidth: screenWidth)),
-                  SizedBox(
-                    height: 50,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * (20 / 930),
+            ),
+//********************section of Gift card************************
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ListOfGiftCards(
+                        screenHeight: screenHeight, screenWidth: screenWidth),
                   )
                 ],
               ),
             ),
+
+            SizedBox(
+              height: screenHeight * (45 / 930),
+            )
           ],
         ),
       ),
