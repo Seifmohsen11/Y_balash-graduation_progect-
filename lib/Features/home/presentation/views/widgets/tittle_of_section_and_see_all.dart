@@ -7,15 +7,17 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
       required this.screenHeight,
       required this.screenWidth,
       required this.label,
-      required this.onTap});
+      required this.onTap,
+      required this.spaceBetween});
   final double screenHeight;
   final double screenWidth;
   final String label;
   final VoidCallback onTap;
+  final double spaceBetween;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenHeight * (34 / 932),
+      height: screenHeight * (36 / 932),
       child: Row(
         children: [
           Text(
@@ -26,7 +28,7 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
                 fontSize: screenWidth * (24 / 430)),
           ),
           SizedBox(
-            width: screenWidth * (165 / 430),
+            width: spaceBetween,
           ),
           TextButton(
             onPressed: onTap,
