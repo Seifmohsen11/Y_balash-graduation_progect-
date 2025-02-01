@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 
-class ListOfTodaysOffers extends StatelessWidget {
-  const ListOfTodaysOffers({super.key});
+class ListOfBestSelling extends StatelessWidget {
+  const ListOfBestSelling({super.key});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 10,
@@ -16,8 +15,8 @@ class ListOfTodaysOffers extends StatelessWidget {
           return ProductCard(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            image: 'assets/images/banana.png',
-            title: 'Organic Bananas',
+            image: 'assets/images/pepper.png',
+            title: 'Red Pepper',
             description: '1Kg, Priceg',
             price: '4.99',
           );

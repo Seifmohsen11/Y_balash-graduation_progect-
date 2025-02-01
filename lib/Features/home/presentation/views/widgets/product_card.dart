@@ -7,11 +7,17 @@ class ProductCard extends StatelessWidget {
     required this.screenWidth,
     required this.screenHeight,
     required this.image,
+    required this.title,
+    required this.description,
+    required this.price,
   });
 
   final double screenWidth;
   final double screenHeight;
   final String image;
+  final String title;
+  final String description;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +70,13 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Organic Bananas',
+                    title,
                     style: TextStyle(
                         fontFamily: kAbyssinicaSIL,
                         fontSize: screenWidth * (16 / 430)),
                   ),
                   Text(
-                    '1Kg, Priceg',
+                    description,
                     style: TextStyle(
                         color: kmainTextColor,
                         fontFamily: kAbyssinicaSIL,
@@ -85,7 +91,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$4.99',
+                          '\$$price',
                           style: TextStyle(
                               fontFamily: kAbyssinicaSIL,
                               fontSize: screenWidth * (18 / 430)),

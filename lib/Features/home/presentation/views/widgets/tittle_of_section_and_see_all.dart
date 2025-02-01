@@ -17,7 +17,7 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenHeight * (36 / 932),
+      height: screenHeight * (38 / 932),
       child: Row(
         children: [
           Text(

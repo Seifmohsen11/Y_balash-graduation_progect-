@@ -3,8 +3,10 @@ import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.
 import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/list_of_restaurants.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/list_of_best_selling.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/list_of_groceries_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays_offers.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/restaurants_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/tittle_of_section_and_see_all.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -53,7 +55,7 @@ class HomeViewBody extends StatelessWidget {
                               screenHeight * 0.02), // Space for layout balance
                     ],
                   ),
-                  // Categories Section
+                  //****************Categories Section**************************
                   Positioned(
                     top: screenHeight * (168 / 932),
                     left: screenWidth * (16 / 430),
@@ -101,7 +103,7 @@ class HomeViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            // Section: Today's Offers
+            //********************Section: Today's Offers***********************
             Padding(
               padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
               child: Column(
@@ -126,7 +128,7 @@ class HomeViewBody extends StatelessWidget {
             SizedBox(
               height: screenHeight * (16 / 932),
             ),
-            // Section: Restaurants & Cafes
+            //********************Section: Restaurants & Cafes*****************************
             Padding(
               padding: EdgeInsets.only(
                   left: screenWidth * (16 / 430),
@@ -144,14 +146,64 @@ class HomeViewBody extends StatelessWidget {
                   SizedBox(
                       height:
                           screenHeight * (3 / 932)), // Space for layout balance
-                  RestaurantsCard(
+                  SizedBox(
+                    height: screenHeight * (273 / 932),
+                    child: ListOfRestaurants(
+                        screenHeight: screenHeight, screenWidth: screenWidth),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * (16 / 932),
+            ),
+            //**********************section of Best Selling**********************
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleOfSectionAndSeeAll(
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
-                    image: 'assets/images/frio.png',
-                    color: Colors.grey,
+                    label: "Best Selling",
+                    onTap: () {},
+                    spaceBetween: screenWidth * (193 / 430),
                   ),
+                  SizedBox(height: screenHeight * (3 / 932)),
                   SizedBox(
-                    height: 30,
+                    height:
+                        screenHeight * (245 / 932), // Keep ListView constrained
+                    child: const ListOfBestSelling(),
+                  ),
+                ],
+              ),
+            ),
+            //********************section of Groceries************************
+            SizedBox(
+              height: screenHeight * (16 / 932),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleOfSectionAndSeeAll(
+                    screenHeight: screenHeight,
+                    screenWidth: screenWidth,
+                    label: "Groceries",
+                    onTap: () {},
+                    spaceBetween: screenWidth * (230 / 430),
+                  ),
+                  SizedBox(height: screenHeight * (3 / 932)),
+                  SizedBox(
+                      height: screenHeight *
+                          (101 / 932), // Keep ListView constrained
+                      child: ListOfGroceriesCard(
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth)),
+                  SizedBox(
+                    height: 50,
                   )
                 ],
               ),
