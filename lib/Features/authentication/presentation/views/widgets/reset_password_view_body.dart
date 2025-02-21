@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
-import 'package:y_balash/core/data/services/reset_password_service.dart';
+import 'package:y_balash/core/data/services/auth/reset_password_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 

@@ -3,7 +3,7 @@ import 'package:y_balash/Features/authentication/presentation/views/Login_view.d
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
-import 'package:y_balash/core/data/services/sign_up_service.dart';
+import 'package:y_balash/core/data/services/auth/sign_up_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/custom_text_divider.dart';

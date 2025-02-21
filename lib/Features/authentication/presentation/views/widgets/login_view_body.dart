@@ -6,7 +6,7 @@ import 'package:y_balash/Features/authentication/presentation/views/widgets/titl
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
-import 'package:y_balash/core/data/services/login_service.dart';
+import 'package:y_balash/core/data/services/auth/login_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/custom_text_divider.dart';

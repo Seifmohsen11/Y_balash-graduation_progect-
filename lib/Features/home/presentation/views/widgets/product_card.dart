@@ -52,7 +52,7 @@ class ProductCard extends StatelessWidget {
                     child: SizedBox(
                         height: screenHeight * (100 / 932),
                         width: screenWidth * (100 / 430),
-                        child: Image.asset(image)),
+                        child: Image.network(image)),
                   ),
                   Positioned(
                     top: screenHeight * (3 / 932),

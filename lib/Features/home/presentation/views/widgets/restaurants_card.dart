@@ -37,13 +37,20 @@ class RestaurantsCard extends StatelessWidget {
             ),
             Center(
               child: Container(
+                height: screenHeight * (100 / 932),
+                width: screenWidth * (100 / 430),
                 decoration: BoxDecoration(
                   border: Border.all(color: color, width: .5),
-                  borderRadius: BorderRadius.circular(56),
+                  borderRadius:
+                      BorderRadius.circular(56), // Border radius for Container
                 ),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(56), // Apply border radius to image
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
