@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class AppBarOfCategoryView extends StatelessWidget {
@@ -41,7 +42,12 @@ class AppBarOfCategoryView extends StatelessWidget {
                 IconButton(
                     iconSize: 28,
                     color: kTextFieldAndButtomColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CartView();
+                      }));
+                    },
                     icon: const Icon(Icons.shopping_cart_outlined))
               ],
             ),
