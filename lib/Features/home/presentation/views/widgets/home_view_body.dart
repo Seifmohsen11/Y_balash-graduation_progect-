@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/dairy_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_gift_card.dart';
@@ -65,7 +66,12 @@ class HomeViewBody extends StatelessWidget {
                       screenHeight: screenHeight,
                       image: "assets/images/Dairy.png",
                       title: 'Dairy',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DairyView();
+                        }));
+                      },
                     ),
                   ),
                   Positioned(
