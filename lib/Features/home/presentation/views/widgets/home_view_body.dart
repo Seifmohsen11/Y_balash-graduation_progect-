@@ -13,6 +13,8 @@ import 'package:y_balash/Features/home/presentation/views/widgets/list_of_best_s
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_groceries_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays_offers.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/best_selling_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/restaurants_and_cafes_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/tittle_of_section_and_see_all.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -165,7 +167,12 @@ class HomeViewBody extends StatelessWidget {
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
                     label: "Restaurants & Cafes",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const RestaurantsAndCafesView();
+                      }));
+                    },
                     spaceBetween: screenWidth * (102 / 430),
                   ),
                   SizedBox(
@@ -192,7 +199,12 @@ class HomeViewBody extends StatelessWidget {
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
                     label: "Best Selling",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const BestSellingView();
+                      }));
+                    },
                     spaceBetween: screenWidth * (193 / 430),
                   ),
                   SizedBox(height: screenHeight * (3 / 932)),
