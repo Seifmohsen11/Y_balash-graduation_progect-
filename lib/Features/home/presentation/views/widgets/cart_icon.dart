@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CartIcon extends StatelessWidget {
@@ -19,7 +20,12 @@ class CartIcon extends StatelessWidget {
       decoration: BoxDecoration(
           color: kPrimaryColor, borderRadius: BorderRadius.circular(24)),
       child: IconButton(
-          onPressed: () {}, icon: Icon(Icons.shopping_cart_outlined)),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const CartView();
+            }));
+          },
+          icon: const Icon(Icons.shopping_cart_outlined)),
     );
   }
 }
