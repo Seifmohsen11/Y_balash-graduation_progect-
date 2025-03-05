@@ -15,6 +15,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/best_selling_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/restaurants_and_cafes_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/todays_offers_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/tittle_of_section_and_see_all.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -140,13 +141,17 @@ class HomeViewBody extends StatelessWidget {
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
                     label: "Today's Offers",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const TodaysOffersView();
+                      }));
+                    },
                     spaceBetween: screenWidth * (165 / 430),
                   ),
                   SizedBox(height: screenHeight * (3 / 932)),
                   SizedBox(
-                    height:
-                        screenHeight * (245 / 932), // Keep ListView constrained
+                    height: screenHeight * (245 / 932),
                     child: const ListOfTodaysOffers(),
                   ),
                 ],

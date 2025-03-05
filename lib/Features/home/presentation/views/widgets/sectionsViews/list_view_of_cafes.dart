@@ -72,6 +72,6 @@ class _ListViewOfCafesState extends State<ListViewOfCafes> {
 }
 
 List<Color> colors = [
-  Color(0xffE7E3DA),
+  Color(0xFFE0DACD),
   Color(0xffD2D6D5),
 ];
