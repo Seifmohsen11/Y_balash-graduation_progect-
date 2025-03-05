@@ -9,16 +9,59 @@ class TodaysOfferCard extends StatelessWidget {
     required this.firstColor,
     required this.secondColor,
     required this.icon,
+    required this.title,
+    required this.subject,
+    required this.description,
+    required this.imageUrl,
+    required this.subjectColor,
   });
 
   final double screenHeight;
   final double screenWidth;
   final Color firstColor;
   final Color secondColor;
+  final Color subjectColor;
   final AssetImage icon;
+  final String title;
+  final String subject;
+  final String description;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
+    String formattedDescription = description.replaceFirstMapped(
+      RegExp(
+          r'([^,]*,[^,]*, )'), // Finds the first two segments separated by commas
+      (match) =>
+          '${match.group(0)}\n', // Adds a new line after the second comma
+    );
+    String formattedTitle = title; // Default to original title
+    String formattedSubject = subject; // Default to original subject
+
+    int maxChars = 25; // Maximum characters before inserting a new line
+
+// Format title
+    if (title.length > maxChars) {
+      int breakPoint = title.lastIndexOf(
+          ' ', maxChars); // Find the last space before maxChars
+      if (breakPoint == -1) {
+        breakPoint = maxChars; // If no space is found, break at maxChars
+      }
+      formattedTitle =
+          '${title.substring(0, breakPoint)}\n${title.substring(breakPoint).trim()}';
+    }
+
+// Format subject
+    if (subject.length > maxChars) {
+      int breakPoint = subject.lastIndexOf(
+          ' ', maxChars); // Find the last space before maxChars
+      if (breakPoint == -1) {
+        breakPoint = maxChars; // If no space is found, break at maxChars
+      }
+      formattedSubject =
+          '${subject.substring(0, breakPoint)}\n${subject.substring(breakPoint).trim()}';
+    }
+
     return Container(
       height: screenHeight * (392 / 932),
       width: screenWidth * (191 / 430),
@@ -43,23 +86,15 @@ class TodaysOfferCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: screenHeight * (32 / 932),
+            top: screenHeight * (12 / 932),
             left: screenWidth * (10 / 430),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Text(
-                      'Discount',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: screenWidth * (20 / 430),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     SizedBox(
-                      width: screenWidth * (48 / 430),
+                      width: screenWidth * (130 / 430),
                     ),
                     ImageIcon(
                       icon,
@@ -67,19 +102,30 @@ class TodaysOfferCard extends StatelessWidget {
                     )
                   ],
                 ),
+                Row(
+                  children: [
+                    Text(
+                      formattedTitle,
+                      style: TextStyle(
+                        color: const Color(0xFF393939),
+                        fontSize: screenWidth * (17 / 430),
+                        fontFamily: kIneraFont,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: screenHeight * (7 / 932),
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: screenWidth * (48 / 430),
-                    ),
                     Text(
-                      '30 %',
+                      formattedSubject,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: screenWidth * (32 / 430),
+                        color: subjectColor,
+                        fontSize: screenWidth * (14 / 430),
+                        fontFamily: kIneraFont,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -89,14 +135,7 @@ class TodaysOfferCard extends StatelessWidget {
                   height: screenHeight * (10 / 932),
                 ),
                 Text(
-                  "Enjoy Discount all types of ",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: screenWidth * (14 / 430),
-                      fontFamily: kIneraFont),
-                ),
-                Text(
-                  'Grocery & frozen item',
+                  formattedDescription,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: screenWidth * (14 / 430),
@@ -114,7 +153,7 @@ class TodaysOfferCard extends StatelessWidget {
                 SizedBox(
                     height: screenHeight * (160 / 932),
                     width: screenWidth * (160 / 430),
-                    child: Image.asset('assets/images/milk.png')),
+                    child: Image.network(imageUrl)),
               ],
             ),
           ),
