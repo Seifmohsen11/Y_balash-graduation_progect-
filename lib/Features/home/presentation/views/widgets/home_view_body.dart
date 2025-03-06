@@ -14,6 +14,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/list_of_grocer
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays_offers.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/best_selling_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/groceries_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/restaurants_and_cafes_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/todays_offers_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/tittle_of_section_and_see_all.dart';
@@ -234,7 +235,12 @@ class HomeViewBody extends StatelessWidget {
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
                     label: "Groceries",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const GroceriesView();
+                      }));
+                    },
                     spaceBetween: screenWidth * (230 / 430),
                   ),
                   SizedBox(height: screenHeight * (3 / 932)),
@@ -242,8 +248,10 @@ class HomeViewBody extends StatelessWidget {
                       height: screenHeight *
                           (101 / 932), // Keep ListView constrained
                       child: ListOfGroceriesCard(
-                          screenHeight: screenHeight,
-                          screenWidth: screenWidth)),
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        scrollDirection: Axis.horizontal,
+                      )),
                 ],
               ),
             ),
