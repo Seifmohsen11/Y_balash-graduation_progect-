@@ -73,17 +73,21 @@ class TodaysOfferCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Container(
-            height: screenHeight * (420 / 932) / 2,
-            width: screenWidth * (210 / 430),
-            decoration: BoxDecoration(
-              color: firstColor,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                    screenWidth * (18 / 430),
-                  ),
-                  topRight: Radius.circular(screenWidth * (18 / 430))),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return Container(
+                height: constraints.maxHeight / 2, // Half of parent height
+                width: constraints.maxWidth, // Same width as parent
+                decoration: BoxDecoration(
+                  color: firstColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        screenWidth * (18 / 430),
+                      ),
+                      topRight: Radius.circular(screenWidth * (18 / 430))),
+                ),
+              );
+            },
           ),
           Positioned(
             top: screenHeight * (12 / 932),
