@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -10,6 +11,7 @@ class ProductCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.price,
+    required this.id,
   });
 
   final double screenWidth;
@@ -18,6 +20,7 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String description;
   final String price;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +108,9 @@ class ProductCard extends StatelessWidget {
                                   screenWidth * (16 / 430))),
                           child: Center(
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await AddToCart(id, 1);
+                                },
                                 icon: const Icon(
                                   Icons.add,
                                   color: Colors.white,

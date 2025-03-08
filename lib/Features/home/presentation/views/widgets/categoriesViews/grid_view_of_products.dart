@@ -33,6 +33,7 @@ class GridViewOfProducts extends StatelessWidget {
             title: product['name'],
             description: product['quantity'],
             price: product['price'],
+            id: product['_id'] ?? '0.00',
           );
         },
       ),

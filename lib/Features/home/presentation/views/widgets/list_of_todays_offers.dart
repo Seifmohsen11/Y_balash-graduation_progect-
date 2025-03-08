@@ -60,6 +60,7 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
           title: product['name'] ?? 'No Name',
           description: product['quantity'] ?? 'No Quantity Info',
           price: product['price'] ?? '0.00',
+          id: product["_id"] ?? '0.00',
         );
       },
     );

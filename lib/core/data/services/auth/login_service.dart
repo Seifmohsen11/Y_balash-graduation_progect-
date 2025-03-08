@@ -1,4 +1,5 @@
 import 'package:y_balash/core/helper/api.dart';
+import 'package:y_balash/core/helper/shared_pref_helper.dart';
 
 final apiService = ApiService(baseUrl: 'https://y-balash.vercel.app/api/');
 
@@ -17,6 +18,7 @@ Future<void> loginUser(
       body: loginData,
     );
     print('Login Success: $response');
+    await SharedPrefHelper.saveToken(response['token']);
   } catch (error) {
     print('Login Failed: $error');
     throw error;
