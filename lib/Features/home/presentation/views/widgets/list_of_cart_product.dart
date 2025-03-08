@@ -7,10 +7,12 @@ class ListOfCartProducts extends StatefulWidget {
     super.key,
     required this.screenHeight,
     required this.screenWidth,
+    required this.onCartUpdated,
   });
 
   final double screenHeight;
   final double screenWidth;
+  final VoidCallback onCartUpdated;
 
   @override
   State<ListOfCartProducts> createState() => _ListOfCartProductsState();
@@ -28,9 +30,9 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
 
   Future<void> fetchProducts() async {
     try {
-      final items = await getCartProduct(); // Call the service
+      final items = await getCartProduct();
       setState(() {
-        products = items; // Store the fetched data
+        products = items;
         isLoading = false;
       });
     } catch (error) {
@@ -39,6 +41,11 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
         isLoading = false;
       });
     }
+  }
+
+  void removeProductFromList() async {
+    await fetchProducts();
+    widget.onCartUpdated();
   }
 
   @override
@@ -66,6 +73,10 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
               image: product['imageUrl'] ?? '',
               titel: product['name'] ?? 'Unknown',
               price: product['price'] ?? 'Unknown',
+              itemId: product['_id'] ?? 'Unknown',
+              onRemove: () {
+                removeProductFromList();
+              },
             ),
           );
         },

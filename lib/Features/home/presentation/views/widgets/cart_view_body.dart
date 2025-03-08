@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_cart_product.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
-class CartViewBody extends StatelessWidget {
+class CartViewBody extends StatefulWidget {
   const CartViewBody({super.key});
+
+  @override
+  State<CartViewBody> createState() => _CartViewBodyState();
+}
+
+class _CartViewBodyState extends State<CartViewBody> {
+  void refreshCart() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +54,9 @@ class CartViewBody extends StatelessWidget {
                 ),
               ),
               ListOfCartProducts(
-                  screenHeight: screenHeight, screenWidth: screenWidth)
+                  screenHeight: screenHeight,
+                  screenWidth: screenWidth,
+                  onCartUpdated: refreshCart)
             ],
           ),
         ));

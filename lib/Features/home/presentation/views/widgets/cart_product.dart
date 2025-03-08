@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
 
 class CartProduct extends StatelessWidget {
   const CartProduct({
@@ -9,6 +10,8 @@ class CartProduct extends StatelessWidget {
     required this.image,
     required this.titel,
     required this.price,
+    required this.itemId,
+    required this.onRemove,
   });
 
   final double screenHeight;
@@ -16,6 +19,8 @@ class CartProduct extends StatelessWidget {
   final String image;
   final String titel;
   final String price;
+  final String itemId;
+  final VoidCallback onRemove; // Callback function
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +102,15 @@ class CartProduct extends StatelessWidget {
                       ),
                       SizedBox(width: screenWidth * (16 / 430)),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () async {
+                          bool success = await removeFromCart(
+                              itemId); // Wait for API response
+                          if (success) {
+                            onRemove(); // Update UI only if API call succeeds
+                          } else {
+                            print('Failed to remove item from cart');
+                          }
+                        },
                         child: const ImageIcon(
                             AssetImage('assets/icons/delete.png')),
                       ),
