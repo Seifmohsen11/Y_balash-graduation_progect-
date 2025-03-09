@@ -3,6 +3,7 @@ import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
@@ -30,6 +31,21 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   bool isRed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfFavorite();
+  }
+
+  Future<void> checkIfFavorite() async {
+    bool isFav = await isProductFavorite(widget.id);
+    if (!mounted)
+      return; // Ensure the widget is still in the widget tree before calling setState()
+    setState(() {
+      isRed = isFav;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
