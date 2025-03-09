@@ -3,9 +3,10 @@ import 'package:y_balash/Features/home/presentation/views/widgets/cart_view_body
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
+  static String id = 'cartView';
 
   @override
   Widget build(BuildContext context) {
-    return CartViewBody();
+    return const CartViewBody();
   }
 }

@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/cart_product.dart';
-import 'package:y_balash/core/data/services/home/get_cart_product_service.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/favourite_product_card.dart';
+import 'package:y_balash/core/data/services/home/get_favourite_product_service.dart';
 
-class ListOfCartProducts extends StatefulWidget {
-  const ListOfCartProducts({
+class ListOfFavoritesProducts extends StatefulWidget {
+  const ListOfFavoritesProducts({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
-    required this.onCartUpdated,
+    required this.onFavoriteUpdated,
   });
 
   final double screenHeight;
   final double screenWidth;
-  final VoidCallback onCartUpdated;
+  final VoidCallback onFavoriteUpdated;
 
   @override
-  State<ListOfCartProducts> createState() => _ListOfCartProductsState();
+  State<ListOfFavoritesProducts> createState() =>
+      _ListOfFavoritesProductsState();
 }
 
-class _ListOfCartProductsState extends State<ListOfCartProducts> {
+class _ListOfFavoritesProductsState extends State<ListOfFavoritesProducts> {
   List<dynamic> products = [];
   bool isLoading = true;
 
@@ -30,7 +31,7 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
 
   Future<void> fetchProducts() async {
     try {
-      final items = await getCartProduct();
+      final items = await getFavoriteProduct();
       setState(() {
         products = items;
         isLoading = false;
@@ -43,9 +44,11 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
     }
   }
 
-  void removeProductFromList() async {
-    await fetchProducts();
-    widget.onCartUpdated();
+  void removeProductFromList(String itemId) {
+    setState(() {
+      products.removeWhere((product) => product['itemId']['_id'] == itemId);
+    });
+    widget.onFavoriteUpdated();
   }
 
   @override
@@ -69,15 +72,15 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
           final product = products[index]['itemId'];
           return Padding(
             padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
-            child: CartProduct(
+            child: FavouriteProductCard(
               screenHeight: widget.screenHeight,
               screenWidth: widget.screenWidth,
               image: product['imageUrl'] ?? '',
               titel: product['name'] ?? 'Unknown',
               price: product['price'] ?? 'Unknown',
               itemId: product['_id'] ?? 'Unknown',
-              onRemove: () {
-                removeProductFromList();
+              onRemove: (String itemId) {
+                removeProductFromList(itemId);
               },
             ),
           );

@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/account_view_b
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
+  static String id = 'accountView';
 
   @override
   Widget build(BuildContext context) {

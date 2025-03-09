@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/chat_bot_view_
 
 class ChatPotView extends StatelessWidget {
   const ChatPotView({super.key});
+  static String id = 'chatPotView';
 
   @override
   Widget build(BuildContext context) {

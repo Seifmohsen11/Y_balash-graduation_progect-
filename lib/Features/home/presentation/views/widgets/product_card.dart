@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
+import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
+import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard({
     super.key,
     required this.screenWidth,
@@ -23,9 +25,16 @@ class ProductCard extends StatelessWidget {
   final String id;
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  bool isRed = false;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: screenWidth * (15 / 430)),
+      padding: EdgeInsets.only(right: widget.screenWidth * (15 / 430)),
       child: Container(
         decoration: BoxDecoration(
             boxShadow: [
@@ -38,78 +47,94 @@ class ProductCard extends StatelessWidget {
             ],
             color: kPrimaryColor,
             border: Border.all(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(screenWidth * (18 / 430))),
-        height: screenHeight * (243 / 932),
-        width: screenWidth * (175 / 430),
+            borderRadius:
+                BorderRadius.circular(widget.screenWidth * (18 / 430))),
+        height: widget.screenHeight * (243 / 932),
+        width: widget.screenWidth * (175 / 430),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenHeight * (131 / 932),
+              height: widget.screenHeight * (131 / 932),
               child: Stack(
                 children: [
                   Positioned(
-                    top: screenHeight * (16 / 932),
-                    left: screenWidth * (35 / 430),
-                    right: screenWidth * (40 / 430),
+                    top: widget.screenHeight * (16 / 932),
+                    left: widget.screenWidth * (35 / 430),
+                    right: widget.screenWidth * (40 / 430),
                     child: SizedBox(
-                        height: screenHeight * (100 / 932),
-                        width: screenWidth * (100 / 430),
-                        child: Image.network(image)),
+                        height: widget.screenHeight * (100 / 932),
+                        width: widget.screenWidth * (100 / 430),
+                        child: Image.network(widget.image)),
                   ),
                   Positioned(
-                    top: screenHeight * (3 / 932),
-                    right: screenWidth * (2 / 430),
+                    top: widget.screenHeight * (3 / 932),
+                    right: widget.screenWidth * (2 / 430),
                     child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_outline)),
+                      onPressed: () async {
+                        setState(() {
+                          isRed = !isRed;
+                        });
+
+                        if (isRed) {
+                          await AddToFavourite(widget.id);
+                        } else {
+                          await removeFromCart(widget.id);
+                        }
+                      },
+                      icon: Icon(
+                        isRed ? Icons.favorite : Icons.favorite_outline,
+                        color: isRed ? Colors.red : null,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: screenWidth * (8 / 430)),
+              padding: EdgeInsets.only(left: widget.screenWidth * (8 / 430)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
                         fontFamily: kAbyssinicaSIL,
-                        fontSize: screenWidth * (16 / 430)),
+                        fontSize: widget.screenWidth * (16 / 430)),
                   ),
                   Text(
-                    description,
+                    widget.description,
                     style: TextStyle(
                         color: kmainTextColor,
                         fontFamily: kAbyssinicaSIL,
-                        fontSize: screenWidth * (12 / 430)),
+                        fontSize: widget.screenWidth * (12 / 430)),
                   ),
                   SizedBox(
-                    height: screenWidth * (22 / 430),
+                    height: widget.screenWidth * (22 / 430),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: screenWidth * (12 / 430)),
+                    padding:
+                        EdgeInsets.only(right: widget.screenWidth * (12 / 430)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$$price',
+                          '\$${widget.price}',
                           style: TextStyle(
                               fontFamily: kAbyssinicaSIL,
-                              fontSize: screenWidth * (18 / 430)),
+                              fontSize: widget.screenWidth * (18 / 430)),
                         ),
                         Container(
-                          height: screenHeight * (40 / 932),
-                          width: screenWidth * (40 / 430),
+                          height: widget.screenHeight * (40 / 932),
+                          width: widget.screenWidth * (40 / 430),
                           decoration: BoxDecoration(
                               color: kTextFieldAndButtomColor,
                               borderRadius: BorderRadius.circular(
-                                  screenWidth * (16 / 430))),
+                                  widget.screenWidth * (16 / 430))),
                           child: Center(
                             child: IconButton(
                                 onPressed: () async {
-                                  await AddToCart(id, 1);
+                                  await AddToCart(widget.id, 1);
                                 },
                                 icon: const Icon(
                                   Icons.add,
