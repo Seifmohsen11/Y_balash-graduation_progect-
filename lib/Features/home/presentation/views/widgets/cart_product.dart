@@ -12,6 +12,7 @@ class CartProduct extends StatelessWidget {
     required this.price,
     required this.itemId,
     required this.onRemove,
+    required this.quantity,
   });
 
   final double screenHeight;
@@ -20,6 +21,7 @@ class CartProduct extends StatelessWidget {
   final String titel;
   final String price;
   final String itemId;
+  final int quantity;
   final VoidCallback onRemove; // Callback function
 
   @override
@@ -122,12 +124,12 @@ class CartProduct extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
-                      SizedBox(width: screenWidth * (26 / 430)),
+                      SizedBox(width: screenWidth * (20 / 430)),
                       IconButton(
                           iconSize: screenWidth * (32 / 430),
                           onPressed: () {},
                           icon: Icon(Icons.remove_circle_outline)),
-                      Text('1'),
+                      Text("$quantity"),
                       IconButton(
                           iconSize: screenWidth * (32 / 430),
                           color: Colors.yellow,

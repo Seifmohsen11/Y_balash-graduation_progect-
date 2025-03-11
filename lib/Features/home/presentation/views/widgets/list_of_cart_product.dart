@@ -31,15 +31,19 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
   Future<void> fetchProducts() async {
     try {
       final items = await getCartProduct();
-      setState(() {
-        products = items;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          products = items;
+          isLoading = false;
+        });
+      }
     } catch (error) {
       print('Error fetching products: $error');
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -76,6 +80,7 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
               titel: product['name'] ?? 'Unknown',
               price: product['price'] ?? 'Unknown',
               itemId: product['_id'] ?? 'Unknown',
+              quantity: products[index]['quantity'],
               onRemove: () {
                 removeProductFromList();
               },

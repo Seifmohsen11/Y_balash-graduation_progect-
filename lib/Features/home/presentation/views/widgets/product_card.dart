@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
-import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
+import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ProductCard extends StatefulWidget {
@@ -95,7 +95,7 @@ class _ProductCardState extends State<ProductCard> {
                         if (isRed) {
                           await AddToFavourite(widget.id);
                         } else {
-                          await removeFromCart(widget.id);
+                          await removeFromFavourite(widget.id);
                         }
                       },
                       icon: Icon(
