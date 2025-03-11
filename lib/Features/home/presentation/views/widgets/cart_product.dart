@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
+import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/update_cart_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class CartProduct extends StatefulWidget {
   const CartProduct({
@@ -30,11 +33,20 @@ class CartProduct extends StatefulWidget {
 
 class _CartProductState extends State<CartProduct> {
   late int currentQuantity;
+  bool isFavorite = false;
 
   @override
   void initState() {
     super.initState();
     currentQuantity = widget.quantity;
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    bool favoriteStatus = await isProductFavorite(widget.itemId);
+    setState(() {
+      isFavorite = favoriteStatus;
+    });
   }
 
   void updateQuantity(int newQuantity) async {
@@ -50,6 +62,17 @@ class _CartProductState extends State<CartProduct> {
     } catch (error) {
       print("Faild to update quantity $error");
     }
+  }
+
+  void toggleFavorite() async {
+    if (isFavorite) {
+      await removeFromFavourite(widget.itemId);
+    } else {
+      await AddToFavourite(widget.itemId);
+    }
+    setState(() {
+      isFavorite = !isFavorite;
+    });
   }
 
   // Callback function
@@ -130,8 +153,12 @@ class _CartProductState extends State<CartProduct> {
                     children: [
                       SizedBox(width: widget.screenWidth * (46 / 430)),
                       GestureDetector(
-                        onTap: () {},
-                        child: const Icon(Icons.favorite_border),
+                        onTap: () {
+                          toggleFavorite();
+                        },
+                        child: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite ? Colors.red : Colors.black),
                       ),
                       SizedBox(width: widget.screenWidth * (16 / 430)),
                       GestureDetector(
