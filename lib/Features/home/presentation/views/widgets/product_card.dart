@@ -4,6 +4,7 @@ import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
@@ -94,8 +95,12 @@ class _ProductCardState extends State<ProductCard> {
 
                         if (isRed) {
                           await AddToFavourite(widget.id);
+                          showSnackBar(context, "Added successfuly",
+                              backgroundColor: Colors.green);
                         } else {
                           await removeFromFavourite(widget.id);
+                          showSnackBar(context, "Removed successfuly",
+                              backgroundColor: Colors.green);
                         }
                       },
                       icon: Icon(
@@ -151,6 +156,8 @@ class _ProductCardState extends State<ProductCard> {
                             child: IconButton(
                                 onPressed: () async {
                                   await AddToCart(widget.id, 1);
+                                  showSnackBar(context, "Added successfuly",
+                                      backgroundColor: Colors.green);
                                 },
                                 icon: const Icon(
                                   Icons.add,
