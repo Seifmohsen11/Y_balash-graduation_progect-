@@ -29,14 +29,17 @@ class ItemOfCategory extends StatelessWidget {
                 image: DecorationImage(
                   image: AssetImage(image),
                 ),
-                borderRadius: BorderRadius.circular(36)),
+                borderRadius: BorderRadius.circular(screenWidth * (36 / 430))),
           ),
           SizedBox(
             height: screenHeight * (3 / 932),
           ),
           Text(
             title,
-            style: const TextStyle(color: kTextFieldAndButtomColor),
+            style: TextStyle(
+                color: kTextFieldAndButtomColor,
+                fontSize: screenWidth * (14 / 430),
+                fontFamily: kAbyssinicaSIL),
           )
         ],
       ),

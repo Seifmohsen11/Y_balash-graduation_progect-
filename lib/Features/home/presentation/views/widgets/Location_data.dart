@@ -6,17 +6,21 @@ class Location extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Column(
       children: [
         SizedBox(
-          height: 12,
+          height: screenHeight * (12 / 932),
         ),
         SizedBox(
           child: Center(
               child: Text(
             'Current Location',
             style: TextStyle(
-                color: Color(0xff8A8A8A), fontFamily: kIneraFont, fontSize: 20),
+                color: const Color(0xff8A8A8A),
+                fontFamily: kIneraFont,
+                fontSize: screenWidth * (20 / 430)),
           )),
         ),
         SizedBox(
@@ -24,7 +28,9 @@ class Location extends StatelessWidget {
               child: Text(
             'Ismailia , Egypt',
             style: TextStyle(
-                color: Color(0xffFFC433), fontFamily: kIneraFont, fontSize: 20),
+                color: const Color(0xffFFC433),
+                fontFamily: kIneraFont,
+                fontSize: screenWidth * (20 / 430)),
           )),
         ),
       ],

@@ -59,9 +59,6 @@ class HomeViewBody extends StatelessWidget {
                         ),
                       ),
                       const Location(),
-                      SizedBox(
-                          height:
-                              screenHeight * 0.02), // Space for layout balance
                     ],
                   ),
                   //****************Categories Section**************************

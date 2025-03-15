@@ -9,7 +9,7 @@ class ListOfGiftCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenHeight * (165 / 932),
+      height: screenHeight * (168 / 932),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 5,

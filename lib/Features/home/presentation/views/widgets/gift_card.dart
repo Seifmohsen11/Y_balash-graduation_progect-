@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y_balash/core/constants/constants.dart';
 
 class GiftCard extends StatelessWidget {
   const GiftCard(
@@ -10,11 +11,11 @@ class GiftCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: screenWidth * (16 / 430)),
       child: Container(
-        height: screenHeight * (165 / 932),
+        height: screenHeight * (168 / 932),
         width: screenWidth * (229 / 430),
         decoration: BoxDecoration(
             color: const Color(0xff0F4273),
-            borderRadius: BorderRadius.circular(24)),
+            borderRadius: BorderRadius.circular(screenWidth * (24 / 430))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,11 +28,15 @@ class GiftCard extends StatelessWidget {
                 width: screenWidth * (91 / 430),
                 decoration: BoxDecoration(
                     color: const Color(0xffA6E4E1),
-                    borderRadius: BorderRadius.circular(4)),
-                child: const Center(
+                    borderRadius:
+                        BorderRadius.circular(screenWidth * (4 / 430))),
+                child: Center(
                   child: Text(
                     'Free delivery',
-                    style: TextStyle(color: Color(0xff0F4273), fontSize: 13),
+                    style: TextStyle(
+                        color: const Color(0xff0F4273),
+                        fontFamily: kIneraFont,
+                        fontSize: screenWidth * (13 / 430)),
                   ),
                 ),
               ),
@@ -39,15 +44,18 @@ class GiftCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                   left: screenWidth * (7 / 430), top: screenHeight * (7 / 932)),
-              child: const Text(
+              child: Text(
                 'Get up to 50% off on delivery when you redeem your points',
-                style: TextStyle(color: Color(0xffA6E4E1), fontSize: 13),
+                style: TextStyle(
+                    color: const Color(0xffA6E4E1),
+                    fontFamily: kIneraFont,
+                    fontSize: screenWidth * (13 / 430)),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                  right: screenWidth * (15 / 430),
-                  bottom: screenHeight * (5 / 932)),
+                right: screenWidth * (15 / 430),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

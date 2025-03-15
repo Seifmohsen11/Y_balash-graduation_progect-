@@ -18,14 +18,20 @@ class CartIcon extends StatelessWidget {
       height: screenHeight * (45 / 932),
       width: screenWidth * (45 / 430),
       decoration: BoxDecoration(
-          color: kPrimaryColor, borderRadius: BorderRadius.circular(24)),
+          color: kPrimaryColor,
+          borderRadius: BorderRadius.circular(
+            screenWidth * (24 / 430),
+          )),
       child: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const CartView();
             }));
           },
-          icon: const Icon(Icons.shopping_cart_outlined)),
+          icon: Icon(
+            Icons.shopping_cart_outlined,
+            size: screenWidth * (25 / 430),
+          )),
     );
   }
 }

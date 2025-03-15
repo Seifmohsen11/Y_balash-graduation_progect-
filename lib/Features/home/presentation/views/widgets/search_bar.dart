@@ -12,15 +12,24 @@ class CustomSearchBar extends StatelessWidget {
       width: screenWidth * (345 / 430),
       height: screenHeight * (53 / 932),
       child: TextField(
+        textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
           hintText: 'Search',
-          hintStyle: const TextStyle(color: Color(0xff8A8A8A)),
-          prefixIcon: const Icon(Icons.search),
+          hintStyle: TextStyle(
+              color: const Color(0xff8A8A8A),
+              fontSize: screenWidth * (20 / 430),
+              fontFamily: kIneraFont),
+          prefixIcon: Icon(
+            Icons.search,
+            size: screenWidth * (24 / 430),
+          ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32),
+            borderRadius: BorderRadius.circular(screenWidth * (32 / 430)),
           ),
           filled: true,
           fillColor: kPrimaryColor,
+          contentPadding:
+              EdgeInsets.symmetric(vertical: screenHeight * (10 / 932)),
         ),
         onChanged: (value) {
           // Handle search text changes
