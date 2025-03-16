@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
+import 'package:y_balash/Features/authentication/presentation/views/widgets/forget_password_view_body.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/auth/verify_otp_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
@@ -20,6 +22,14 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
   String otp = "";
   bool _isLoading = false;
 
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +38,7 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
         child: Column(
           children: [
             SizedBox(
-              height: 108.h,
+              height: getProportionalHeight(context, 108),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,22 +49,24 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
                     color: kTextFieldAndButtomColor,
                     fontFamily: kIneraFont,
                     fontWeight: FontWeight.w400,
-                    fontSize: 32.sp,
+                    fontSize: getProportionalWidth(context, 32),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 17.h,
+              height: getProportionalHeight(context, 17),
             ),
             const TextUnderButtom(
               firstText: "Enter OTP code sent to ****@gmail.com",
             ),
             SizedBox(
-              height: 31.h,
+              height: getProportionalHeight(context, 31),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: getProportionalWidth(context, 18),
+              ),
               child: PinCodeTextField(
                 appContext: context,
                 length: 6,
@@ -65,13 +77,17 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
                   });
                 },
                 keyboardType: TextInputType.number,
-                textStyle: TextStyle(fontSize: 18.sp, color: Colors.black),
+                textStyle: TextStyle(
+                    fontSize: getProportionalWidth(context, 18),
+                    color: Colors.black),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(20.r),
+                  borderRadius: BorderRadius.circular(
+                    getProportionalWidth(context, 20),
+                  ),
                   borderWidth: 2,
-                  fieldHeight: 70.h,
-                  fieldWidth: 54.w,
+                  fieldHeight: getProportionalHeight(context, 70),
+                  fieldWidth: getProportionalWidth(context, 54),
                   activeFillColor: Colors.white,
                   inactiveFillColor: Colors.white,
                   selectedFillColor: Colors.white,
@@ -83,15 +99,15 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
               ),
             ),
             SizedBox(
-              height: 39.h,
+              height: getProportionalHeight(context, 39),
             ),
             _isLoading
                 ? const CircularProgressIndicator(
                     color: kTextFieldAndButtomColor,
                   )
                 : CustomButtom(
-                    height: 58.h,
-                    width: 216.w,
+                    height: getProportionalHeight(context, 58),
+                    width: getProportionalWidth(context, 216),
                     label: 'Verify & proceed',
                     backgorundColor: kTextFieldAndButtomColor,
                     textColor: Colors.white,
@@ -123,18 +139,20 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
                     },
                   ),
             SizedBox(
-              height: 29.h,
+              height: getProportionalHeight(context, 29),
             ),
             const TextUnderButtom(
               firstText: "Didn't receive OTP code ?",
             ),
             SizedBox(
-              height: 7.h,
+              height: getProportionalHeight(context, 7),
             ),
             TextUnderButtom(
               firstText: "",
               secondText: 'Resend Code',
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, ForgetPasswordView.id);
+              },
             ),
           ],
         ),

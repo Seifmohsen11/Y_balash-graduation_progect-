@@ -18,15 +18,22 @@ class CustomPasswordField extends StatefulWidget {
 class _CustomPasswordFieldState extends State<CustomPasswordField> {
   bool secureText = true;
 
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * (14 / 430)),
+      padding: EdgeInsets.symmetric(
+        horizontal: getProportionalWidth(context, 14),
+      ),
       child: SizedBox(
-        height: screenHeight * (55 / 932),
+        height: getProportionalHeight(context, 55),
         child: TextFormField(
           validator: (data) {
             if (data!.isEmpty) {
@@ -44,7 +51,9 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                 });
               },
               icon: Padding(
-                padding: EdgeInsets.only(right: screenWidth * (8 / 430)),
+                padding: EdgeInsets.only(
+                  right: getProportionalWidth(context, 8),
+                ),
                 child: ColorFiltered(
                   colorFilter: const ColorFilter.mode(
                     Color(0xff8A8A8A), // Set the color to red
@@ -54,32 +63,38 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                     secureText
                         ? 'assets/icons/closedEyeIcon.png' // Icon when password is hidden
                         : 'assets/icons/openEyeIcon.png', // Icon when password is visible
-                    width: screenWidth *
-                        (24 / 430), // Adjust the icon size if needed
-                    height: screenHeight * (24 / 932),
+                    width: getProportionalWidth(
+                        context, 24), // Adjust the icon size if needed
+                    height: getProportionalHeight(context, 24),
                   ),
                 ),
               ),
             ),
             hintText: widget.hintText,
             hintStyle: TextStyle(
-              fontSize: screenWidth * (16 / 430),
+              fontSize: getProportionalWidth(context, 16),
               color: kmainTextColor,
               fontFamily: kIneraFont,
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
+                borderRadius: BorderRadius.circular(
+                  getProportionalWidth(context, 50),
+                ),
                 borderSide: BorderSide(
-                  width: screenWidth * (2 / 430),
+                  width: getProportionalWidth(context, 2),
                   color: kTextFieldAndButtomColor,
                 )),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
+                borderRadius: BorderRadius.circular(
+                  getProportionalWidth(context, 50),
+                ),
                 borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
+                borderRadius: BorderRadius.circular(
+                  getProportionalWidth(context, 50),
+                ),
                 borderSide: const BorderSide(
                   color: kTextFieldAndButtomColor,
                 )),

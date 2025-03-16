@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/otp_verification_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
@@ -21,6 +20,15 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
   String? email;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +39,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
           child: Column(
             children: [
               SizedBox(
-                height: 108.h,
+                height: getProportionalHeight(context, 108),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -42,13 +50,13 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                       color: kTextFieldAndButtomColor,
                       fontFamily: kIneraFont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 32.sp,
+                      fontSize: getProportionalWidth(context, 32),
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 63.h,
+                height: getProportionalHeight(context, 63),
               ),
               TitleAndTextField(
                 title: 'Email',
@@ -58,15 +66,15 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                 },
               ),
               SizedBox(
-                height: 67.h,
+                height: getProportionalHeight(context, 67),
               ),
               _isLoading
                   ? const CircularProgressIndicator(
                       color: kTextFieldAndButtomColor,
                     )
                   : CustomButtom(
-                      height: 58.h,
-                      width: 216.w,
+                      height: getProportionalHeight(context, 58),
+                      width: getProportionalHeight(context, 216),
                       label: 'Send OTP',
                       backgorundColor: kTextFieldAndButtomColor,
                       textColor: Colors.white,
@@ -94,7 +102,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                         }
                       }),
               SizedBox(
-                height: 22.h,
+                height: getProportionalHeight(context, 22),
               ),
               TextUnderButtom(
                 firstText: "New here ?",
@@ -104,7 +112,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                 },
               ),
               SizedBox(
-                height: 18.h,
+                height: getProportionalHeight(context, 18),
               ),
               TextUnderButtom(
                 firstText: "Remembered my password .",

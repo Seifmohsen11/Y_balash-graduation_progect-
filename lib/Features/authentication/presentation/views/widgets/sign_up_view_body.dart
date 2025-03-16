@@ -22,11 +22,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: SingleChildScrollView(
@@ -35,11 +40,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           child: Column(
             children: [
               SizedBox(
-                height: screenHeight * (57 / 932),
+                height: getProportionalHeight(context, 57),
               ),
               const LogoName(),
               SizedBox(
-                height: screenHeight * (37 / 932),
+                height: getProportionalHeight(context, 37),
               ),
               TitleAndTextField(
                 title: 'Email address',
@@ -49,7 +54,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: screenHeight * (15 / 932),
+                height: getProportionalHeight(context, 15),
               ),
               TitleAndTextField(
                 title: 'Phone Number',
@@ -59,7 +64,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: screenHeight * (15 / 932),
+                height: getProportionalHeight(context, 15),
               ),
               TitleAndPasswordField(
                 title: 'Password',
@@ -69,7 +74,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: screenHeight * (15 / 932),
+                height: getProportionalHeight(context, 15),
               ),
               TitleAndPasswordField(
                 title: 'Confirm Password',
@@ -79,15 +84,15 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: screenHeight * (37 / 932),
+                height: getProportionalHeight(context, 37),
               ),
               _isLoading
                   ? const CircularProgressIndicator(
                       color: kTextFieldAndButtomColor,
                     )
                   : CustomButtom(
-                      height: screenHeight * (58 / 932),
-                      width: screenWidth * (191 / 430),
+                      height: getProportionalHeight(context, 58),
+                      width: getProportionalWidth(context, 191),
                       label: 'Sign Up',
                       backgorundColor: kTextFieldAndButtomColor,
                       textColor: Colors.white,
@@ -117,7 +122,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       },
                     ),
               SizedBox(
-                height: screenHeight * (15 / 932),
+                height: getProportionalHeight(context, 15),
               ),
               TextUnderButtom(
                 onTap: () {
@@ -130,11 +135,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 text: "or",
               ),
               SizedBox(
-                height: screenHeight * (48 / 932),
+                height: getProportionalHeight(context, 48),
               ),
               CustomButtom(
-                height: screenHeight * (46 / 932),
-                width: screenWidth * (292 / 430),
+                height: getProportionalHeight(context, 46),
+                width: getProportionalWidth(context, 292),
                 label: 'Sign up with google',
                 image: 'assets/icons/google.png',
                 backgorundColor: Colors.transparent,

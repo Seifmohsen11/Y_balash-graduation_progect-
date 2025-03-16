@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
@@ -25,6 +24,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +41,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           key: _formKey,
           child: Column(
             children: [
-              SizedBox(
-                height: 57.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 57)),
               const LogoName(),
-              SizedBox(
-                height: 37.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 37)),
               TitleAndTextField(
                 title: 'Email address',
                 hintText: 'Enter your email',
@@ -48,9 +51,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   email = data;
                 },
               ),
-              SizedBox(
-                height: 15.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 15)),
               TitleAndPasswordField(
                 title: 'Password',
                 hintText: 'Enter your password',
@@ -58,11 +59,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   password = data;
                 },
               ),
-              SizedBox(
-                height: 39.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 39)),
               Padding(
-                padding: EdgeInsets.only(right: 30.w),
+                padding:
+                    EdgeInsets.only(right: getProportionalWidth(context, 30)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -74,25 +74,23 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       child: const Text(
                         "Forget Password ?",
                         style: TextStyle(
-                            fontFamily: kIneraFont,
-                            fontWeight: FontWeight.w400,
-                            color: kmainTextColor,
-                            decoration: TextDecoration.underline),
+                          fontFamily: kIneraFont,
+                          fontWeight: FontWeight.w400,
+                          color: kmainTextColor,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 50.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 50)),
               _isLoading
                   ? const CircularProgressIndicator(
-                      color: kTextFieldAndButtomColor,
-                    )
+                      color: kTextFieldAndButtomColor)
                   : CustomButtom(
-                      height: 58.h,
-                      width: 153.w,
+                      height: getProportionalHeight(context, 58),
+                      width: getProportionalWidth(context, 153),
                       label: 'Login',
                       backgorundColor: kTextFieldAndButtomColor,
                       textColor: Colors.white,
@@ -104,10 +102,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           });
                           try {
                             await loginUser(email!, password!);
-
                             showSnackBar(context, 'Login Successful!',
                                 backgroundColor: Colors.green);
-
                             Navigator.popAndPushNamed(context, MainView.id);
                           } catch (error) {
                             showSnackBar(context, error.toString());
@@ -120,10 +116,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           showSnackBar(
                               context, 'Please fill all required fields.');
                         }
-                      }),
-              SizedBox(
-                height: 22.h,
-              ),
+                      },
+                    ),
+              SizedBox(height: getProportionalHeight(context, 22)),
               TextUnderButtom(
                 firstText: "Doesn't have an account ?",
                 secondText: 'sign up',
@@ -131,18 +126,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   Navigator.popAndPushNamed(context, SignUpView.id);
                 },
               ),
-              SizedBox(
-                height: 8.h,
-              ),
-              const CusttomTextDivider(
-                text: "or",
-              ),
-              SizedBox(
-                height: 52.h,
-              ),
+              SizedBox(height: getProportionalHeight(context, 8)),
+              const CusttomTextDivider(text: "or"),
+              SizedBox(height: getProportionalHeight(context, 52)),
               CustomButtom(
-                height: 46.h,
-                width: 292.w,
+                height: getProportionalHeight(context, 46),
+                width: getProportionalWidth(context, 292),
                 label: 'Login with google',
                 image: 'assets/icons/google.png',
                 backgorundColor: Colors.transparent,

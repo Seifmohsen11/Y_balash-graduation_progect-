@@ -4,26 +4,31 @@ import 'package:y_balash/core/constants/constants.dart';
 class TitleOfTextField extends StatelessWidget {
   const TitleOfTextField({super.key, required this.title});
   final String title;
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        SizedBox(width: getProportionalWidth(context, 16)),
         SizedBox(
-          width: screenWidth * (16 / 430),
-        ),
-        SizedBox(
-          height: screenHeight * (29 / 932),
+          height: getProportionalHeight(context, 29),
           child: Text(
             title,
             style: TextStyle(
-                fontFamily: kIneraFont,
-                fontWeight: FontWeight.w400,
-                fontSize: screenWidth * (24 / 430),
-                color: kTextFieldAndButtomColor),
+              fontFamily: kIneraFont,
+              fontWeight: FontWeight.w400,
+              fontSize: getProportionalWidth(context, 24),
+              color: kTextFieldAndButtomColor,
+            ),
           ),
         ),
       ],

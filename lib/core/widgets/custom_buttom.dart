@@ -23,8 +23,13 @@ class CustomButtom extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    double getProportionalHeight(BuildContext context, double originalHeight) {
+      return (originalHeight / 932) * MediaQuery.of(context).size.height;
+    }
+
+    double getProportionalWidth(BuildContext context, double originalWidth) {
+      return (originalWidth / 430) * MediaQuery.of(context).size.width;
+    }
 
     return GestureDetector(
       onTap: onTap,
@@ -32,8 +37,8 @@ class CustomButtom extends StatelessWidget {
         decoration: BoxDecoration(
             color: backgorundColor,
             border: Border.all(color: borderColor),
-            borderRadius:
-                BorderRadius.all(Radius.circular(screenWidth * (50 / 430)))),
+            borderRadius: BorderRadius.all(
+                Radius.circular(getProportionalWidth(context, 50)))),
         height: height,
         width: width,
         child: Center(
@@ -43,12 +48,13 @@ class CustomButtom extends StatelessWidget {
               if (image != null)
                 Padding(
                   padding: EdgeInsets.only(
-                      right: screenWidth *
-                          (8 / 430)), // Space between image and text
+                    right: getProportionalWidth(context, 8),
+                  ), // Space between image and text
                   child: Image.asset(
                     image!,
-                    height: screenHeight * (24 / 930), // Adjust size if needed
-                    width: screenWidth * (24 / 430),
+                    height: getProportionalHeight(
+                        context, 24), // Adjust size if needed
+                    width: getProportionalWidth(context, 24),
                   ),
                 ),
               Text(

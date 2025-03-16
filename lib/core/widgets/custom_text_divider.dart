@@ -17,7 +17,9 @@ class CusttomTextDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double getProportionalWidth(BuildContext context, double originalWidth) {
+      return (originalWidth / 430) * MediaQuery.of(context).size.width;
+    }
 
     return Row(
       children: [
@@ -25,7 +27,7 @@ class CusttomTextDivider extends StatelessWidget {
           child: Divider(
             color: dividerColor,
             thickness: thickness,
-            indent: screenWidth * (22 / 430),
+            indent: getProportionalWidth(context, 22),
           ),
         ),
         Padding(
@@ -42,7 +44,7 @@ class CusttomTextDivider extends StatelessWidget {
           child: Divider(
             color: dividerColor,
             thickness: thickness,
-            endIndent: screenWidth * (22 / 430),
+            endIndent: getProportionalWidth(context, 22),
           ),
         ),
       ],

@@ -18,15 +18,21 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * (14 / 430)),
+      padding:
+          EdgeInsets.symmetric(horizontal: getProportionalWidth(context, 14)),
       child: SizedBox(
-        height: screenHeight * (55 / 932),
+        height: getProportionalHeight(context, 55),
         child: TextFormField(
           validator: (data) {
             if (data!.isEmpty) {
@@ -39,26 +45,28 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             suffixIcon: widget.icon,
             hintText: widget.hintText,
             hintStyle: TextStyle(
-              fontSize: screenWidth * (16 / 430),
+              fontSize: getProportionalWidth(context, 16),
               color: kmainTextColor,
               fontFamily: kIneraFont,
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
-                borderSide: BorderSide(
-                  width: screenWidth * (2 / 430),
-                  color: kTextFieldAndButtomColor,
-                )),
+              borderRadius:
+                  BorderRadius.circular(getProportionalWidth(context, 50)),
+              borderSide: BorderSide(
+                width: getProportionalWidth(context, 2),
+                color: kTextFieldAndButtomColor,
+              ),
+            ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
-                borderSide: const BorderSide(
-                  color: kTextFieldAndButtomColor,
-                )),
+              borderRadius:
+                  BorderRadius.circular(getProportionalWidth(context, 50)),
+              borderSide: const BorderSide(color: kTextFieldAndButtomColor),
+            ),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (50 / 430)),
-                borderSide: const BorderSide(
-                  color: kTextFieldAndButtomColor,
-                )),
+              borderRadius:
+                  BorderRadius.circular(getProportionalWidth(context, 50)),
+              borderSide: const BorderSide(color: kTextFieldAndButtomColor),
+            ),
           ),
         ),
       ),

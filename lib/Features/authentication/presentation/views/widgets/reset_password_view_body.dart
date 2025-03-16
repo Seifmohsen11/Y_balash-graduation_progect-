@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_password_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -19,6 +18,14 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +36,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           child: Column(
             children: [
               SizedBox(
-                height: 108.h,
+                height: getProportionalHeight(context, 108),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -40,13 +47,13 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       color: kTextFieldAndButtomColor,
                       fontFamily: kIneraFont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 32.sp,
+                      fontSize: getProportionalWidth(context, 32),
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 42.h,
+                height: getProportionalHeight(context, 42),
               ),
               TitleAndPasswordField(
                 title: 'New Password',
@@ -56,7 +63,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 },
               ),
               SizedBox(
-                height: 15.h,
+                height: getProportionalHeight(context, 15),
               ),
               TitleAndPasswordField(
                 title: 'Confirm New Password',
@@ -66,15 +73,15 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 },
               ),
               SizedBox(
-                height: 36.h,
+                height: getProportionalHeight(context, 36),
               ),
               _isLoading
                   ? const CircularProgressIndicator(
                       color: kTextFieldAndButtomColor,
                     )
                   : CustomButtom(
-                      height: 58.h,
-                      width: 216.w,
+                      height: getProportionalHeight(context, 58),
+                      width: getProportionalWidth(context, 216),
                       label: 'Reset',
                       backgorundColor: kTextFieldAndButtomColor,
                       textColor: Colors.white,

@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/otp_verification_view.dart';
@@ -24,31 +23,23 @@ class YBalashApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize:
-          const Size(430, 932), // Reference design size (width x height)
-      minTextAdapt: true, // Adjust text scaling
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: {
-            SignUpView.id: (context) => const SignUpView(),
-            LoginView.id: (context) => const LoginView(),
-            ForgetPasswordView.id: (context) => const ForgetPasswordView(),
-            OtpVerificationView.id: (context) => const OtpVerificationView(),
-            ResetPasswordView.id: (context) => const ResetPasswordView(),
-            MainView.id: (context) => const MainView(),
-            HomeView.id: (context) => const HomeView(),
-            SearchView.id: (context) => const SearchView(),
-            FavouriteView.id: (context) => const FavouriteView(),
-            ChatPotView.id: (context) => const ChatPotView(),
-            CartView.id: (context) => const CartView(),
-            AccountView.id: (context) => const AccountView(),
-          },
-          initialRoute: SignUpView.id,
-        );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        SignUpView.id: (context) => const SignUpView(),
+        LoginView.id: (context) => const LoginView(),
+        ForgetPasswordView.id: (context) => const ForgetPasswordView(),
+        OtpVerificationView.id: (context) => const OtpVerificationView(),
+        ResetPasswordView.id: (context) => const ResetPasswordView(),
+        MainView.id: (context) => const MainView(),
+        HomeView.id: (context) => const HomeView(),
+        SearchView.id: (context) => const SearchView(),
+        FavouriteView.id: (context) => const FavouriteView(),
+        ChatPotView.id: (context) => const ChatPotView(),
+        CartView.id: (context) => const CartView(),
+        AccountView.id: (context) => const AccountView(),
       },
+      initialRoute: SignUpView.id,
     );
   }
 }

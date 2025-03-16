@@ -5,13 +5,18 @@ class LogoName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    double getProportionalHeight(BuildContext context, double originalHeight) {
+      return (originalHeight / 932) * MediaQuery.of(context).size.height;
+    }
+
+    double getProportionalWidth(BuildContext context, double originalWidth) {
+      return (originalWidth / 430) * MediaQuery.of(context).size.width;
+    }
 
     return Center(
       child: SizedBox(
-        height: screenHeight * (90 / 932),
-        width: screenWidth * (253 / 430),
+        height: getProportionalHeight(context, 90),
+        width: getProportionalWidth(context, 253),
         child: Image.asset(
           'assets/images/y-balashName.png',
           fit: BoxFit.cover,

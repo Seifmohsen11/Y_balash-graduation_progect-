@@ -11,7 +11,9 @@ class TextUnderButtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double getProportionalWidth(BuildContext context, double originalWidth) {
+      return (originalWidth / 430) * MediaQuery.of(context).size.width;
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +27,7 @@ class TextUnderButtom extends StatelessWidget {
         ),
         if (secondText != null)
           Padding(
-            padding: EdgeInsets.only(left: screenWidth * (4 / 430)),
+            padding: EdgeInsets.only(left: getProportionalWidth(context, 4)),
             child: GestureDetector(
               onTap: onTap,
               child: Text(

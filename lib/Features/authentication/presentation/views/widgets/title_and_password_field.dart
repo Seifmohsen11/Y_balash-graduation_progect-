@@ -13,17 +13,19 @@ class TitleAndPasswordField extends StatelessWidget {
   final String hintText;
   final Function(String)? onChange;
 
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         TitleOfTextField(
           title: title,
         ),
         SizedBox(
-          height: screenHeight * (15 / 932),
+          height: getProportionalHeight(context, 15),
         ),
         CustomPasswordField(
           hintText: '  $hintText',
