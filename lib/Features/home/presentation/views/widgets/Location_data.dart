@@ -19,7 +19,7 @@ class Location extends StatelessWidget {
             'Current Location',
             style: TextStyle(
                 color: const Color(0xff8A8A8A),
-                fontFamily: kIneraFont,
+                fontFamily: kInriaSansFont,
                 fontSize: screenWidth * (20 / 430)),
           )),
         ),
@@ -29,7 +29,7 @@ class Location extends StatelessWidget {
             'Ismailia , Egypt',
             style: TextStyle(
                 color: const Color(0xffFFC433),
-                fontFamily: kIneraFont,
+                fontFamily: kInriaSansFont,
                 fontSize: screenWidth * (20 / 430)),
           )),
         ),

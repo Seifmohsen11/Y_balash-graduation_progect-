@@ -42,7 +42,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           child: Column(
             children: [
               SizedBox(height: getProportionalHeight(context, 57)),
-              const LogoName(),
+              LogoName(
+                height: getProportionalHeight(context, 90),
+                width: getProportionalWidth(context, 253),
+              ),
               SizedBox(height: getProportionalHeight(context, 37)),
               TitleAndTextField(
                 title: 'Email address',
@@ -74,7 +77,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       child: const Text(
                         "Forget Password ?",
                         style: TextStyle(
-                          fontFamily: kIneraFont,
+                          fontFamily: kInriaSansFont,
                           fontWeight: FontWeight.w400,
                           color: kmainTextColor,
                           decoration: TextDecoration.underline,

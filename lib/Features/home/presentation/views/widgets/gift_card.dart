@@ -35,7 +35,7 @@ class GiftCard extends StatelessWidget {
                     'Free delivery',
                     style: TextStyle(
                         color: const Color(0xff0F4273),
-                        fontFamily: kIneraFont,
+                        fontFamily: kInriaSansFont,
                         fontSize: screenWidth * (13 / 430)),
                   ),
                 ),
@@ -48,7 +48,7 @@ class GiftCard extends StatelessWidget {
                 'Get up to 50% off on delivery when you redeem your points',
                 style: TextStyle(
                     color: const Color(0xffA6E4E1),
-                    fontFamily: kIneraFont,
+                    fontFamily: kInriaSansFont,
                     fontSize: screenWidth * (13 / 430)),
               ),
             ),

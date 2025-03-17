@@ -24,7 +24,7 @@ class TitleOfTextField extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              fontFamily: kIneraFont,
+              fontFamily: kInriaSansFont,
               fontWeight: FontWeight.w400,
               fontSize: getProportionalWidth(context, 24),
               color: kTextFieldAndButtomColor,

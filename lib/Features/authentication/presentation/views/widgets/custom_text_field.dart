@@ -47,7 +47,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             hintStyle: TextStyle(
               fontSize: getProportionalWidth(context, 16),
               color: kmainTextColor,
-              fontFamily: kIneraFont,
+              fontFamily: kInriaSansFont,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius:

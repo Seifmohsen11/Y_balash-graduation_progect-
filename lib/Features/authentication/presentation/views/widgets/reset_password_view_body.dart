@@ -45,7 +45,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                     'Reset Password',
                     style: TextStyle(
                       color: kTextFieldAndButtomColor,
-                      fontFamily: kIneraFont,
+                      fontFamily: kInriaSansFont,
                       fontWeight: FontWeight.w400,
                       fontSize: getProportionalWidth(context, 32),
                     ),

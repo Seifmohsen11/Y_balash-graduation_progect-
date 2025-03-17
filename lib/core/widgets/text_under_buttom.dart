@@ -9,12 +9,12 @@ class TextUnderButtom extends StatelessWidget {
   final String? secondText;
   final VoidCallback? onTap;
 
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double getProportionalWidth(BuildContext context, double originalWidth) {
-      return (originalWidth / 430) * MediaQuery.of(context).size.width;
-    }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -22,7 +22,7 @@ class TextUnderButtom extends StatelessWidget {
           firstText,
           style: const TextStyle(
             color: kmainTextColor,
-            fontFamily: kIneraFont,
+            fontFamily: kInriaSansFont,
           ),
         ),
         if (secondText != null)
@@ -34,7 +34,7 @@ class TextUnderButtom extends StatelessWidget {
                 secondText!,
                 style: const TextStyle(
                     color: kmainTextColor,
-                    fontFamily: kIneraFont,
+                    fontFamily: kInriaSansFont,
                     decoration: TextDecoration.underline),
               ),
             ),

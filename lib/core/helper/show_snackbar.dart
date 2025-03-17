@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+double getProportionalWidth(BuildContext context, double originalWidth) {
+  return (originalWidth / 430) * MediaQuery.of(context).size.width;
+}
 
 void showSnackBar(BuildContext context, String message,
     {Color backgroundColor = Colors.red, IconData icon = Icons.error}) {
@@ -7,14 +10,20 @@ void showSnackBar(BuildContext context, String message,
     SnackBar(
       content: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 24.sp),
-          SizedBox(width: 10.w),
+          Icon(
+            icon,
+            color: Colors.white,
+            size: getProportionalWidth(context, 24),
+          ),
+          SizedBox(
+            width: getProportionalWidth(context, 10),
+          ),
           Expanded(
             child: Text(
               message,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 14.sp,
+                fontSize: getProportionalWidth(context, 14),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -24,10 +33,14 @@ void showSnackBar(BuildContext context, String message,
       backgroundColor: backgroundColor,
       behavior: SnackBarBehavior.floating, // Makes it float above the UI
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r), // Rounded corners
+        borderRadius: BorderRadius.circular(
+          getProportionalWidth(context, 12),
+        ), // Rounded corners
       ),
       duration: const Duration(seconds: 3), // Display duration
-      margin: EdgeInsets.all(16.w), // Margin from screen edges
+      margin: EdgeInsets.all(
+        getProportionalWidth(context, 16),
+      ), // Margin from screen edges
       elevation: 6, // Light shadow effect
     ),
   );

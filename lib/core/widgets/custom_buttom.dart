@@ -21,16 +21,17 @@ class CustomButtom extends StatelessWidget {
   final Color borderColor;
   final String? image;
   final VoidCallback onTap;
+
+  double getProportionalHeight(BuildContext context, double originalHeight) {
+    return (originalHeight / 932) * MediaQuery.of(context).size.height;
+  }
+
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double getProportionalHeight(BuildContext context, double originalHeight) {
-      return (originalHeight / 932) * MediaQuery.of(context).size.height;
-    }
-
-    double getProportionalWidth(BuildContext context, double originalWidth) {
-      return (originalWidth / 430) * MediaQuery.of(context).size.width;
-    }
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -59,7 +60,10 @@ class CustomButtom extends StatelessWidget {
                 ),
               Text(
                 label,
-                style: TextStyle(color: textColor, fontFamily: kIneraFont),
+                style: TextStyle(
+                    color: textColor,
+                    fontFamily: kInriaSansFont,
+                    fontSize: getProportionalWidth(context, 20)),
               ),
             ],
           ),

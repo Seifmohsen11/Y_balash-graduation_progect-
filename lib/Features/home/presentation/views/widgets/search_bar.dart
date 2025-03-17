@@ -18,7 +18,7 @@ class CustomSearchBar extends StatelessWidget {
           hintStyle: TextStyle(
               color: const Color(0xff8A8A8A),
               fontSize: screenWidth * (20 / 430),
-              fontFamily: kIneraFont),
+              fontFamily: kInriaSansFont),
           prefixIcon: Icon(
             Icons.search,
             size: screenWidth * (24 / 430),

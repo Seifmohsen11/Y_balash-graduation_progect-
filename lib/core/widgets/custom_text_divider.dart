@@ -15,12 +15,12 @@ class CusttomTextDivider extends StatelessWidget {
     this.textPadding = 2.0,
   });
 
+  double getProportionalWidth(BuildContext context, double originalWidth) {
+    return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double getProportionalWidth(BuildContext context, double originalWidth) {
-      return (originalWidth / 430) * MediaQuery.of(context).size.width;
-    }
-
     return Row(
       children: [
         Expanded(
@@ -37,7 +37,7 @@ class CusttomTextDivider extends StatelessWidget {
             style: TextStyle(
                 color: dividerColor,
                 fontWeight: FontWeight.w400,
-                fontFamily: kIneraFont),
+                fontFamily: kInriaSansFont),
           ),
         ),
         Expanded(

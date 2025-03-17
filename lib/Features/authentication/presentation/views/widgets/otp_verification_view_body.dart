@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
-import 'package:y_balash/Features/authentication/presentation/views/widgets/forget_password_view_body.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/auth/verify_otp_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
@@ -47,7 +45,7 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
                   'OTP Verification',
                   style: TextStyle(
                     color: kTextFieldAndButtomColor,
-                    fontFamily: kIneraFont,
+                    fontFamily: kInriaSansFont,
                     fontWeight: FontWeight.w400,
                     fontSize: getProportionalWidth(context, 32),
                   ),

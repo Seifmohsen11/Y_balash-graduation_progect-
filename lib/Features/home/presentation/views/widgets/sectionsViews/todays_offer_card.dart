@@ -113,7 +113,7 @@ class TodaysOfferCard extends StatelessWidget {
                       style: TextStyle(
                         color: const Color(0xFF393939),
                         fontSize: screenWidth * (17 / 430),
-                        fontFamily: kIneraFont,
+                        fontFamily: kInriaSansFont,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -129,7 +129,7 @@ class TodaysOfferCard extends StatelessWidget {
                       style: TextStyle(
                         color: subjectColor,
                         fontSize: screenWidth * (14 / 430),
-                        fontFamily: kIneraFont,
+                        fontFamily: kInriaSansFont,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -143,7 +143,7 @@ class TodaysOfferCard extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: screenWidth * (14 / 430),
-                      fontFamily: kIneraFont),
+                      fontFamily: kInriaSansFont),
                 ),
               ],
             ),

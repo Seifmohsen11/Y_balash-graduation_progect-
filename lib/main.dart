@@ -12,6 +12,7 @@ import 'package:y_balash/Features/home/presentation/views/favourite_view.dart';
 import 'package:y_balash/Features/home/presentation/views/home_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
+import 'package:y_balash/core/widgets/splash_view.dart';
 
 void main() {
   runApp(
@@ -26,6 +27,7 @@ class YBalashApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
+        SplashView.id: (context) => const SplashView(),
         SignUpView.id: (context) => const SignUpView(),
         LoginView.id: (context) => const LoginView(),
         ForgetPasswordView.id: (context) => const ForgetPasswordView(),
@@ -39,7 +41,7 @@ class YBalashApp extends StatelessWidget {
         CartView.id: (context) => const CartView(),
         AccountView.id: (context) => const AccountView(),
       },
-      initialRoute: SignUpView.id,
+      initialRoute: SplashView.id,
     );
   }
 }

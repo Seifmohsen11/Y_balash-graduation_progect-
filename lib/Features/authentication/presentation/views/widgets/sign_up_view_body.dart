@@ -42,7 +42,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               SizedBox(
                 height: getProportionalHeight(context, 57),
               ),
-              const LogoName(),
+              LogoName(
+                height: getProportionalHeight(context, 90),
+                width: getProportionalWidth(context, 253),
+              ),
               SizedBox(
                 height: getProportionalHeight(context, 37),
               ),

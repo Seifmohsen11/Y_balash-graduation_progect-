@@ -74,7 +74,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
             hintStyle: TextStyle(
               fontSize: getProportionalWidth(context, 16),
               color: kmainTextColor,
-              fontFamily: kIneraFont,
+              fontFamily: kInriaSansFont,
             ),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
