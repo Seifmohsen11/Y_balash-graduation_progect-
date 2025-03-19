@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 
 class FavouriteProductCard extends StatefulWidget {
   const FavouriteProductCard({
@@ -102,12 +103,14 @@ class _FavouriteProductCardState extends State<FavouriteProductCard> {
                       EdgeInsets.only(top: widget.screenHeight * (2 / 932)),
                   child: Row(
                     children: [
-                      SizedBox(width: widget.screenWidth * (86 / 430)),
+                      SizedBox(width: widget.screenWidth * (80 / 430)),
                       IconButton(
                         onPressed: () async {
                           bool success =
                               await removeFromFavourite(widget.itemId);
                           if (success) {
+                            showSnackBar(context, 'Removed successfully',
+                                backgroundColor: Colors.green);
                             widget.onRemove(widget.itemId);
                           } else {
                             print('Failed to remove item from favorites');

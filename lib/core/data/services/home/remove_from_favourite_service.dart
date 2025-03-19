@@ -19,7 +19,7 @@ Future<bool> removeFromFavourite(String itemId) async {
       token: token,
     );
 
-    print('added Successfully: $response');
+    print('removed Successfully: $response');
     return true;
   } catch (error) {
     print('Failed to delete item: $error');

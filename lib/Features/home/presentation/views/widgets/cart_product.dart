@@ -5,6 +5,7 @@ import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/update_cart_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 
 class CartProduct extends StatefulWidget {
   const CartProduct({
@@ -67,8 +68,12 @@ class _CartProductState extends State<CartProduct> {
   void toggleFavorite() async {
     if (isFavorite) {
       await removeFromFavourite(widget.itemId);
+      showSnackBar(context, 'Removed Successfully',
+          backgroundColor: Colors.green);
     } else {
       await AddToFavourite(widget.itemId);
+      showSnackBar(context, 'Added Successfully',
+          backgroundColor: Colors.green);
     }
     setState(() {
       isFavorite = !isFavorite;
@@ -166,6 +171,8 @@ class _CartProductState extends State<CartProduct> {
                           bool success = await removeFromCart(
                               widget.itemId); // Wait for API response
                           if (success) {
+                            showSnackBar(context, 'Removed Successfully',
+                                backgroundColor: Colors.green);
                             widget
                                 .onRemove(); // Update UI only if API call succeeds
                           } else {
@@ -183,7 +190,7 @@ class _CartProductState extends State<CartProduct> {
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
-                      SizedBox(width: widget.screenWidth * (20 / 430)),
+                      SizedBox(width: widget.screenWidth * (14 / 430)),
                       IconButton(
                           iconSize: widget.screenWidth * (32 / 430),
                           onPressed: () {

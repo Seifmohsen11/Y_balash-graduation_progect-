@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
-class AppBarOfCategoryView extends StatelessWidget {
-  const AppBarOfCategoryView({super.key, required this.title});
-  final String title;
+class AppBarOfItemDetails extends StatelessWidget {
+  const AppBarOfItemDetails({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -17,14 +19,6 @@ class AppBarOfCategoryView extends StatelessWidget {
           SizedBox(
             height: screenHeight * (42 / 932),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const ImageIcon(
-              AssetImage('assets/icons/Arrow.png'),
-            ),
-          ),
           Padding(
             padding: EdgeInsets.only(
                 left: screenWidth * (10 / 430),
@@ -32,12 +26,13 @@ class AppBarOfCategoryView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                      fontSize: screenWidth * (36 / 430),
-                      fontFamily: kAbyssinicaSIL,
-                      color: kTextFieldAndButtomColor),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const ImageIcon(
+                    AssetImage('assets/icons/Arrow.png'),
+                  ),
                 ),
                 IconButton(
                     iconSize: 28,
