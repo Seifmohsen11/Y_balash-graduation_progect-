@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/app_bar_of_item_details.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
+import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
@@ -27,7 +30,8 @@ class ItemDetailsViewBody extends StatefulWidget {
 }
 
 class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
-  bool isRed = false;
+  late int currentQuantity;
+  bool isFavorite = false;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -35,6 +39,43 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
 
   double getProportionalWidth(BuildContext context, double originalWidth) {
     return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentQuantity = 1;
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    bool favoriteStatus = await isProductFavorite(widget.itemId);
+    setState(() {
+      isFavorite = favoriteStatus;
+    });
+  }
+
+  void toggleFavorite() async {
+    if (isFavorite) {
+      await removeFromFavourite(widget.itemId);
+      showSnackBar(context, 'Removed Successfully',
+          backgroundColor: Colors.green);
+    } else {
+      await AddToFavourite(widget.itemId);
+      showSnackBar(context, 'Added Successfully',
+          backgroundColor: Colors.green);
+    }
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  void updateQuantity(int newQuantity) async {
+    if (newQuantity < 1) return;
+
+    setState(() {
+      currentQuantity = newQuantity;
+    });
   }
 
   @override
@@ -71,20 +112,12 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                       fontFamily: kLatoBold),
                 ),
                 IconButton(
-                  onPressed: () async {
-                    bool success = await removeFromFavourite(widget.itemId);
-                    if (success) {
-                      showSnackBar(context, 'Removed successfully',
-                          backgroundColor: Colors.green);
-                      widget.onRemove(widget.itemId);
-                    } else {
-                      print('Failed to remove item from favorites');
-                    }
+                  onPressed: () {
+                    toggleFavorite();
                   },
                   icon: Icon(
-                    isRed ? Icons.favorite : Icons.favorite_outline,
-                    color: isRed ? Colors.red : null,
-                  ),
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : Colors.black),
                 ),
               ],
             ),
@@ -122,18 +155,22 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                     SizedBox(width: getProportionalWidth(context, 20)),
                     IconButton(
                         iconSize: getProportionalWidth(context, 32),
-                        onPressed: () {},
+                        onPressed: () {
+                          updateQuantity(currentQuantity - 1);
+                        },
                         icon: const Icon(Icons.remove_circle_outline)),
-                    Text("1"),
+                    Text("$currentQuantity"),
                     IconButton(
                         iconSize: getProportionalWidth(context, 32),
                         color: Colors.yellow,
-                        onPressed: () {},
+                        onPressed: () {
+                          updateQuantity(currentQuantity + 1);
+                        },
                         icon: const Icon(Icons.add_circle_outline)),
                   ],
                 ),
                 Text(
-                  widget.price,
+                  "${(double.parse(widget.price.replaceAll(RegExp(r'[^0-9.]'), '')) * currentQuantity).toStringAsFixed(2)} EGP",
                   style: TextStyle(
                       fontSize: getProportionalWidth(context, 24),
                       color: const Color(0xFF1C573E)),
@@ -145,13 +182,18 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
             height: getProportionalHeight(context, 77),
           ),
           CustomButtom(
-              label: 'Add to cart',
-              height: getProportionalHeight(context, 46),
-              width: getProportionalWidth(context, 340),
-              backgorundColor: kTextFieldAndButtomColor,
-              textColor: Colors.white,
-              borderColor: kTextFieldAndButtomColor,
-              onTap: () {})
+            label: 'Add to cart',
+            height: getProportionalHeight(context, 46),
+            width: getProportionalWidth(context, 340),
+            backgorundColor: kTextFieldAndButtomColor,
+            textColor: Colors.white,
+            borderColor: kTextFieldAndButtomColor,
+            onTap: () async {
+              await AddToCart(widget.itemId, currentQuantity);
+              showSnackBar(context, "Added successfuly",
+                  backgroundColor: Colors.green);
+            },
+          )
         ],
       ),
     );

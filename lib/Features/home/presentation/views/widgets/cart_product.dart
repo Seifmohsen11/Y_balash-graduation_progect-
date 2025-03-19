@@ -45,6 +45,7 @@ class _CartProductState extends State<CartProduct> {
 
   void checkIfFavorite() async {
     bool favoriteStatus = await isProductFavorite(widget.itemId);
+    if (!mounted) return;
     setState(() {
       isFavorite = favoriteStatus;
     });

@@ -21,7 +21,9 @@ Future<bool> removeFromCart(String itemId) async {
 
     print("Response: $response");
 
-    if (response != null && response['message'] == "Item removed from cart") {
+    if (response != null &&
+        response['message'] != null &&
+        response['message'].contains("removed from cart")) {
       print('Item removed successfully.');
       return true;
     } else {
