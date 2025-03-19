@@ -10,9 +10,17 @@ class ItemDetailsViewBody extends StatefulWidget {
     super.key,
     required this.itemId,
     required this.onRemove,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.image,
   });
   final String itemId;
   final Function(String) onRemove;
+  final String title;
+  final String description;
+  final String price;
+  final String image;
 
   @override
   State<ItemDetailsViewBody> createState() => _ItemDetailsViewBodyState();
@@ -39,8 +47,8 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
           SizedBox(
             height: getProportionalHeight(context, 56),
           ),
-          Image.asset(
-            'assets/images/dounats.png',
+          Image.network(
+            widget.image,
             height: getProportionalHeight(context, 280),
             width: getProportionalWidth(context, 315),
             fit: BoxFit.fill,
@@ -56,7 +64,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Unicorn Sprinkles',
+                  widget.title,
                   style: TextStyle(
                       fontSize: getProportionalWidth(context, 24),
                       color: kTextFieldAndButtomColor,
@@ -91,7 +99,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                 SizedBox(
                   width: getProportionalWidth(context, 303),
                   child: Text(
-                    'A fluffy fresh cooked donut covered by a creamy strawberry flavour with rainbow sprinkles.',
+                    widget.description,
                     style: TextStyle(
                         fontSize: getProportionalWidth(context, 20),
                         color: Color(0xff8A8A8A),
@@ -125,7 +133,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                   ],
                 ),
                 Text(
-                  '60 EGP',
+                  widget.price,
                   style: TextStyle(
                       fontSize: getProportionalWidth(context, 24),
                       color: const Color(0xFF1C573E)),

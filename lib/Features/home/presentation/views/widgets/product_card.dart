@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/item_details_view.dart
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
+import 'package:y_balash/core/data/services/home/get_item_details_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
@@ -54,10 +55,19 @@ class _ProductCardState extends State<ProductCard> {
     return Padding(
       padding: EdgeInsets.only(right: widget.screenWidth * (15 / 430)),
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const ItemDetailsView();
-          }));
+        onTap: () async {
+          final productData = await FetchItemDetails(widget.id);
+          if (productData != null) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ItemDetailsView(
+                itemId: widget.id,
+                title: productData['name'],
+                description: 'Quantity: ${productData['quantity']}',
+                price: productData['price'].toString(),
+                image: productData['imageUrl'],
+              );
+            }));
+          }
         },
         child: Container(
           decoration: BoxDecoration(
