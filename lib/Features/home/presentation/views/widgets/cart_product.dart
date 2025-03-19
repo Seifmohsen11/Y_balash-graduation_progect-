@@ -170,7 +170,7 @@ class _CartProductState extends State<CartProduct> {
                       GestureDetector(
                         onTap: () async {
                           bool success = await removeFromCart(
-                              widget.itemId); // Wait for API response
+                              itemId: widget.itemId); // Wait for API response
                           if (success) {
                             showSnackBar(context, 'Removed Successfully',
                                 backgroundColor: Colors.green);

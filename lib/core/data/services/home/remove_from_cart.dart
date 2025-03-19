@@ -3,7 +3,7 @@ import 'package:y_balash/core/helper/shared_pref_helper.dart';
 
 final apiService = ApiService(baseUrl: 'https://y-balash.vercel.app/api/');
 
-Future<bool> removeFromCart(String itemId) async {
+Future<bool> removeFromCart({String? itemId, String? offerId}) async {
   try {
     String? token = await SharedPrefHelper.getToken();
     if (token == null) {
@@ -11,11 +11,19 @@ Future<bool> removeFromCart(String itemId) async {
       return false;
     }
 
-    String url = 'https://y-balash.vercel.app/api/remove/$itemId';
+    String url = '';
+    if (itemId != null) {
+      url = 'https://y-balash.vercel.app/api/remove/$itemId';
+    } else if (offerId != null) {
+      url = 'https://y-balash.vercel.app/api/remove/$offerId';
+    } else {
+      print("Error: No itemId or offerId provided.");
+      return false;
+    }
     print("Sending DELETE request to: $url");
 
     final response = await apiService.delete(
-      endpoint: 'cart/remove/$itemId',
+      endpoint: 'cart/remove/${itemId ?? offerId}',
       token: token,
     );
 
@@ -27,7 +35,8 @@ Future<bool> removeFromCart(String itemId) async {
       print('Item removed successfully.');
       return true;
     } else {
-      print('Failed to remove item: Unexpected response format');
+      print(
+          'Failed to remove item: Unexpected response format ${response['message']}');
       return false;
     }
   } catch (error) {
