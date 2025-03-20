@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/coupon_input_field.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_cart_product.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/order_summary.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CartViewBody extends StatefulWidget {
@@ -20,44 +22,58 @@ class _CartViewBodyState extends State<CartViewBody> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: kPrimaryColor,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * (16 / 430)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: screenHeight * (42 / 932),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const ImageIcon(
-                  AssetImage('assets/icons/Arrow.png'),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * (16 / 430)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: screenHeight * (42 / 932),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: screenWidth * (10 / 430),
-                    right: screenWidth * (10 / 430)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Cart',
-                      style: TextStyle(
-                          fontSize: screenWidth * (36 / 430),
-                          fontFamily: kAbyssinicaSIL,
-                          color: kTextFieldAndButtomColor),
-                    ),
-                  ],
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const ImageIcon(
+                    AssetImage('assets/icons/Arrow.png'),
+                  ),
                 ),
-              ),
-              ListOfCartProducts(
-                  screenHeight: screenHeight,
-                  screenWidth: screenWidth,
-                  onCartUpdated: refreshCart)
-            ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: screenWidth * (10 / 430),
+                      right: screenWidth * (10 / 430)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Cart',
+                        style: TextStyle(
+                            fontSize: screenWidth * (36 / 430),
+                            fontFamily: kAbyssinicaSIL,
+                            color: kTextFieldAndButtomColor),
+                      ),
+                    ],
+                  ),
+                ),
+                ListOfCartProducts(
+                    screenHeight: screenHeight,
+                    screenWidth: screenWidth,
+                    onCartUpdated: refreshCart),
+                SizedBox(
+                  height: screenHeight * (16 / 932),
+                ),
+                const CouponInputField(),
+                SizedBox(
+                  height: screenHeight * (8 / 932),
+                ),
+                OrderSummary(
+                  itemCount: 5,
+                  totalPrice: 700,
+                  shipping: 50,
+                )
+              ],
+            ),
           ),
         ));
   }

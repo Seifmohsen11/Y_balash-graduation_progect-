@@ -65,7 +65,8 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
           height: widget.screenHeight * 0.3,
           child: const Center(child: Text("No products available")));
     }
-    return Expanded(
+    return SizedBox(
+      height: widget.screenHeight * (470 / 932),
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: products.length,

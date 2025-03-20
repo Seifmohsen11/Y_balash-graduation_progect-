@@ -22,7 +22,7 @@ class _MainViewBodyState extends State<MainViewBody> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: const Color(0xFF2C9066),
+        buttonBackgroundColor: Colors.green,
         backgroundColor: kPrimaryColor,
         items: <Widget>[
           ImageIcon(
