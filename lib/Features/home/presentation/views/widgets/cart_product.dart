@@ -60,6 +60,7 @@ class _CartProductState extends State<CartProduct> {
 
     try {
       await UpdateCart(widget.itemId, newQuantity);
+      widget.onRemove();
       print("Quantity updated successfuly");
     } catch (error) {
       print("Faild to update quantity $error");

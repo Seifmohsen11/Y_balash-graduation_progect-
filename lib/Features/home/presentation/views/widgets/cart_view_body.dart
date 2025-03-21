@@ -84,28 +84,30 @@ class _CartViewBodyState extends State<CartViewBody> {
                 SizedBox(
                   height: screenHeight * (8 / 932),
                 ),
-                const CouponInputField(),
-                SizedBox(
-                  height: screenHeight * (8 / 932),
-                ),
-                OrderSummary(
-                  itemCount: itemCount,
-                  totalPrice: totalPrice,
-                  shipping: 50,
-                ),
-                SizedBox(
-                  height: screenHeight * (8 / 932),
-                ),
-                CustomButtom(
-                  label: 'Check Out',
-                  height: screenHeight * (57 / 932),
-                  width: screenWidth * (398 / 430),
-                  backgorundColor: kTextFieldAndButtomColor,
-                  textColor: Colors.white,
-                  borderColor: kTextFieldAndButtomColor,
-                  onTap: () {},
-                  borderRadiusSize: screenWidth * (14 / 430),
-                )
+                if (itemCount > 0) ...[
+                  const CouponInputField(),
+                  SizedBox(
+                    height: screenHeight * (8 / 932),
+                  ),
+                  OrderSummary(
+                    itemCount: itemCount,
+                    totalPrice: totalPrice,
+                    shipping: 50,
+                  ),
+                  SizedBox(
+                    height: screenHeight * (8 / 932),
+                  ),
+                  CustomButtom(
+                    label: 'Check Out',
+                    height: screenHeight * (57 / 932),
+                    width: screenWidth * (398 / 430),
+                    backgorundColor: kTextFieldAndButtomColor,
+                    textColor: Colors.white,
+                    borderColor: kTextFieldAndButtomColor,
+                    onTap: () {},
+                    borderRadiusSize: screenWidth * (14 / 430),
+                  ),
+                ]
               ],
             ),
           ),
