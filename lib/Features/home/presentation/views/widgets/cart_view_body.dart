@@ -13,6 +13,24 @@ class CartViewBody extends StatefulWidget {
 }
 
 class _CartViewBodyState extends State<CartViewBody> {
+  int itemCount = 0;
+  double totalPrice = 0.0;
+
+  void updateOrderSummary(List<dynamic> products) {
+    setState(() {
+      itemCount = products.length;
+      totalPrice = products.fold(0.0, (sum, item) {
+        double price = double.tryParse((item['itemId']['price'] ?? '0')
+                .toString()
+                .replaceAll(RegExp(r'[^0-9.]'), '')) ??
+            0.0;
+
+        int quantity = item['quantity'] ?? 1;
+        return sum + (price * quantity);
+      });
+    });
+  }
+
   void refreshCart() {
     setState(() {});
   }
@@ -58,9 +76,11 @@ class _CartViewBodyState extends State<CartViewBody> {
                   ),
                 ),
                 ListOfCartProducts(
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                    onCartUpdated: refreshCart),
+                  screenHeight: screenHeight,
+                  screenWidth: screenWidth,
+                  onCartUpdated: refreshCart,
+                  onProductsFetched: updateOrderSummary,
+                ),
                 SizedBox(
                   height: screenHeight * (8 / 932),
                 ),
@@ -68,9 +88,9 @@ class _CartViewBodyState extends State<CartViewBody> {
                 SizedBox(
                   height: screenHeight * (8 / 932),
                 ),
-                const OrderSummary(
-                  itemCount: 5,
-                  totalPrice: 700,
+                OrderSummary(
+                  itemCount: itemCount,
+                  totalPrice: totalPrice,
                   shipping: 50,
                 ),
                 SizedBox(

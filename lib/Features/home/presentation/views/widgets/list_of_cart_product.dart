@@ -8,11 +8,13 @@ class ListOfCartProducts extends StatefulWidget {
     required this.screenHeight,
     required this.screenWidth,
     required this.onCartUpdated,
+    required this.onProductsFetched,
   });
 
   final double screenHeight;
   final double screenWidth;
   final VoidCallback onCartUpdated;
+  final Function(List<dynamic>) onProductsFetched;
 
   @override
   State<ListOfCartProducts> createState() => _ListOfCartProductsState();
@@ -36,6 +38,7 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
           products = items;
           isLoading = false;
         });
+        widget.onProductsFetched(products);
       }
     } catch (error) {
       print('Error fetching products: $error');
