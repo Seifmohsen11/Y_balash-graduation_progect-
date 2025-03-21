@@ -123,6 +123,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                               context, 'Please fill all required fields.');
                         }
                       },
+                      borderRadiusSize: getProportionalWidth(context, 50),
                     ),
               SizedBox(
                 height: getProportionalHeight(context, 15),
@@ -149,6 +150,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 textColor: Colors.black,
                 borderColor: kmainTextColor,
                 onTap: () {},
+                borderRadiusSize: getProportionalWidth(context, 50),
               ),
             ],
           ),

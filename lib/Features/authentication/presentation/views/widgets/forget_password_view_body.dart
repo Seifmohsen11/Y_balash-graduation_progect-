@@ -100,7 +100,9 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                         } else {
                           showSnackBar(context, 'Please fill required field.');
                         }
-                      }),
+                      },
+                      borderRadiusSize: getProportionalWidth(context, 50),
+                    ),
               SizedBox(
                 height: getProportionalHeight(context, 22),
               ),

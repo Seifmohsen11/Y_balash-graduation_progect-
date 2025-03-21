@@ -120,6 +120,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               context, 'Please fill all required fields.');
                         }
                       },
+                      borderRadiusSize: getProportionalWidth(context, 50),
                     ),
               SizedBox(height: getProportionalHeight(context, 22)),
               TextUnderButtom(
@@ -141,6 +142,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 textColor: Colors.black,
                 borderColor: kmainTextColor,
                 onTap: () {},
+                borderRadiusSize: getProportionalWidth(context, 50),
               ),
             ],
           ),

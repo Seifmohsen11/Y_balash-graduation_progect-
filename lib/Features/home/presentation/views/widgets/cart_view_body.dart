@@ -3,6 +3,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/coupon_input_f
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_cart_product.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/order_summary.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class CartViewBody extends StatefulWidget {
   const CartViewBody({super.key});
@@ -61,16 +62,29 @@ class _CartViewBodyState extends State<CartViewBody> {
                     screenWidth: screenWidth,
                     onCartUpdated: refreshCart),
                 SizedBox(
-                  height: screenHeight * (16 / 932),
+                  height: screenHeight * (8 / 932),
                 ),
                 const CouponInputField(),
                 SizedBox(
                   height: screenHeight * (8 / 932),
                 ),
-                OrderSummary(
+                const OrderSummary(
                   itemCount: 5,
                   totalPrice: 700,
                   shipping: 50,
+                ),
+                SizedBox(
+                  height: screenHeight * (8 / 932),
+                ),
+                CustomButtom(
+                  label: 'Check Out',
+                  height: screenHeight * (57 / 932),
+                  width: screenWidth * (398 / 430),
+                  backgorundColor: kTextFieldAndButtomColor,
+                  textColor: Colors.white,
+                  borderColor: kTextFieldAndButtomColor,
+                  onTap: () {},
+                  borderRadiusSize: screenWidth * (14 / 430),
                 )
               ],
             ),

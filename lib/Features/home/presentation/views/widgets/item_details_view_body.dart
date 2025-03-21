@@ -193,6 +193,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
               showSnackBar(context, "Added successfuly",
                   backgroundColor: Colors.green);
             },
+            borderRadiusSize: getProportionalWidth(context, 50),
           )
         ],
       ),

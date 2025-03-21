@@ -108,7 +108,9 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                           showSnackBar(
                               context, 'Please fill all required fields.');
                         }
-                      }),
+                      },
+                      borderRadiusSize: getProportionalWidth(context, 50),
+                    ),
             ],
           ),
         ),

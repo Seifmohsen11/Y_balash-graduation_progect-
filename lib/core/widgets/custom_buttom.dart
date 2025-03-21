@@ -12,6 +12,7 @@ class CustomButtom extends StatelessWidget {
     required this.borderColor,
     this.image,
     required this.onTap,
+    required this.borderRadiusSize,
   });
   final String label;
   final dynamic height;
@@ -21,6 +22,7 @@ class CustomButtom extends StatelessWidget {
   final Color borderColor;
   final String? image;
   final VoidCallback onTap;
+  final double borderRadiusSize;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -38,8 +40,7 @@ class CustomButtom extends StatelessWidget {
         decoration: BoxDecoration(
             color: backgorundColor,
             border: Border.all(color: borderColor),
-            borderRadius: BorderRadius.all(
-                Radius.circular(getProportionalWidth(context, 50)))),
+            borderRadius: BorderRadius.all(Radius.circular(borderRadiusSize))),
         height: height,
         width: width,
         child: Center(

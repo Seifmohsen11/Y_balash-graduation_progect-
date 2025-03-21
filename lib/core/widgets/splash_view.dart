@@ -70,15 +70,17 @@ class SplashViewState extends State<SplashView> {
             SizedBox(height: getProportionalHeight(context, 100)),
             if (showButton)
               CustomButtom(
-                  label: 'Get started for free >',
-                  height: getProportionalHeight(context, 58),
-                  width: getProportionalWidth(context, 232),
-                  backgorundColor: kTextFieldAndButtomColor,
-                  textColor: Colors.white,
-                  borderColor: kTextFieldAndButtomColor,
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, SignUpView.id);
-                  })
+                label: 'Get started for free >',
+                height: getProportionalHeight(context, 58),
+                width: getProportionalWidth(context, 232),
+                backgorundColor: kTextFieldAndButtomColor,
+                textColor: Colors.white,
+                borderColor: kTextFieldAndButtomColor,
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, SignUpView.id);
+                },
+                borderRadiusSize: getProportionalWidth(context, 50),
+              )
           ],
         ),
       ),

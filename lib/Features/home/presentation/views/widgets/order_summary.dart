@@ -42,15 +42,15 @@ class OrderSummary extends StatelessWidget {
         children: [
           buildRow("Items ($itemCount)", "\$${totalPrice.toStringAsFixed(2)}",
               Colors.grey[600]!),
-          SizedBox(height: getProportionalHeight(context, 8)),
+          SizedBox(height: getProportionalHeight(context, 4)),
           buildRow("Shipping", "\$$shipping", Colors.grey[600]!),
-          SizedBox(height: getProportionalHeight(context, 8)),
+          SizedBox(height: getProportionalHeight(context, 4)),
           buildRow("Import charges", "\$$importCharges", Colors.grey[600]!),
-          SizedBox(height: getProportionalHeight(context, 12)),
+          SizedBox(height: getProportionalHeight(context, 4)),
           Divider(
               thickness: getProportionalHeight(context, 1.2),
               color: Colors.grey),
-          SizedBox(height: getProportionalHeight(context, 12)),
+          SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(
               "Total Price",
               "\$${((totalPrice) + (shipping) + (importCharges)).toStringAsFixed(2)}",

@@ -135,6 +135,7 @@ class _OtpVerificationViewBodyState extends State<OtpVerificationViewBody> {
                         }
                       }
                     },
+                    borderRadiusSize: getProportionalWidth(context, 50),
                   ),
             SizedBox(
               height: getProportionalHeight(context, 29),
