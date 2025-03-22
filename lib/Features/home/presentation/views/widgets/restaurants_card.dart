@@ -23,7 +23,9 @@ class RestaurantsCard extends StatelessWidget {
         width: screenWidth * (248 / 430),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(
+            screenWidth * (18 / 430),
+          ),
         ),
         child: Stack(
           children: [
@@ -32,7 +34,9 @@ class RestaurantsCard extends StatelessWidget {
               width: screenWidth * (248 / 430),
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(
+                  screenWidth * (18 / 430),
+                ),
               ),
             ),
             Center(
@@ -41,12 +45,14 @@ class RestaurantsCard extends StatelessWidget {
                 width: screenWidth * (100 / 430),
                 decoration: BoxDecoration(
                   border: Border.all(color: color, width: .5),
-                  borderRadius:
-                      BorderRadius.circular(56), // Border radius for Container
+                  borderRadius: BorderRadius.circular(
+                    screenWidth * (56 / 430),
+                  ), // Border radius for Container
                 ),
                 child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(56), // Apply border radius to image
+                  borderRadius: BorderRadius.circular(
+                    screenWidth * (56 / 430),
+                  ), // Apply border radius to image
                   child: Image.network(
                     image,
                     fit: BoxFit.cover,

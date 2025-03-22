@@ -82,7 +82,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                   onProductsFetched: updateOrderSummary,
                 ),
                 SizedBox(
-                  height: screenHeight * (8 / 932),
+                  height: screenHeight * (18 / 932),
                 ),
                 if (itemCount > 0) ...[
                   const CouponInputField(),
