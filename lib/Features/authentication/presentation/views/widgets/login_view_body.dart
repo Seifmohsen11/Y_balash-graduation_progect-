@@ -109,7 +109,24 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                 backgroundColor: Colors.green);
                             Navigator.popAndPushNamed(context, MainView.id);
                           } catch (error) {
-                            showSnackBar(context, error.toString());
+                            String errorMessage = 'An error occurred';
+
+                            try {
+                              String errorString = error.toString();
+
+                              RegExp regex = RegExp(r'Error \d+: (.+)');
+                              Match? match = regex.firstMatch(errorString);
+
+                              if (match != null) {
+                                errorMessage = match.group(1)!;
+                              } else {
+                                errorMessage = errorString;
+                              }
+                            } catch (e) {
+                              errorMessage = 'Unexpected error occurred';
+                            }
+
+                            showSnackBar(context, errorMessage);
                           } finally {
                             setState(() {
                               _isLoading = false;
