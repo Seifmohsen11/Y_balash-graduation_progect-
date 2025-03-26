@@ -55,6 +55,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onChange: (data) {
                   email = data;
                 },
+                backgroundColor: kPrimaryColor,
+                borderColor: kTextFieldAndButtomColor,
               ),
               SizedBox(
                 height: getProportionalHeight(context, 15),
@@ -65,6 +67,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onChange: (data) {
                   phone = data;
                 },
+                backgroundColor: kPrimaryColor,
+                borderColor: kTextFieldAndButtomColor,
               ),
               SizedBox(
                 height: getProportionalHeight(context, 15),

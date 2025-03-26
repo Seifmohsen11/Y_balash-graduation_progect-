@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class TitleOfTextField extends StatelessWidget {
-  const TitleOfTextField({super.key, required this.title});
+  const TitleOfTextField({super.key, required this.title, this.fontSize});
   final String title;
+  final double? fontSize;
 
   double getProportionalWidth(BuildContext context, double originalWidth) {
     return (originalWidth / 430) * MediaQuery.of(context).size.width;
@@ -26,7 +27,7 @@ class TitleOfTextField extends StatelessWidget {
             style: TextStyle(
               fontFamily: kInriaSansFont,
               fontWeight: FontWeight.w400,
-              fontSize: getProportionalWidth(context, 24),
+              fontSize: getProportionalWidth(context, fontSize ?? 24),
               color: kTextFieldAndButtomColor,
             ),
           ),

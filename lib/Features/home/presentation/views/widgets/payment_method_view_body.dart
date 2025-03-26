@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/favourite_view_body.dart';
+import 'package:y_balash/Features/home/presentation/views/card_details_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
@@ -42,7 +43,9 @@ class PaymentMethodViewBody extends StatelessWidget {
               backgorundColor: Colors.white,
               textColor: kTextFieldAndButtomColor,
               borderColor: Colors.grey.withOpacity(.5),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, CardDetailsView.id);
+              },
               borderRadiusSize: getProportionalWidth(context, 32),
             ),
             SizedBox(height: getProportionalHeight(context, 14)),

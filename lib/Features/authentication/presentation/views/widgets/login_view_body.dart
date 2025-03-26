@@ -53,6 +53,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 onChange: (data) {
                   email = data;
                 },
+                backgroundColor: kPrimaryColor,
+                borderColor: kTextFieldAndButtomColor,
               ),
               SizedBox(height: getProportionalHeight(context, 15)),
               TitleAndPasswordField(

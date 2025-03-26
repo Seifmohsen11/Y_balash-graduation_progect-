@@ -6,6 +6,7 @@ import 'package:y_balash/Features/authentication/presentation/views/otp_verifica
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/home/presentation/views/account_view.dart';
+import 'package:y_balash/Features/home/presentation/views/card_details_view.dart';
 import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/chat_bot_view.dart';
 import 'package:y_balash/Features/home/presentation/views/favourite_view.dart';
@@ -42,6 +43,7 @@ class YBalashApp extends StatelessWidget {
         CartView.id: (context) => const CartView(),
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
+        CardDetailsView.id: (context) => const CardDetailsView(),
       },
       initialRoute: SplashView.id,
     );
