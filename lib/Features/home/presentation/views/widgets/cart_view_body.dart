@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/coupon_input_field.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/favourite_view_body.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_cart_product.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/order_summary.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -50,30 +51,13 @@ class _CartViewBodyState extends State<CartViewBody> {
                 SizedBox(
                   height: screenHeight * (42 / 932),
                 ),
-                IconButton(
+                AppBarOfCartView(
+                  screenWidth: screenWidth,
+                  iconImage: 'assets/icons/Arrow.png',
+                  title: 'Cart',
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const ImageIcon(
-                    AssetImage('assets/icons/Arrow.png'),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: screenWidth * (10 / 430),
-                      right: screenWidth * (10 / 430)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Cart',
-                        style: TextStyle(
-                            fontSize: screenWidth * (36 / 430),
-                            fontFamily: kAbyssinicaSIL,
-                            color: kTextFieldAndButtomColor),
-                      ),
-                    ],
-                  ),
                 ),
                 ListOfCartProducts(
                   screenHeight: screenHeight,

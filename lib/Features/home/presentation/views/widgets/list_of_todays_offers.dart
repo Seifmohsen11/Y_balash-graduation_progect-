@@ -22,15 +22,19 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
   Future<void> fetchProducts() async {
     try {
       final items = await getItems(); // Call the service
-      setState(() {
-        products = items; // Store the fetched data
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          products = items; // Store the fetched data
+          isLoading = false;
+        });
+      }
     } catch (error) {
       print('Error fetching products: $error');
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 

@@ -38,15 +38,19 @@ class _ListOfGroceriesCardState extends State<ListOfGroceriesCard> {
   Future<void> fetchCategories() async {
     try {
       final data = await getCategories();
-      setState(() {
-        categories = data;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          categories = data;
+          isLoading = false;
+        });
+      }
     } catch (e) {
       print('Error fetching categories: $e');
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 

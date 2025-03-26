@@ -22,15 +22,19 @@ class ListOfBestSellingState extends State<ListOfBestSelling> {
   Future<void> fetchBestSelling() async {
     try {
       final items = await getBestSelling(); // Fetch data from API
-      setState(() {
-        products = items;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          products = items;
+          isLoading = false;
+        });
+      }
     } catch (error) {
       print('Error fetching best-selling products: $error');
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 

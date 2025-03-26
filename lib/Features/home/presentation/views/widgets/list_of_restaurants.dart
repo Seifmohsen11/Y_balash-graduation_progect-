@@ -29,15 +29,19 @@ class ListOfRestaurantsState extends State<ListOfRestaurants> {
   Future<void> fetchRestaurants() async {
     try {
       final data = await getRestaurants(); // Call the service
-      setState(() {
-        restaurants = data; // Store API response
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          restaurants = data; // Store API response
+          isLoading = false;
+        });
+      }
     } catch (error) {
       print('Error fetching restaurants: $error');
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
