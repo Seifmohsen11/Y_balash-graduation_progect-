@@ -1,40 +1,37 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class ApiService {
   final String baseUrl;
+  final Dio _dio;
 
-  ApiService({required this.baseUrl});
+  ApiService({required this.baseUrl})
+      : _dio =
+            Dio(BaseOptions(baseUrl: baseUrl, contentType: 'application/json'));
 
   // Build headers
-  Map<String, String> _buildHeaders({String? token}) {
-    Map<String, String> headers = {'Content-Type': 'application/json'};
-    if (token != null) {
-      headers['Authorization'] = 'Bearer $token';
-    }
-    return headers;
+  Options _buildOptions({String? token}) {
+    return Options(
+      headers: token != null ? {'Authorization': 'Bearer $token'} : {},
+    );
   }
 
   // Unified response handler
-  dynamic _handleResponse(http.Response response) {
-    final statusCode = response.statusCode;
-    final body = response.body.isNotEmpty ? jsonDecode(response.body) : null;
-
-    if (statusCode >= 200 && statusCode < 300) {
-      return body;
+  dynamic _handleResponse(Response response) {
+    if (response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300) {
+      return response.data;
     } else {
-      final error = body?['message'] ?? 'An error occurred';
-      throw Exception('Error $statusCode: $error');
+      throw Exception(
+          'Error ${response.statusCode}: ${response.data?['message'] ?? 'An error occurred'}');
     }
   }
 
   // GET request
   Future<dynamic> get({required String endpoint, String? token}) async {
-    final url = Uri.parse('$baseUrl$endpoint');
-    final headers = _buildHeaders(token: token);
-
     try {
-      final response = await http.get(url, headers: headers);
+      final response =
+          await _dio.get(endpoint, options: _buildOptions(token: token));
       return _handleResponse(response);
     } catch (e) {
       throw Exception('GET request failed: $e');
@@ -47,15 +44,9 @@ class ApiService {
     required Map<String, dynamic> body,
     String? token,
   }) async {
-    final url = Uri.parse('$baseUrl$endpoint');
-    final headers = _buildHeaders(token: token);
-
     try {
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: json.encode(body),
-      );
+      final response = await _dio.post(endpoint,
+          data: body, options: _buildOptions(token: token));
       return _handleResponse(response);
     } catch (e) {
       throw Exception('POST request failed: $e');
@@ -68,15 +59,9 @@ class ApiService {
     required Map<String, dynamic> body,
     String? token,
   }) async {
-    final url = Uri.parse('$baseUrl$endpoint');
-    final headers = _buildHeaders(token: token);
-
     try {
-      final response = await http.put(
-        url,
-        headers: headers,
-        body: json.encode(body),
-      );
+      final response = await _dio.put(endpoint,
+          data: body, options: _buildOptions(token: token));
       return _handleResponse(response);
     } catch (e) {
       throw Exception('PUT request failed: $e');
@@ -85,11 +70,9 @@ class ApiService {
 
   // DELETE request
   Future<dynamic> delete({required String endpoint, String? token}) async {
-    final url = Uri.parse('$baseUrl$endpoint');
-    final headers = _buildHeaders(token: token);
-
     try {
-      final response = await http.delete(url, headers: headers);
+      final response =
+          await _dio.delete(endpoint, options: _buildOptions(token: token));
       return _handleResponse(response);
     } catch (e) {
       throw Exception('DELETE request failed: $e');
