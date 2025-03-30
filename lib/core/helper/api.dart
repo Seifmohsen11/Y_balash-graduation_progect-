@@ -27,14 +27,23 @@ class ApiService {
     }
   }
 
+  // Handle Dio exceptions
+  Exception _handleDioException(DioException e) {
+    if (e.response != null && e.response!.data is Map<String, dynamic>) {
+      return Exception(e.response!.data['message'] ?? 'An error occurred');
+    } else {
+      return Exception('Request failed: ${e.message}');
+    }
+  }
+
   // GET request
   Future<dynamic> get({required String endpoint, String? token}) async {
     try {
       final response =
           await _dio.get(endpoint, options: _buildOptions(token: token));
       return _handleResponse(response);
-    } catch (e) {
-      throw Exception('GET request failed: $e');
+    } on DioException catch (e) {
+      throw _handleDioException(e);
     }
   }
 
@@ -48,8 +57,8 @@ class ApiService {
       final response = await _dio.post(endpoint,
           data: body, options: _buildOptions(token: token));
       return _handleResponse(response);
-    } catch (e) {
-      throw Exception('POST request failed: $e');
+    } on DioException catch (e) {
+      throw _handleDioException(e);
     }
   }
 
@@ -63,8 +72,8 @@ class ApiService {
       final response = await _dio.put(endpoint,
           data: body, options: _buildOptions(token: token));
       return _handleResponse(response);
-    } catch (e) {
-      throw Exception('PUT request failed: $e');
+    } on DioException catch (e) {
+      throw _handleDioException(e);
     }
   }
 
@@ -74,8 +83,8 @@ class ApiService {
       final response =
           await _dio.delete(endpoint, options: _buildOptions(token: token));
       return _handleResponse(response);
-    } catch (e) {
-      throw Exception('DELETE request failed: $e');
+    } on DioException catch (e) {
+      throw _handleDioException(e);
     }
   }
 }

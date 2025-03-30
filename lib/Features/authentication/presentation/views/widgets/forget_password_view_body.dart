@@ -93,24 +93,8 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                             Navigator.popAndPushNamed(
                                 context, OtpVerificationView.id);
                           } catch (error) {
-                            String errorMessage = 'An error occurred';
-
-                            try {
-                              String errorString = error.toString();
-
-                              RegExp regex = RegExp(r'Error \d+: (.+)');
-                              Match? match = regex.firstMatch(errorString);
-
-                              if (match != null) {
-                                errorMessage = match.group(1)!;
-                              } else {
-                                errorMessage = errorString;
-                              }
-                            } catch (e) {
-                              errorMessage = 'Unexpected error occurred';
-                            }
-
-                            showSnackBar(context, errorMessage);
+                            showSnackBar(context,
+                                error.toString().replaceAll('Exception: ', ''));
                           } finally {
                             setState(() {
                               _isLoading = false;
