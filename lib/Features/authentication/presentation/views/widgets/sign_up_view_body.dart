@@ -4,6 +4,7 @@ import 'package:y_balash/Features/authentication/presentation/views/widgets/titl
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/auth/sign_up_service.dart';
+import 'package:y_balash/core/data/services/auth/sign_up_with_google_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 import 'package:y_balash/core/widgets/custom_text_divider.dart';
@@ -170,7 +171,13 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 backgorundColor: Colors.transparent,
                 textColor: Colors.black,
                 borderColor: kmainTextColor,
-                onTap: () {},
+                onTap: () async {
+                  try {
+                    await signUpWithGoogle();
+                  } catch (error) {
+                    showSnackBar(context, 'Error: $error');
+                  }
+                },
                 borderRadiusSize: getProportionalWidth(context, 50),
               ),
             ],
