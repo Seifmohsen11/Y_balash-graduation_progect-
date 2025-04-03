@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/Location_data.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/cart_icon.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/cart_icon.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/bakery_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/beverages_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/dairy_view.dart';
@@ -9,10 +9,10 @@ import 'package:y_balash/Features/home/presentation/views/widgets/categoriesView
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/list_of_gift_card.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_restaurants.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_best_selling.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_groceries_card.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_todays_offers.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_restaurants.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_best_selling.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_groceries_card.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_todays_offers.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/best_selling_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/groceries_view.dart';

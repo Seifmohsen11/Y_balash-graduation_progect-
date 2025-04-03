@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_groceries_card.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_groceries_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/back_arrow.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
