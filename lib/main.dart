@@ -1,12 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/otp_verification_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/reset_password_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/sign_up_view.dart';
 import 'package:y_balash/Features/home/presentation/views/account_view.dart';
-import 'package:y_balash/Features/home/presentation/views/card_details_view.dart';
 import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/chat_bot_view.dart';
 import 'package:y_balash/Features/home/presentation/views/favourite_view.dart';
@@ -17,6 +17,11 @@ import 'package:y_balash/Features/home/presentation/views/search_view.dart';
 import 'package:y_balash/core/widgets/splash_view.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Stripe.publishableKey =
+      'pk_test_51Qxr5tGvLVRZ2IJZdi79skSIRf8iMJgmZVMVTtENkPQCTrbR1Jlo1ljW0whTogd7DNZqlbyKcbTTEQEioxfVSGbi00t1fq1DBN';
+
   runApp(
       DevicePreview(enabled: true, builder: (context) => const YBalashApp()));
 }
@@ -43,7 +48,6 @@ class YBalashApp extends StatelessWidget {
         CartView.id: (context) => const CartView(),
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
-        CardDetailsView.id: (context) => const CardDetailsView(),
       },
       initialRoute: SplashView.id,
     );
