@@ -41,6 +41,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: SizedBox(
         height: getProportionalHeight(context, 55),
         child: TextFormField(
+          textInputAction: TextInputAction.next,
           validator: (data) {
             if (data!.isEmpty) {
               return "field is required";

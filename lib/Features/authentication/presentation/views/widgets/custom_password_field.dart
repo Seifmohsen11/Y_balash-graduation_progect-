@@ -35,6 +35,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       child: SizedBox(
         height: getProportionalHeight(context, 55),
         child: TextFormField(
+          textInputAction: TextInputAction.next,
           validator: (data) {
             if (data!.isEmpty) {
               return "field is required";
