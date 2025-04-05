@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/success_after_payment_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/helper/api.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
@@ -47,6 +48,9 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
 
       showSnackBar(context, 'payment Successful',
           backgroundColor: Colors.green);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return SuccessAfterPaymentView();
+      }));
     } catch (e) {
       print(e);
       showSnackBar(context, 'Payment Failed', backgroundColor: Colors.red);
@@ -104,7 +108,12 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
               backgorundColor: Colors.white,
               textColor: kTextFieldAndButtomColor,
               borderColor: Colors.grey.withOpacity(.5),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return SuccessAfterPaymentView();
+                }));
+              },
               borderRadiusSize: getProportionalWidth(context, 32),
             )
           ],
