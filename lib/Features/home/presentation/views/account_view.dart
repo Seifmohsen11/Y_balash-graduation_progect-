@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/account_view_body.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/account_view_body.dart';
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});

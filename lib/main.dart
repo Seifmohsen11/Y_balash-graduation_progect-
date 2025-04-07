@@ -14,20 +14,32 @@ import 'package:y_balash/Features/home/presentation/views/home_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
+import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/widgets/splash_view.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Stripe.publishableKey =
       'pk_test_51Qxr5tGvLVRZ2IJZdi79skSIRf8iMJgmZVMVTtENkPQCTrbR1Jlo1ljW0whTogd7DNZqlbyKcbTTEQEioxfVSGbi00t1fq1DBN';
 
-  runApp(
-      DevicePreview(enabled: true, builder: (context) => const YBalashApp()));
+  // Check if the token exists in SharedPreferences
+  String? token = await SharedPrefHelper.getToken();
+
+  // Based on token presence, decide the initial route
+  String initialRoute = token == null ? SplashView.id : MainView.id;
+
+  runApp(DevicePreview(
+      enabled: true,
+      builder: (context) => YBalashApp(
+            initialRoute: initialRoute,
+          )));
 }
 
 class YBalashApp extends StatelessWidget {
-  const YBalashApp({super.key});
+  final String initialRoute;
+
+  const YBalashApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +61,7 @@ class YBalashApp extends StatelessWidget {
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
       },
-      initialRoute: SplashView.id,
+      initialRoute: initialRoute,
     );
   }
 }

@@ -32,15 +32,21 @@ class _ListOfFavoritesProductsState extends State<ListOfFavoritesProducts> {
   Future<void> fetchProducts() async {
     try {
       final items = await getFavoriteProduct();
-      setState(() {
-        products = items;
-        isLoading = false;
-      });
+
+      if (mounted) {
+        setState(() {
+          products = items;
+          isLoading = false;
+        });
+      }
     } catch (error) {
       print('Error fetching products: $error');
-      setState(() {
-        isLoading = false;
-      });
+
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
