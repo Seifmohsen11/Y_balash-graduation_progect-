@@ -28,15 +28,19 @@ class _BeveragesViewState extends State<BeveragesView> {
   Future<void> fetchProducts() async {
     try {
       final data = await productService.fetchProducts(categoryId);
-      setState(() {
-        products = data;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          products = data;
+          isLoading = false;
+        });
+      }
     } catch (error) {
-      setState(() {
-        isLoading = false;
-        hasError = true;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+          hasError = true;
+        });
+      }
       print('Failed to fetch products: $error');
     }
   }

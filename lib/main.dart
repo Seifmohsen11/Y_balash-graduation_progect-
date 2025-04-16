@@ -14,6 +14,7 @@ import 'package:y_balash/Features/home/presentation/views/home_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
+import 'package:y_balash/core/helper/is_token_expired.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/widgets/splash_view.dart';
 
@@ -25,9 +26,12 @@ void main() async {
 
   // Check if the token exists in SharedPreferences
   String? token = await SharedPrefHelper.getToken();
+  print('token is $token');
+
+  bool isValid = token != null && !isTokenExpired(token);
 
   // Based on token presence, decide the initial route
-  String initialRoute = token == null ? SplashView.id : MainView.id;
+  String initialRoute = isValid ? MainView.id : SplashView.id;
 
   runApp(DevicePreview(
       enabled: true,
