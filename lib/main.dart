@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:y_balash/Features/authentication/presentation/views/Login_view.dart';
 import 'package:y_balash/Features/authentication/presentation/views/forget_password_view.dart';
@@ -33,11 +34,18 @@ void main() async {
   // Based on token presence, decide the initial route
   String initialRoute = isValid ? MainView.id : SplashView.id;
 
-  runApp(DevicePreview(
-      enabled: true,
-      builder: (context) => YBalashApp(
-            initialRoute: initialRoute,
-          )));
+  runApp(
+    DevicePreview(
+        enabled: true,
+        builder: (context) => ScreenUtilInit(
+              designSize: const Size(430, 932),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) => YBalashApp(
+                initialRoute: initialRoute,
+              ),
+            )),
+  );
 }
 
 class YBalashApp extends StatelessWidget {

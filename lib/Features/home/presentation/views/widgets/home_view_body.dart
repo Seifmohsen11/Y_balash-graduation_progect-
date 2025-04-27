@@ -13,7 +13,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_best_selling.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_groceries_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_todays_offers.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/search_bar.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/searchWidgets/search_bar.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/best_selling_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/groceries_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/restaurants_and_cafes_view.dart';
