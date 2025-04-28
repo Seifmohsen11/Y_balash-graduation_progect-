@@ -6,17 +6,54 @@ import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/user_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/get_user_info_service.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
-class AccountViewBody extends StatelessWidget {
+class AccountViewBody extends StatefulWidget {
   const AccountViewBody({super.key});
+
+  @override
+  State<AccountViewBody> createState() => _AccountViewBodyState();
+}
+
+class _AccountViewBodyState extends State<AccountViewBody> {
+  Map<String, dynamic> userInfo = {};
+  bool isLoading = true;
+
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
   }
 
   double getProportionalWidth(BuildContext context, double originalWidth) {
     return (originalWidth / 430) * MediaQuery.of(context).size.width;
+  }
+
+  @override
+  void initState() {
+    fetchUserInfo();
+    super.initState();
+  }
+
+  Future<void> fetchUserInfo() async {
+    try {
+      final info = await getUserInfo();
+
+      if (mounted) {
+        setState(() {
+          userInfo = info;
+          isLoading = false;
+        });
+      }
+    } catch (error) {
+      print('Error fetching info: $error');
+
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
 // Function to log out the user by removing the token from SharedPreferences
@@ -46,12 +83,16 @@ class AccountViewBody extends StatelessWidget {
                 },
               ),
               SizedBox(height: getProportionalHeight(context, 40)),
-              const UserImageAndNameAndEmail(),
+              UserImageAndNameAndEmail(
+                image: userInfo["profileImage"],
+                userName: userInfo["username"] ?? "",
+                email: userInfo["email"],
+              ),
               SizedBox(height: getProportionalHeight(context, 22)),
               UserData(
                 image: 'assets/images/name.png',
                 label: 'Name',
-                data: 'Seif Mohsen',
+                data: userInfo["username"] ?? "",
                 onTap: () {
                   Navigator.push(
                     context,

@@ -10,9 +10,11 @@ class CustomTextFormField extends StatefulWidget {
     required this.backgroundColor,
     required this.borderColor,
     this.horizontalPadding,
+    required this.borderRadius,
   });
 
   final String hintText;
+  final double borderRadius;
   final IconButton? icon;
   final Function(String)? onChange;
   final Color backgroundColor;
@@ -38,48 +40,45 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       padding: EdgeInsets.symmetric(
           horizontal:
               getProportionalWidth(context, widget.horizontalPadding ?? 14)),
-      child: SizedBox(
-        height: getProportionalHeight(context, 55),
-        child: TextFormField(
-          textInputAction: TextInputAction.next,
-          validator: (data) {
-            if (data!.isEmpty) {
-              return "field is required";
-            }
-            return null;
-          },
-          onChanged: widget.onChange,
-          decoration: InputDecoration(
-            fillColor: widget.backgroundColor,
-            filled: true,
-            suffixIcon: widget.icon,
-            hintText: widget.hintText,
-            hintStyle: TextStyle(
-              fontSize: getProportionalWidth(context, 16),
-              color: kmainTextColor,
-              fontFamily: kInriaSansFont,
+      child: TextFormField(
+        textInputAction: TextInputAction.next,
+        validator: (data) {
+          if (data!.isEmpty) {
+            return "field is required";
+          }
+          return null;
+        },
+        onChanged: widget.onChange,
+        decoration: InputDecoration(
+          fillColor: widget.backgroundColor,
+          filled: true,
+          suffixIcon: widget.icon,
+          hintText: widget.hintText,
+          hintStyle: TextStyle(
+            fontSize: getProportionalWidth(context, 16),
+            color: kmainTextColor,
+            fontFamily: kInriaSansFont,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+                getProportionalWidth(context, widget.borderRadius)),
+            borderSide: BorderSide(
+              width: getProportionalWidth(context, 2),
+              color: widget.borderColor,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(getProportionalWidth(context, 50)),
-              borderSide: BorderSide(
-                width: getProportionalWidth(context, 2),
-                color: widget.borderColor,
-              ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+                getProportionalWidth(context, widget.borderRadius)),
+            borderSide: BorderSide(
+              color: widget.borderColor,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(getProportionalWidth(context, 50)),
-              borderSide: BorderSide(
-                color: widget.borderColor,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(getProportionalWidth(context, 50)),
-              borderSide: BorderSide(
-                color: widget.borderColor,
-              ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+                getProportionalWidth(context, widget.borderRadius)),
+            borderSide: BorderSide(
+              color: widget.borderColor,
             ),
           ),
         ),

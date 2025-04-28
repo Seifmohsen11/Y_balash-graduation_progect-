@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class UserImageAndNameAndEmail extends StatelessWidget {
-  const UserImageAndNameAndEmail({super.key});
+  const UserImageAndNameAndEmail(
+      {super.key,
+      required this.image,
+      required this.userName,
+      required this.email});
+  final String? image;
+  final String userName;
+  final String email;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -27,28 +34,39 @@ class UserImageAndNameAndEmail extends StatelessWidget {
             ), // Border radius for Container
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(getProportionalWidth(
-                context, 56)), // Apply border radius to image
-            child: Image.asset(
-              'assets/images/user.png',
-              fit: BoxFit.cover,
-            ),
+            borderRadius:
+                BorderRadius.circular(getProportionalWidth(context, 56)),
+            child: image != null
+                ? Image.network(
+                    image!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/images/user.png',
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  )
+                : Image.asset(
+                    'assets/images/user.png',
+                    fit: BoxFit.cover,
+                  ),
           ),
         ),
         SizedBox(width: getProportionalWidth(context, 18)),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Seif Mohsen',
-              style: TextStyle(
+              userName,
+              style: const TextStyle(
                   color: Color(0xff003366),
                   fontSize: 14,
                   fontWeight: FontWeight.bold),
             ),
             Text(
-              'seifmohsen@gmail.com',
-              style: TextStyle(
+              email,
+              style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                   fontWeight: FontWeight.bold),

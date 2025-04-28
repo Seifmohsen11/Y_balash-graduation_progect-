@@ -45,6 +45,7 @@ class TitleAndTextField extends StatelessWidget {
           backgroundColor: backgroundColor,
           borderColor: borderColor,
           horizontalPadding: horizontalPaddingOfField,
+          borderRadius: 50,
         ),
       ],
     );
