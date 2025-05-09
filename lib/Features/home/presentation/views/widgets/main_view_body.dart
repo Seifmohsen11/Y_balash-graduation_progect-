@@ -19,7 +19,8 @@ class _MainViewBodyState extends State<MainViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.green,
@@ -27,23 +28,23 @@ class _MainViewBodyState extends State<MainViewBody> {
         items: <Widget>[
           ImageIcon(
             const AssetImage("assets/icons/home.png"),
-            size: screenWidth * (50 / 430),
+            size: screenHeight * (50 / 932),
           ),
           ImageIcon(
             const AssetImage("assets/icons/search.png"),
-            size: screenWidth * (50 / 430),
+            size: screenHeight * (50 / 932),
           ),
           ImageIcon(
             const AssetImage("assets/icons/chatBot.png"),
-            size: screenWidth * (50 / 430),
+            size: screenHeight * (50 / 932),
           ),
           ImageIcon(
             const AssetImage("assets/icons/favourite.png"),
-            size: screenWidth * (50 / 430),
+            size: screenHeight * (50 / 932),
           ),
           ImageIcon(
             const AssetImage("assets/icons/account.png"),
-            size: screenWidth * (50 / 430),
+            size: screenHeight * (50 / 932),
           ),
         ],
         onTap: (index) {

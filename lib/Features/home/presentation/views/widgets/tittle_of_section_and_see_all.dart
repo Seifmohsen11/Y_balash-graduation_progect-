@@ -20,18 +20,21 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
       height: screenHeight * (38 / 932),
       child: Row(
         children: [
-          Text(
-            label,
-            style: TextStyle(
-                color: kTextFieldAndButtomColor,
-                fontFamily: kAbyssinicaSIL,
-                fontSize: screenWidth * (24 / 430)),
+          Expanded(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: kTextFieldAndButtomColor,
+                  fontFamily: kAbyssinicaSIL,
+                  fontSize: screenHeight * (24 / 932)),
+            ),
           ),
-          SizedBox(
-            width: spaceBetween,
-          ),
+          SizedBox(width: spaceBetween),
           TextButton(
             onPressed: onTap,
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: Text(
               "See all",
               style: TextStyle(

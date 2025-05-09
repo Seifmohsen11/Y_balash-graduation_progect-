@@ -71,7 +71,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
           ),
           hintText: widget.hintText,
           hintStyle: TextStyle(
-            fontSize: getProportionalWidth(context, 16),
+            fontSize: getProportionalHeight(context, 16),
             color: kmainTextColor,
             fontFamily: kInriaSansFont,
           ),

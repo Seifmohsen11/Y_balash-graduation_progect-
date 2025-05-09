@@ -23,7 +23,7 @@ class ItemOfCategory extends StatelessWidget {
         children: [
           Container(
             height: screenHeight * (70 / 932),
-            width: screenWidth * (70 / 430),
+            width: screenHeight * (70 / 932),
             decoration: BoxDecoration(
                 color: kPrimaryColor,
                 image: DecorationImage(

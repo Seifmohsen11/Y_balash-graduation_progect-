@@ -16,7 +16,7 @@ class CartIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: screenHeight * (45 / 932),
-      width: screenWidth * (45 / 430),
+      width: screenHeight * (45 / 932),
       decoration: BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.circular(
@@ -30,7 +30,7 @@ class CartIcon extends StatelessWidget {
           },
           icon: Icon(
             Icons.shopping_cart_outlined,
-            size: screenWidth * (25 / 430),
+            size: screenHeight * (25 / 932),
           )),
     );
   }

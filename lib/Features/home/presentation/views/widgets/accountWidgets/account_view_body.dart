@@ -140,7 +140,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       data: '01211161931',
                       onTap: () {},
                     ),
-                    SizedBox(height: getProportionalHeight(context, 120)),
+                    const Spacer(),
                     CustomButtom(
                       label: 'Log out',
                       height: getProportionalHeight(context, 55),
@@ -153,6 +153,9 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       },
                       borderRadiusSize: getProportionalWidth(context, 32),
                     ),
+                    SizedBox(
+                      height: getProportionalHeight(context, 84),
+                    )
                   ],
                 ),
               ),

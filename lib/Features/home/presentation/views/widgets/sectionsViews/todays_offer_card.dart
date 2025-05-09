@@ -62,13 +62,16 @@ class TodaysOfferCard extends StatelessWidget {
           '${subject.substring(0, breakPoint)}\n${subject.substring(breakPoint).trim()}';
     }
 
+    double cardHeight = screenHeight * (392 / 932);
+    double cardWidth = screenWidth * (191 / 430);
+
     return Container(
       height: screenHeight * (392 / 932),
       width: screenWidth * (191 / 430),
       decoration: BoxDecoration(
         color: secondColor,
         borderRadius: BorderRadius.circular(
-          screenWidth * (18 / 430),
+          screenHeight * (18 / 932),
         ),
       ),
       child: Stack(
@@ -82,9 +85,9 @@ class TodaysOfferCard extends StatelessWidget {
                   color: firstColor,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
-                        screenWidth * (18 / 430),
+                        screenHeight * (18 / 932),
                       ),
-                      topRight: Radius.circular(screenWidth * (18 / 430))),
+                      topRight: Radius.circular(screenHeight * (18 / 932))),
                 ),
               );
             },
@@ -97,12 +100,10 @@ class TodaysOfferCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      width: screenWidth * (130 / 430),
-                    ),
+                    SizedBox(width: cardWidth * (130 / 191)),
                     ImageIcon(
                       icon,
-                      size: screenWidth * (56 / 430),
+                      size: cardWidth * (56 / 191),
                     )
                   ],
                 ),
@@ -112,51 +113,47 @@ class TodaysOfferCard extends StatelessWidget {
                       formattedTitle,
                       style: TextStyle(
                         color: const Color(0xFF393939),
-                        fontSize: screenWidth * (17 / 430),
+                        fontSize: cardWidth * (17 / 191),
                         fontFamily: kInriaSansFont,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: screenHeight * (7 / 932),
-                ),
+                SizedBox(height: cardHeight * (7 / 392)),
                 Row(
                   children: [
                     Text(
                       formattedSubject,
                       style: TextStyle(
                         color: subjectColor,
-                        fontSize: screenWidth * (14 / 430),
+                        fontSize: cardWidth * (14 / 191),
                         fontFamily: kInriaSansFont,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: screenHeight * (10 / 932),
-                ),
+                SizedBox(height: cardHeight * (10 / 392)),
                 Text(
                   formattedDescription,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: screenWidth * (14 / 430),
+                      fontSize: cardWidth * (14 / 191),
                       fontFamily: kInriaSansFont),
                 ),
               ],
             ),
           ),
           Positioned(
-            bottom: screenHeight * (32 / 932),
-            left: screenWidth * (26 / 430),
+            bottom: cardHeight * (32 / 392),
+            left: cardWidth * (26 / 191),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                    height: screenHeight * (160 / 932),
-                    width: screenWidth * (160 / 430),
+                    height: cardHeight * (160 / 392),
+                    width: cardWidth * (160 / 191),
                     child: Image.network(imageUrl)),
               ],
             ),

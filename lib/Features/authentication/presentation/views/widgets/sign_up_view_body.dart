@@ -45,7 +45,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               ),
               LogoName(
                 height: getProportionalHeight(context, 90),
-                width: getProportionalWidth(context, 253),
+                width: getProportionalHeight(context, 253),
               ),
               SizedBox(
                 height: getProportionalHeight(context, 37),
@@ -145,7 +145,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 text: "or",
               ),
               SizedBox(
-                height: getProportionalHeight(context, 48),
+                height: getProportionalHeight(context, 32),
               ),
               CustomButtom(
                 height: getProportionalHeight(context, 46),
@@ -163,6 +163,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   }
                 },
                 borderRadiusSize: getProportionalWidth(context, 50),
+              ),
+              SizedBox(
+                height: getProportionalHeight(context, 32),
               ),
             ],
           ),

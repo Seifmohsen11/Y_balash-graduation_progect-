@@ -26,7 +26,7 @@ class UserImageAndNameAndEmail extends StatelessWidget {
         SizedBox(width: getProportionalWidth(context, 18)),
         Container(
           height: getProportionalHeight(context, 76),
-          width: getProportionalWidth(context, 76),
+          width: getProportionalHeight(context, 76),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white, width: .5),
             borderRadius: BorderRadius.circular(
@@ -59,16 +59,16 @@ class UserImageAndNameAndEmail extends StatelessWidget {
           children: [
             Text(
               userName,
-              style: const TextStyle(
-                  color: Color(0xff003366),
-                  fontSize: 14,
+              style: TextStyle(
+                  color: const Color(0xff003366),
+                  fontSize: getProportionalWidth(context, 12),
                   fontWeight: FontWeight.bold),
             ),
             Text(
               email,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 12,
+                  fontSize: getProportionalWidth(context, 12),
                   fontWeight: FontWeight.bold),
             ),
           ],

@@ -52,6 +52,8 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = widget.screenWidth * (175 / 430);
+    double cardHeight = widget.screenHeight * (243 / 932);
     return Padding(
       padding: EdgeInsets.only(right: widget.screenWidth * (15 / 430)),
       child: GestureDetector(
@@ -81,29 +83,37 @@ class _ProductCardState extends State<ProductCard> {
               ],
               color: kPrimaryColor,
               border: Border.all(color: Colors.grey.shade300),
-              borderRadius:
-                  BorderRadius.circular(widget.screenWidth * (18 / 430))),
-          height: widget.screenHeight * (243 / 932),
-          width: widget.screenWidth * (175 / 430),
+              borderRadius: BorderRadius.circular(18)),
+          height: cardHeight,
+          width: cardWidth,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: widget.screenHeight * (131 / 932),
+              Expanded(
+                flex: 2,
                 child: Stack(
                   children: [
-                    Positioned(
-                      top: widget.screenHeight * (16 / 932),
-                      left: widget.screenWidth * (35 / 430),
-                      right: widget.screenWidth * (40 / 430),
-                      child: SizedBox(
-                          height: widget.screenHeight * (100 / 932),
-                          width: widget.screenWidth * (100 / 430),
-                          child: Image.network(widget.image)),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: cardHeight * 0.05,
+                          left: cardWidth * 0.05,
+                          right: cardWidth * 0.15,
+                        ),
+                        child: SizedBox(
+                          height: cardHeight / 3,
+                          width: cardWidth / 2,
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Image.network(widget.image),
+                          ),
+                        ),
+                      ),
                     ),
                     Positioned(
-                      top: widget.screenHeight * (3 / 932),
-                      right: widget.screenWidth * (2 / 430),
+                      top: cardHeight * .01,
+                      right: cardWidth * .02,
                       child: IconButton(
                         onPressed: () async {
                           setState(() {
@@ -129,63 +139,70 @@ class _ProductCardState extends State<ProductCard> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: widget.screenWidth * (8 / 430)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.title,
-                      style: TextStyle(
-                          fontFamily: kAbyssinicaSIL,
-                          fontSize: widget.screenWidth * (16 / 430)),
-                    ),
-                    Text(
-                      widget.description,
-                      style: TextStyle(
-                          color: kmainTextColor,
-                          fontFamily: kAbyssinicaSIL,
-                          fontSize: widget.screenWidth * (12 / 430)),
-                    ),
-                    SizedBox(
-                      height: widget.screenWidth * (22 / 430),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          right: widget.screenWidth * (12 / 430)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${widget.price}',
-                            style: TextStyle(
-                                fontFamily: kAbyssinicaSIL,
-                                fontSize: widget.screenWidth * (18 / 430)),
-                          ),
-                          Container(
-                            height: widget.screenHeight * (40 / 932),
-                            width: widget.screenWidth * (40 / 430),
-                            decoration: BoxDecoration(
-                                color: kTextFieldAndButtomColor,
-                                borderRadius: BorderRadius.circular(
-                                    widget.screenWidth * (16 / 430))),
-                            child: Center(
-                              child: IconButton(
-                                  onPressed: () async {
-                                    await AddToCart(widget.id, 1);
-                                    showSnackBar(context, "Added successfuly",
-                                        backgroundColor: Colors.green);
-                                  },
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  )),
-                            ),
-                          )
-                        ],
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.only(left: cardWidth * (8 / 175)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontFamily: kAbyssinicaSIL,
+                            fontSize: cardWidth * (16 / 175)),
                       ),
-                    ),
-                  ],
+                      Text(
+                        widget.description,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: kmainTextColor,
+                            fontFamily: kAbyssinicaSIL,
+                            fontSize: cardWidth * (12 / 175)),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(right: cardWidth * (12 / 175)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              widget.price,
+                              style: TextStyle(
+                                  fontFamily: kAbyssinicaSIL,
+                                  fontSize: cardWidth * (18 / 175)),
+                            ),
+                            Container(
+                              height: cardWidth * (40 / 175),
+                              width: cardWidth * (40 / 175),
+                              decoration: BoxDecoration(
+                                  color: kTextFieldAndButtomColor,
+                                  borderRadius: BorderRadius.circular(
+                                      cardWidth * (16 / 175))),
+                              child: IconButton(
+                                icon:
+                                    const Icon(Icons.add, color: Colors.white),
+                                iconSize: cardWidth * 0.15,
+                                padding: EdgeInsets
+                                    .zero, // عشان تلغي البادينج الداخلي
+                                constraints:
+                                    const BoxConstraints(), // تمنع القيود الافتراضية
+                                onPressed: () async {
+                                  await AddToCart(widget.id, 1);
+                                  showSnackBar(context, "Added successfully",
+                                      backgroundColor: Colors.green);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: cardHeight * 0.02),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -48,6 +48,9 @@ class _TodaysOffersViewState extends State<TodaysOffersView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const BackArrow(),
+          SizedBox(
+            height: screenHeight * (12 / 932),
+          ),
           Expanded(
             child: isLoading
                 ? const Center(child: CircularProgressIndicator())

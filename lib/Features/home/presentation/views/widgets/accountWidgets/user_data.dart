@@ -59,7 +59,10 @@ class UserData extends StatelessWidget {
                   SizedBox(
                     width: getProportionalWidth(context, 8),
                   ),
-                  Image.asset('assets/images/Vector.png'),
+                  SizedBox(
+                      height: getProportionalHeight(context, 16),
+                      width: getProportionalHeight(context, 16),
+                      child: Image.asset('assets/images/Vector.png')),
                 ],
               ),
             )

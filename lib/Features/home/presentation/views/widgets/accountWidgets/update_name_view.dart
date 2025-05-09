@@ -30,9 +30,7 @@ class UpdateNameView extends StatelessWidget {
               titel: 'Last Name',
               hintText: 'mohsen',
             ),
-            SizedBox(
-              height: 450.h,
-            ),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -44,8 +42,11 @@ class UpdateNameView extends StatelessWidget {
                     textColor: Colors.white,
                     borderColor: kTextFieldAndButtomColor,
                     onTap: () {},
-                    borderRadiusSize: 12),
+                    borderRadiusSize: 12.w),
               ],
+            ),
+            SizedBox(
+              height: 40.h,
             )
           ],
         ));
