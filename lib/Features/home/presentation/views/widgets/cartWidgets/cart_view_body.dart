@@ -49,16 +49,16 @@ class _CartViewBodyState extends State<CartViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: screenHeight * (42 / 932),
-                ),
-                AppBarOfCartView(
-                  screenWidth: screenWidth,
-                  iconImage: 'assets/icons/Arrow.png',
-                  title: 'Cart',
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                SafeArea(
+                  bottom: false,
+                  child: AppBarOfCartView(
+                    screenWidth: screenWidth,
+                    iconImage: 'assets/icons/Arrow.png',
+                    title: 'Cart',
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
                 ListOfCartProducts(
                   screenHeight: screenHeight,

@@ -28,7 +28,9 @@ class CouponInputField extends StatelessWidget {
                     horizontal: getProportionalWidth(context, 12)),
                 border: InputBorder.none,
                 hintText: "Enter Coupon Code",
-                hintStyle: TextStyle(color: Colors.grey[400]),
+                hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: getProportionalHeight(context, 16)),
               ),
             ),
           ),
@@ -47,9 +49,11 @@ class CouponInputField extends StatelessWidget {
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
               ),
-              child: const Text(
+              child: Text(
                 "Apply",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: getProportionalHeight(context, 16)),
               ),
             ),
           ),

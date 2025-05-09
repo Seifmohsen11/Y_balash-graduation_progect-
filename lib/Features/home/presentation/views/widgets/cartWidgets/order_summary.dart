@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderSummary extends StatelessWidget {
   final int itemCount;
@@ -69,7 +70,7 @@ class OrderSummary extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.h,
             color: color,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
           ),
@@ -77,7 +78,7 @@ class OrderSummary extends StatelessWidget {
         Text(
           amount,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.h,
             color: color,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
           ),
