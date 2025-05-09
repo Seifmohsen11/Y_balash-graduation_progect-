@@ -10,41 +10,40 @@ class AppBarOfItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.only(left: screenWidth * (8 / 430)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: screenHeight * (42 / 932),
-          ),
           Padding(
             padding: EdgeInsets.only(
                 left: screenWidth * (10 / 430),
                 right: screenWidth * (10 / 430)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const ImageIcon(
-                    AssetImage('assets/icons/Arrow.png'),
-                  ),
-                ),
-                IconButton(
-                    iconSize: 28,
-                    color: kTextFieldAndButtomColor,
+            child: SafeArea(
+              bottom: false,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const CartView();
-                      }));
+                      Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.shopping_cart_outlined))
-              ],
+                    icon: const ImageIcon(
+                      AssetImage('assets/icons/Arrow.png'),
+                    ),
+                  ),
+                  IconButton(
+                      iconSize: 28,
+                      color: kTextFieldAndButtomColor,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const CartView();
+                        }));
+                      },
+                      icon: const Icon(Icons.shopping_cart_outlined))
+                ],
+              ),
             ),
           )
         ],

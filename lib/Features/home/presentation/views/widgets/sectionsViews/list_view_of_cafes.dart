@@ -52,8 +52,10 @@ class _ListViewOfCafesState extends State<ListViewOfCafes> {
     return Padding(
       padding: EdgeInsets.only(
           left: widget.screenWidth * (16 / 430),
-          right: widget.screenWidth * (16 / 430)),
+          right: widget.screenWidth * (16 / 430),
+          top: widget.screenHeight * (24 / 932)),
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: cafes.length,
         scrollDirection: Axis.vertical,
         itemBuilder: (BuildContext context, int index) {

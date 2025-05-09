@@ -70,27 +70,31 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
     }
     return SizedBox(
       height: widget.screenHeight * (460 / 932),
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          final product = products[index]['itemId'];
-          return Padding(
-            padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
-            child: CartProduct(
-              screenHeight: widget.screenHeight,
-              screenWidth: widget.screenWidth,
-              image: product['imageUrl'] ?? '',
-              titel: product['name'] ?? 'Unknown',
-              price: product['price'] ?? 'Unknown',
-              itemId: product['_id'] ?? 'Unknown',
-              quantity: products[index]['quantity'],
-              onRemove: () {
-                removeProductFromList();
-              },
-            ),
-          );
-        },
+      child: Padding(
+        padding: EdgeInsets.only(top: widget.screenHeight * (24 / 932)),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.vertical,
+          itemCount: products.length,
+          itemBuilder: (BuildContext context, int index) {
+            final product = products[index]['itemId'];
+            return Padding(
+              padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
+              child: CartProduct(
+                screenHeight: widget.screenHeight,
+                screenWidth: widget.screenWidth,
+                image: product['imageUrl'] ?? '',
+                titel: product['name'] ?? 'Unknown',
+                price: product['price'] ?? 'Unknown',
+                itemId: product['_id'] ?? 'Unknown',
+                quantity: products[index]['quantity'],
+                onRemove: () {
+                  removeProductFromList();
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

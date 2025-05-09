@@ -16,9 +16,6 @@ class UpdateNameView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const BackArrow(),
-            SizedBox(
-              height: 40.h,
-            ),
             const TitelAndTextFormFieldOfUserData(
               titel: 'First Name',
               hintText: 'Seif',

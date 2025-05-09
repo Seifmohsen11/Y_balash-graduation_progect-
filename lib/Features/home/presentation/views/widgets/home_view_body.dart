@@ -57,20 +57,21 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         screenHeight: screenHeight, screenWidth: screenWidth),
                     Column(
                       children: [
-                        SizedBox(height: screenHeight * (63 / 932)),
                         Padding(
                           padding:
                               EdgeInsets.only(left: screenWidth * (16 / 430)),
-                          child: Row(
-                            children: [
-                              CustomSearchBar(
-                                  screenWidth: screenWidth,
-                                  screenHeight: screenHeight),
-                              SizedBox(width: screenWidth * (8 / 430)),
-                              CartIcon(
-                                  screenHeight: screenHeight,
-                                  screenWidth: screenWidth)
-                            ],
+                          child: SafeArea(
+                            child: Row(
+                              children: [
+                                CustomSearchBar(
+                                    screenWidth: screenWidth,
+                                    screenHeight: screenHeight),
+                                SizedBox(width: screenWidth * (8 / 430)),
+                                CartIcon(
+                                    screenHeight: screenHeight,
+                                    screenWidth: screenWidth)
+                              ],
+                            ),
                           ),
                         ),
                         const Location(),

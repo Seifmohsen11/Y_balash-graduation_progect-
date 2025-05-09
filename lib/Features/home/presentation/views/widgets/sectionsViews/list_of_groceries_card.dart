@@ -61,6 +61,7 @@ class _ListOfGroceriesCardState extends State<ListOfGroceriesCard> {
         : hasError
             ? const Center(child: Text('Failed to load categories'))
             : ListView.builder(
+                padding: EdgeInsets.zero,
                 scrollDirection: widget.scrollDirection,
                 itemCount: categories.length,
                 itemBuilder: (BuildContext context, int index) {

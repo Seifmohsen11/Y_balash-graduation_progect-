@@ -86,13 +86,15 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
         children: [
           const AppBarOfItemDetails(),
           SizedBox(
-            height: getProportionalHeight(context, 56),
+            height: getProportionalHeight(context, 30),
           ),
-          Image.network(
-            widget.image,
-            height: getProportionalHeight(context, 280),
-            width: getProportionalWidth(context, 315),
-            fit: BoxFit.fill,
+          Center(
+            child: Image.network(
+              widget.image,
+              height: getProportionalHeight(context, 280),
+              width: getProportionalWidth(context, 315),
+              fit: BoxFit.fill,
+            ),
           ),
           SizedBox(
             height: getProportionalHeight(context, 52),
@@ -123,19 +125,21 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
             ),
           ),
           SizedBox(
-            height: getProportionalHeight(context, 27),
+            height: getProportionalHeight(context, 16),
           ),
           Padding(
             padding: EdgeInsets.only(left: getProportionalWidth(context, 36)),
             child: Row(
               children: [
                 SizedBox(
-                  width: getProportionalWidth(context, 303),
+                  width: getProportionalWidth(context, 320),
                   child: Text(
                     widget.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontSize: getProportionalWidth(context, 20),
-                        color: Color(0xff8A8A8A),
+                        color: const Color(0xff8A8A8A),
                         fontFamily: kLatoLight),
                   ),
                 ),
@@ -143,7 +147,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
             ),
           ),
           SizedBox(
-            height: getProportionalHeight(context, 42),
+            height: getProportionalHeight(context, 32),
           ),
           Padding(
             padding: EdgeInsets.only(right: getProportionalWidth(context, 32)),
@@ -159,7 +163,12 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                           updateQuantity(currentQuantity - 1);
                         },
                         icon: const Icon(Icons.remove_circle_outline)),
-                    Text("$currentQuantity"),
+                    Text(
+                      "$currentQuantity",
+                      style: TextStyle(
+                        fontSize: getProportionalWidth(context, 18),
+                      ),
+                    ),
                     IconButton(
                         iconSize: getProportionalWidth(context, 32),
                         color: Colors.yellow,
@@ -178,23 +187,27 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
               ],
             ),
           ),
-          SizedBox(
-            height: getProportionalHeight(context, 77),
+          Flexible(
+            child: Center(
+              child: CustomButtom(
+                label: 'Add to cart',
+                height: getProportionalHeight(context, 46),
+                width: getProportionalWidth(context, 340),
+                backgorundColor: kTextFieldAndButtomColor,
+                textColor: Colors.white,
+                borderColor: kTextFieldAndButtomColor,
+                onTap: () async {
+                  await AddToCart(widget.itemId, currentQuantity);
+                  showSnackBar(context, "Added successfuly",
+                      backgroundColor: Colors.green);
+                },
+                borderRadiusSize: getProportionalWidth(context, 50),
+              ),
+            ),
           ),
-          CustomButtom(
-            label: 'Add to cart',
-            height: getProportionalHeight(context, 46),
-            width: getProportionalWidth(context, 340),
-            backgorundColor: kTextFieldAndButtomColor,
-            textColor: Colors.white,
-            borderColor: kTextFieldAndButtomColor,
-            onTap: () async {
-              await AddToCart(widget.itemId, currentQuantity);
-              showSnackBar(context, "Added successfuly",
-                  backgroundColor: Colors.green);
-            },
-            borderRadiusSize: getProportionalWidth(context, 50),
-          )
+          SizedBox(
+            height: getProportionalHeight(context, 70),
+          ),
         ],
       ),
     );

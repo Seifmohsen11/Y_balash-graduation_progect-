@@ -71,26 +71,30 @@ class _ListOfFavoritesProductsState extends State<ListOfFavoritesProducts> {
           child: const Center(child: Text("No products available")));
     }
     return Expanded(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          final product = products[index]['itemId'];
-          return Padding(
-            padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
-            child: FavouriteProductCard(
-              screenHeight: widget.screenHeight,
-              screenWidth: widget.screenWidth,
-              image: product['imageUrl'] ?? '',
-              titel: product['name'] ?? 'Unknown',
-              price: product['price'] ?? 'Unknown',
-              itemId: product['_id'] ?? 'Unknown',
-              onRemove: (String itemId) {
-                removeProductFromList(itemId);
-              },
-            ),
-          );
-        },
+      child: Padding(
+        padding: EdgeInsets.only(top: widget.screenHeight * (24 / 932)),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.vertical,
+          itemCount: products.length,
+          itemBuilder: (BuildContext context, int index) {
+            final product = products[index]['itemId'];
+            return Padding(
+              padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
+              child: FavouriteProductCard(
+                screenHeight: widget.screenHeight,
+                screenWidth: widget.screenWidth,
+                image: product['imageUrl'] ?? '',
+                titel: product['name'] ?? 'Unknown',
+                price: product['price'] ?? 'Unknown',
+                itemId: product['_id'] ?? 'Unknown',
+                onRemove: (String itemId) {
+                  removeProductFromList(itemId);
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

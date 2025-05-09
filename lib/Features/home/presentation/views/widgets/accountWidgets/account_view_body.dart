@@ -91,14 +91,15 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                     EdgeInsets.only(left: getProportionalWidth(context, 16)),
                 child: Column(
                   children: [
-                    SizedBox(height: getProportionalHeight(context, 42)),
-                    AppBarOfCartView(
-                      screenWidth: getProportionalWidth(context, 430),
-                      iconImage: 'assets/icons/Arrow.png',
-                      title: 'Profile',
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, MainView.id);
-                      },
+                    SafeArea(
+                      child: AppBarOfCartView(
+                        screenWidth: getProportionalWidth(context, 430),
+                        iconImage: 'assets/icons/Arrow.png',
+                        title: 'Profile',
+                        onPressed: () {
+                          Navigator.popAndPushNamed(context, MainView.id);
+                        },
+                      ),
                     ),
                     SizedBox(height: getProportionalHeight(context, 40)),
                     UserImageAndNameAndEmail(

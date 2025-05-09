@@ -15,14 +15,17 @@ class GroceriesView extends StatelessWidget {
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const BackArrow(),
           Expanded(
-            child: ListOfGroceriesCard(
-              screenHeight: screenHeight,
-              screenWidth: screenWidth,
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.only(
-                  left: screenWidth * (15 / 430),
-                  right: screenWidth * (15 / 430),
-                  bottom: screenHeight * (15 / 932)),
+            child: Padding(
+              padding: EdgeInsets.only(top: screenHeight * (24 / 932)),
+              child: ListOfGroceriesCard(
+                screenHeight: screenHeight,
+                screenWidth: screenWidth,
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.only(
+                    left: screenWidth * (15 / 430),
+                    right: screenWidth * (15 / 430),
+                    bottom: screenHeight * (15 / 932)),
+              ),
             ),
           )
         ]));

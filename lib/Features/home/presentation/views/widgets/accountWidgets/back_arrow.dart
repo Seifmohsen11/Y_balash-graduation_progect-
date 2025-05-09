@@ -10,9 +10,6 @@ class BackArrow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 60.h,
-        ),
         Row(
           children: [
             SizedBox(
