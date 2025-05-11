@@ -111,34 +111,42 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                     UserData(
                       image: 'assets/images/name.png',
                       label: 'Name',
-                      data: userInfo["username"] ?? "",
+                      data:
+                          "${userInfo["firstName"] ?? ""} ${userInfo["lastName"] ?? ""}",
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return const UpdateNameView();
+                              return UpdateNameView(
+                                firstName: userInfo["firstName"],
+                                lastName: userInfo["lastName"],
+                              );
                             },
                           ),
-                        );
+                        ).then((shouldRefresh) {
+                          if (shouldRefresh == true) {
+                            fetchUserInfo();
+                          }
+                        });
                       },
                     ),
                     UserData(
                       image: 'assets/images/gender.png',
                       label: 'Gender',
-                      data: 'Male',
+                      data: userInfo["gender"] ?? '',
                       onTap: () {},
                     ),
                     UserData(
                       image: 'assets/images/birthday.png',
                       label: 'Birthday',
-                      data: '11-5-2003',
+                      data: userInfo["birthday"] ?? '',
                       onTap: () {},
                     ),
                     UserData(
                       image: 'assets/images/phone_number.png',
                       label: 'Phone Number',
-                      data: '01211161931',
+                      data: userInfo["phone"] ?? '',
                       onTap: () {},
                     ),
                     const Spacer(),

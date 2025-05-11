@@ -8,9 +8,11 @@ class TitelAndTextFormFieldOfUserData extends StatelessWidget {
     super.key,
     required this.titel,
     required this.hintText,
+    this.onChange,
   });
   final String titel;
   final String hintText;
+  final Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class TitelAndTextFormFieldOfUserData extends StatelessWidget {
           backgroundColor: Colors.white,
           borderColor: Colors.white,
           borderRadius: 8,
+          onChange: onChange,
         )
       ],
     );
