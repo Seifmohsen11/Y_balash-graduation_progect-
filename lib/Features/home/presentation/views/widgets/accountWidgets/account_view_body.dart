@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/UserImageAndNameAndEmail.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_gender_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_name_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/user_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
@@ -135,7 +136,22 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       image: 'assets/images/gender.png',
                       label: 'Gender',
                       data: userInfo["gender"] ?? '',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return UpdateGenderView(
+                                hintTextGender: userInfo["gender"],
+                              );
+                            },
+                          ),
+                        ).then((shouldRefresh) {
+                          if (shouldRefresh == true) {
+                            fetchUserInfo();
+                          }
+                        });
+                      },
                     ),
                     UserData(
                       image: 'assets/images/birthday.png',
