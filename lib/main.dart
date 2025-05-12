@@ -36,15 +36,16 @@ void main() async {
 
   runApp(
     DevicePreview(
-        enabled: true,
-        builder: (context) => ScreenUtilInit(
-              designSize: const Size(430, 932),
-              minTextAdapt: true,
-              splitScreenMode: true,
-              builder: (context, child) => YBalashApp(
-                initialRoute: initialRoute,
-              ),
-            )),
+      enabled: true,
+      builder: (context) => ScreenUtilInit(
+        designSize: const Size(430, 932),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => YBalashApp(
+          initialRoute: initialRoute,
+        ),
+      ),
+    ),
   );
 }
 

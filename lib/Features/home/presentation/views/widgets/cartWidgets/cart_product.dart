@@ -121,96 +121,106 @@ class _CartProductState extends State<CartProduct> {
             SizedBox(
               width: widget.screenWidth * (16 / 430),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: widget.screenHeight * (12 / 932),
-                ),
-                SizedBox(
-                  height: widget.screenHeight * (50 / 932),
-                  width: widget.screenWidth * (159 / 430),
-                  child: Text(
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: widget.screenHeight * (12 / 932),
+                  ),
+                  Text(
                     formattedTitle,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontFamily: kAbyssinicaSIL,
                         fontSize: widget.screenWidth * (16 / 430),
                         color: kTextFieldAndButtomColor),
                   ),
-                ),
-                SizedBox(
-                  height: widget.screenHeight * (1 / 430),
-                ),
-                Text(
-                  '\$${widget.price}',
-                  style: TextStyle(
-                    fontFamily: kAbyssinicaSIL,
-                    fontSize: widget.screenWidth * (18 / 430),
+                  Spacer(),
+                  Text(
+                    '\$${widget.price}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: kAbyssinicaSIL,
+                      fontSize: widget.screenWidth * (18 / 430),
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: widget.screenHeight * (12 / 932),
+                  ),
+                ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: widget.screenHeight * (12 / 932)),
-                  child: Row(
-                    children: [
-                      SizedBox(width: widget.screenWidth * (46 / 430)),
-                      GestureDetector(
-                        onTap: () {
-                          toggleFavorite();
-                        },
-                        child: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavorite ? Colors.red : Colors.black),
-                      ),
-                      SizedBox(width: widget.screenWidth * (16 / 430)),
-                      GestureDetector(
-                        onTap: () async {
-                          bool success = await removeFromCart(
-                              itemId: widget.itemId); // Wait for API response
-                          if (success) {
-                            showSnackBar(context, 'Removed Successfully',
-                                backgroundColor: Colors.green);
-                            widget
-                                .onRemove(); // Update UI only if API call succeeds
-                          } else {
-                            print('Failed to remove item from cart');
-                          }
-                        },
-                        child: const ImageIcon(
-                            AssetImage('assets/icons/delete.png')),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: widget.screenHeight * (6 / 932)),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      SizedBox(width: widget.screenWidth * (14 / 430)),
-                      IconButton(
-                          iconSize: widget.screenWidth * (32 / 430),
-                          onPressed: () {
-                            updateQuantity(currentQuantity - 1);
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: widget.screenHeight * (12 / 932),
+                        right: widget.screenHeight * (20 / 932)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            toggleFavorite();
                           },
-                          icon: Icon(Icons.remove_circle_outline)),
-                      Text("$currentQuantity"),
-                      IconButton(
-                          iconSize: widget.screenWidth * (32 / 430),
-                          color: Colors.yellow,
-                          onPressed: () {
-                            updateQuantity(currentQuantity + 1);
+                          child: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: isFavorite ? Colors.red : Colors.black),
+                        ),
+                        SizedBox(width: widget.screenWidth * (16 / 430)),
+                        GestureDetector(
+                          onTap: () async {
+                            bool success = await removeFromCart(
+                                itemId: widget.itemId); // Wait for API response
+                            if (success) {
+                              showSnackBar(context, 'Removed Successfully',
+                                  backgroundColor: Colors.green);
+                              widget
+                                  .onRemove(); // Update UI only if API call succeeds
+                            } else {
+                              print('Failed to remove item from cart');
+                            }
                           },
-                          icon: Icon(Icons.add_circle_outline)),
-                    ],
+                          child: const ImageIcon(
+                              AssetImage('assets/icons/delete.png')),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            iconSize: widget.screenWidth * (32 / 430),
+                            onPressed: () {
+                              updateQuantity(currentQuantity - 1);
+                            },
+                            icon: const Icon(Icons.remove_circle_outline)),
+                        Text("$currentQuantity"),
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            iconSize: widget.screenWidth * (32 / 430),
+                            color: Colors.yellow,
+                            onPressed: () {
+                              updateQuantity(currentQuantity + 1);
+                            },
+                            icon: const Icon(Icons.add_circle_outline)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
