@@ -60,6 +60,9 @@ class _UpdateNameViewState extends State<UpdateNameView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const BackArrow(),
+            SizedBox(
+              height: 12.h,
+            ),
             TitelAndTextFormFieldOfUserData(
               titel: 'First Name',
               hintText: widget.firstName ?? 'Enter your first name',

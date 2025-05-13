@@ -200,7 +200,7 @@ class _ProductCardState extends State<ProductCard> {
                           ],
                         ),
                       ),
-                      SizedBox(height: cardHeight * 0.02),
+                      SizedBox(height: cardHeight * 0.03),
                     ],
                   ),
                 ),
