@@ -15,7 +15,7 @@ class UpdateGenderView extends StatefulWidget {
 }
 
 class _UpdateGenderViewState extends State<UpdateGenderView> {
-  final List<String> genderOptions = ['male', 'female', 'other'];
+  final List<String> genderOptions = ['Male', 'Female', 'Other'];
   String? selectedGender;
 
   bool _isLoading = false;
@@ -33,12 +33,13 @@ class _UpdateGenderViewState extends State<UpdateGenderView> {
     try {
       await updateUserGender(gender: selectedGender!);
 
+      FocusScope.of(context).unfocus();
+      await Future.delayed(const Duration(milliseconds: 300));
       showSnackBar(
         context,
         'Gender updated successfully!',
         backgroundColor: Colors.green,
       );
-
       Navigator.pop(context, true);
     } catch (error) {
       showSnackBar(

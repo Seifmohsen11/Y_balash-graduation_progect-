@@ -27,27 +27,30 @@ class UserData extends StatelessWidget {
       child: Padding(
         padding:
             EdgeInsets.symmetric(horizontal: getProportionalWidth(context, 16)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Image.asset(image),
-                SizedBox(
-                  width: getProportionalWidth(context, 16),
-                ),
-                Text(
-                  label,
-                  style: TextStyle(
-                      fontSize: getProportionalWidth(context, 12),
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xff223263)),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: Row(
+        child: GestureDetector(
+          onTap: onTap,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                      width: getProportionalWidth(context, 32),
+                      height: getProportionalHeight(context, 32),
+                      child: Image.asset(image)),
+                  SizedBox(
+                    width: getProportionalWidth(context, 16),
+                  ),
+                  Text(
+                    label,
+                    style: TextStyle(
+                        fontSize: getProportionalWidth(context, 12),
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xff223263)),
+                  ),
+                ],
+              ),
+              Row(
                 children: [
                   Text(
                     data,
@@ -64,9 +67,9 @@ class UserData extends StatelessWidget {
                       width: getProportionalHeight(context, 16),
                       child: Image.asset('assets/images/Vector.png')),
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

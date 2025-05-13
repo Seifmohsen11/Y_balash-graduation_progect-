@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_birthday_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_gender_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_name_view.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/update_phone_number_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/user_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -90,7 +91,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
             : Padding(
                 key: const ValueKey('content'),
                 padding:
-                    EdgeInsets.only(left: getProportionalWidth(context, 16)),
+                    EdgeInsets.only(left: getProportionalWidth(context, 8)),
                 child: Column(
                   children: [
                     SafeArea(
@@ -103,7 +104,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                         },
                       ),
                     ),
-                    SizedBox(height: getProportionalHeight(context, 40)),
+                    SizedBox(height: getProportionalHeight(context, 32)),
                     UserImageAndNameAndEmail(
                       image: userInfo["profileImage"],
                       userName: userInfo["username"] ?? "",
@@ -179,7 +180,22 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       image: 'assets/images/phone_number.png',
                       label: 'Phone Number',
                       data: userInfo["phone"] ?? '',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return UpdatePhoneNumberView(
+                                phoneNumber: userInfo["phone"],
+                              );
+                            },
+                          ),
+                        ).then((shouldRefresh) {
+                          if (shouldRefresh == true) {
+                            fetchUserInfo();
+                          }
+                        });
+                      },
                     ),
                     const Spacer(),
                     CustomButtom(

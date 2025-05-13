@@ -66,12 +66,13 @@ class _UpdateBirthdayViewState extends State<UpdateBirthdayView> {
       final birthday = DateFormat('yyyy-MM-dd').format(selectedDate!);
       await updateUserBirthday(birthday: birthday);
 
+      FocusScope.of(context).unfocus();
+      await Future.delayed(const Duration(milliseconds: 300));
       showSnackBar(
         context,
         'Birthday updated successfully!',
         backgroundColor: Colors.green,
       );
-
       Navigator.pop(context, true);
     } catch (error) {
       showSnackBar(

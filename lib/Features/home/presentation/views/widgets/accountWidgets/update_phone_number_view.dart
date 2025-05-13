@@ -3,35 +3,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/titel_and_text_form_field_of_user_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/back_arrow.dart';
 import 'package:y_balash/core/constants/constants.dart';
-import 'package:y_balash/core/data/services/home/update_user_name_service.dart';
+import 'package:y_balash/core/data/services/home/update_phone_number_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
-class UpdateNameView extends StatefulWidget {
-  const UpdateNameView(
-      {super.key, required this.firstName, required this.lastName});
-  final String? firstName;
-  final String? lastName;
+class UpdatePhoneNumberView extends StatefulWidget {
+  const UpdatePhoneNumberView({
+    super.key,
+    required this.phoneNumber,
+  });
+  final String? phoneNumber;
 
   @override
-  State<UpdateNameView> createState() => _UpdateNameViewState();
+  State<UpdatePhoneNumberView> createState() => _UpdatePhoneNumberViewState();
 }
 
-class _UpdateNameViewState extends State<UpdateNameView> {
-  String? updatedFirstName, updatedLastName;
+class _UpdatePhoneNumberViewState extends State<UpdatePhoneNumberView> {
+  String? updatedPhoneNumber;
   bool _isLoading = false;
 
-  Future<void> handleUpdateName() async {
-    final firstNameToSend = updatedFirstName ?? widget.firstName;
-    final lastNameToSend = updatedLastName ?? widget.lastName;
+  Future<void> handleUpdateNumber() async {
+    final phoneNumberToSend = updatedPhoneNumber ?? widget.phoneNumber;
 
-    if (firstNameToSend == null || lastNameToSend == null) {
-      showSnackBar(context, 'Please fill in both names.');
+    if (phoneNumberToSend == null) {
+      showSnackBar(context, 'Please add phone number');
       return;
     }
-
-    if (firstNameToSend.length > 15 || lastNameToSend.length > 15) {
-      showSnackBar(context, 'Each name must be at most 15 characters.');
+    // check the number
+    final regex = RegExp(r'^(010|011|012|015)[0-9]{8}$');
+    if (!regex.hasMatch(phoneNumberToSend)) {
+      showSnackBar(context, 'Please enter a valid Egyptian phone number.');
       return;
     }
 
@@ -40,15 +41,15 @@ class _UpdateNameViewState extends State<UpdateNameView> {
     });
 
     try {
-      await updateUserName(
-        firstName: firstNameToSend,
-        lastName: lastNameToSend,
+      await updatePhoneNumber(
+        phoneNumber: phoneNumberToSend,
       );
 
       FocusScope.of(context).unfocus();
       await Future.delayed(const Duration(milliseconds: 300));
-      showSnackBar(context, 'Name updated successfully!',
+      showSnackBar(context, 'Phone Number updated successfully!',
           backgroundColor: Colors.green);
+
       Navigator.pop(context, true);
     } catch (error) {
       showSnackBar(context, error.toString().replaceAll('Exception: ', ''));
@@ -71,20 +72,10 @@ class _UpdateNameViewState extends State<UpdateNameView> {
               height: 12.h,
             ),
             TitelAndTextFormFieldOfUserData(
-              titel: 'First Name',
-              hintText: widget.firstName ?? 'Enter your first name',
+              titel: 'Phone Number',
+              hintText: widget.phoneNumber ?? '+20',
               onChange: (value) {
-                updatedFirstName = value;
-              },
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            TitelAndTextFormFieldOfUserData(
-              titel: 'Last Name',
-              hintText: widget.lastName ?? 'Enter your last name',
-              onChange: (value) {
-                updatedLastName = value;
+                updatedPhoneNumber = value;
               },
             ),
             const Spacer(),
@@ -102,7 +93,7 @@ class _UpdateNameViewState extends State<UpdateNameView> {
                         backgorundColor: kTextFieldAndButtomColor,
                         textColor: Colors.white,
                         borderColor: kTextFieldAndButtomColor,
-                        onTap: handleUpdateName,
+                        onTap: handleUpdateNumber,
                         borderRadiusSize: 12.w,
                       ),
               ],
