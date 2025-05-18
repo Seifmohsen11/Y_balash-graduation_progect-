@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:y_balash/Features/home/presentation/views/item_details_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -10,10 +11,12 @@ class CustomSearchBar extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.screenHeight,
+    this.isSearchScreen = false,
   });
 
   final double screenHeight;
   final double screenWidth;
+  final bool isSearchScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +29,58 @@ class CustomSearchBar extends StatelessWidget {
           return await searchProductsByName(pattern);
         },
         itemBuilder: (context, Map<String, dynamic> suggestion) {
-          return ListTile(
-            leading: suggestion['imageUrl'] != null
-                ? Image.network(
-                    suggestion['imageUrl'],
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.cover,
-                  )
-                : const Icon(Icons.image),
-            title: Text(
-              suggestion['name'] ?? '',
-              style: const TextStyle(fontFamily: kInriaSansFont),
+          return Card(
+            margin: EdgeInsets.symmetric(
+              vertical: 6.h,
+              horizontal: 8.w,
             ),
-            subtitle: Text(suggestion['price'] ?? ''),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(10.w),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.r),
+                    child: suggestion['imageUrl'] != null
+                        ? Image.network(
+                            suggestion['imageUrl'],
+                            width: 50.w,
+                            height: 50.w,
+                            fit: BoxFit.cover,
+                          )
+                        : Icon(Icons.image, size: 50.w),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          suggestion['name'] ?? '',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: kInriaSansFont,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Text(
+                          suggestion['price'] ?? '',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.grey[600],
+                            fontFamily: kInriaSansFont,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
         onSelected: (Map<String, dynamic> suggestion) async {
@@ -77,8 +118,24 @@ class CustomSearchBar extends StatelessWidget {
                 Icons.search,
                 size: screenWidth * (24 / 430),
               ),
+              suffixIcon: isSearchScreen
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            size: 22.h,
+                          ),
+                          onPressed: () => controller.clear(),
+                        ),
+                      ],
+                    )
+                  : null,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (32 / 430)),
+                borderRadius: isSearchScreen
+                    ? BorderRadius.circular(screenWidth * (16 / 430))
+                    : BorderRadius.circular(screenWidth * (32 / 430)),
               ),
               filled: true,
               fillColor: kPrimaryColor,

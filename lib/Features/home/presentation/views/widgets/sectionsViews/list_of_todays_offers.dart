@@ -57,14 +57,17 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
       itemBuilder: (BuildContext context, int index) {
         final product = products[index];
 
-        return ProductCard(
-          screenWidth: screenWidth,
-          screenHeight: screenHeight,
-          image: product['imageUrl'] ?? '',
-          title: product['name'] ?? 'No Name',
-          description: product['quantity'] ?? 'No Quantity Info',
-          price: product['price'] ?? '0.00',
-          id: product["_id"] ?? '0.00',
+        return Padding(
+          padding: EdgeInsets.only(right: screenWidth * (16 / 430)),
+          child: ProductCard(
+            screenWidth: screenWidth,
+            screenHeight: screenHeight,
+            image: product['imageUrl'] ?? '',
+            title: product['name'] ?? 'No Name',
+            description: product['quantity'] ?? 'No Quantity Info',
+            price: product['price'] ?? '0.00',
+            id: product["_id"] ?? '0.00',
+          ),
         );
       },
     );

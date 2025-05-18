@@ -16,13 +16,15 @@ class GridViewOfProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          left: screenWidth * (16 / 430), top: screenHeight * (24 / 932)),
+          left: screenWidth * (16 / 430),
+          right: screenWidth * (16 / 430),
+          top: screenHeight * (24 / 932)),
       child: GridView.builder(
         padding: EdgeInsets.zero,
         itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 2,
+          crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           mainAxisExtent: 240,
         ),

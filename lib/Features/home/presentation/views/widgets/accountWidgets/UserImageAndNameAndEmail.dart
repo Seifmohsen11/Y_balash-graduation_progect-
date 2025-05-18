@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class UserImageAndNameAndEmail extends StatelessWidget {
-  const UserImageAndNameAndEmail(
-      {super.key,
-      required this.image,
-      required this.userName,
-      required this.email,
-      this.onImageChanged,
-      this.onImageRemoved});
+  const UserImageAndNameAndEmail({
+    super.key,
+    required this.image,
+    required this.userName,
+    required this.email,
+    this.onImageChanged,
+    this.onImageRemoved,
+    this.isLoading = false,
+  });
   final String? image;
   final String userName;
   final String email;
+  final bool isLoading;
 
   final void Function(XFile?)? onImageChanged;
   final VoidCallback? onImageRemoved;
@@ -78,37 +83,57 @@ class UserImageAndNameAndEmail extends StatelessWidget {
       children: [
         SizedBox(width: getProportionalWidth(context, 18)),
         GestureDetector(
-          onTap: () => _showImageOptions(context),
-          child: Container(
-            height: getProportionalHeight(context, 76),
-            width: getProportionalHeight(context, 76),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: .5),
-              borderRadius: BorderRadius.circular(
-                getProportionalWidth(context, 56),
-              ), // Border radius for Container
-            ),
-            child: ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(getProportionalWidth(context, 56)),
-              child: image != null
-                  ? Image.network(
-                      image!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          'assets/images/user.png',
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    )
-                  : Image.asset(
-                      'assets/images/user.png',
-                      fit: BoxFit.cover,
+            onTap: () => _showImageOptions(context),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: getProportionalHeight(context, 76),
+                  width: getProportionalHeight(context, 76),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: .5),
+                    borderRadius: BorderRadius.circular(
+                      getProportionalWidth(context, 56),
                     ),
-            ),
-          ),
-        ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                        getProportionalWidth(context, 56)),
+                    child: image != null
+                        ? Image.network(
+                            image!,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/user.png',
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/user.png',
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+                if (isLoading)
+                  Container(
+                    height: getProportionalHeight(context, 76),
+                    width: getProportionalHeight(context, 76),
+                    decoration: BoxDecoration(
+                      color: Colors.black38,
+                      borderRadius: BorderRadius.circular(
+                        getProportionalWidth(context, 56),
+                      ),
+                    ),
+                    child: Center(
+                        child: SpinKitThreeBounce(
+                      color: Colors.blue,
+                      size: 18.h,
+                    )),
+                  ),
+              ],
+            )),
         SizedBox(width: getProportionalWidth(context, 18)),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -25,6 +25,7 @@ class AccountViewBody extends StatefulWidget {
 class _AccountViewBodyState extends State<AccountViewBody> {
   Map<String, dynamic> userInfo = {};
   bool isLoading = true;
+  bool isImageUpdating = false;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -111,17 +112,35 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       image: userInfo["profileImage"],
                       userName: userInfo["username"] ?? "",
                       email: userInfo["email"] ?? "",
+                      isLoading: isImageUpdating,
                       onImageChanged: (XFile? file) async {
                         if (file != null) {
+                          setState(() {
+                            isImageUpdating = true;
+                          });
+
                           // Call API to upload image
                           await updateProfileImage(file); // مثلاً
                           await fetchUserInfo();
+                          if (mounted) {
+                            setState(() {
+                              isImageUpdating = false;
+                            });
+                          }
                         }
                       },
                       onImageRemoved: () async {
+                        setState(() {
+                          isImageUpdating = true;
+                        });
                         await updateProfileImage(
                             null); // Call API to remove image
                         await fetchUserInfo();
+                        if (mounted) {
+                          setState(() {
+                            isImageUpdating = false;
+                          });
+                        }
                       },
                     ),
                     SizedBox(height: getProportionalHeight(context, 22)),
