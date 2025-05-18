@@ -91,4 +91,22 @@ class ApiService {
       throw _handleDioException(e);
     }
   }
+
+  // Image file request
+  Future<dynamic> putFormData({
+    required String endpoint,
+    required FormData formData,
+    String? token,
+  }) async {
+    try {
+      final response = await _dio.put(
+        endpoint,
+        data: formData,
+        options: _buildOptions(token: token),
+      );
+      return _handleResponse(response);
+    } on DioException catch (e) {
+      throw _handleDioException(e);
+    }
+  }
 }

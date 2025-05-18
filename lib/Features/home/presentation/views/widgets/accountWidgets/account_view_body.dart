@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/UserImageAndNameAndEmail.dart';
@@ -10,6 +11,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/get_user_info_service.dart';
+import 'package:y_balash/core/data/services/home/update_profile_image_service.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
@@ -109,6 +111,18 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                       image: userInfo["profileImage"],
                       userName: userInfo["username"] ?? "",
                       email: userInfo["email"] ?? "",
+                      onImageChanged: (XFile? file) async {
+                        if (file != null) {
+                          // Call API to upload image
+                          await updateProfileImage(file); // مثلاً
+                          await fetchUserInfo();
+                        }
+                      },
+                      onImageRemoved: () async {
+                        await updateProfileImage(
+                            null); // Call API to remove image
+                        await fetchUserInfo();
+                      },
                     ),
                     SizedBox(height: getProportionalHeight(context, 22)),
                     UserData(
