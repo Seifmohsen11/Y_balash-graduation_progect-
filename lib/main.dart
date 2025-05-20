@@ -15,44 +15,32 @@ import 'package:y_balash/Features/home/presentation/views/home_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
-import 'package:y_balash/core/helper/is_token_expired.dart';
-import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/widgets/splash_view.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Stripe.publishableKey =
       'pk_test_51Qxr5tGvLVRZ2IJZdi79skSIRf8iMJgmZVMVTtENkPQCTrbR1Jlo1ljW0whTogd7DNZqlbyKcbTTEQEioxfVSGbi00t1fq1DBN';
 
-  // Check if the token exists in SharedPreferences
-  String? token = await SharedPrefHelper.getToken();
-  print('token is $token');
-
-  bool isValid = token != null && !isTokenExpired(token);
-
-  // Based on token presence, decide the initial route
-  String initialRoute = isValid ? MainView.id : SplashView.id;
-
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => ScreenUtilInit(
-        designSize: const Size(430, 932),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) => YBalashApp(
-          initialRoute: initialRoute,
-        ),
-      ),
+    // DevicePreview(
+    //   enabled: true,
+    //   builder: (context) =>
+    ScreenUtilInit(
+      designSize: const Size(430, 932),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) => const YBalashApp(),
     ),
+    // ),
   );
 }
 
 class YBalashApp extends StatelessWidget {
-  final String initialRoute;
-
-  const YBalashApp({super.key, required this.initialRoute});
+  const YBalashApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +62,7 @@ class YBalashApp extends StatelessWidget {
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
       },
-      initialRoute: initialRoute,
+      initialRoute: SplashView.id,
     );
   }
 }

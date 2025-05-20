@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class CustomButtom extends StatelessWidget {
@@ -13,6 +14,7 @@ class CustomButtom extends StatelessWidget {
     this.image,
     required this.onTap,
     required this.borderRadiusSize,
+    this.arrowForSplash,
   });
   final String label;
   final dynamic height;
@@ -21,6 +23,7 @@ class CustomButtom extends StatelessWidget {
   final Color textColor;
   final Color borderColor;
   final String? image;
+  final String? arrowForSplash;
   final VoidCallback onTap;
   final double borderRadiusSize;
 
@@ -66,6 +69,7 @@ class CustomButtom extends StatelessWidget {
                     fontFamily: kInriaSansFont,
                     fontSize: getProportionalWidth(context, 20)),
               ),
+              if (arrowForSplash != null) SvgPicture.asset(arrowForSplash!)
             ],
           ),
         ),
