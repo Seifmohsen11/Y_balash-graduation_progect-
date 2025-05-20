@@ -73,10 +73,10 @@ class SplashViewState extends State<SplashView> {
                   fontFamily: kInriaSansFont,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               if (showButton)
                 CustomButtom(
-                  label: 'Get started for free  ',
+                  label: 'Get started for free',
                   arrowForSplash: 'assets/icons/back.svg',
                   height: getProportionalHeight(context, 58),
                   width: getProportionalWidth(context, 232),

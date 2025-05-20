@@ -151,7 +151,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 height: getProportionalHeight(context, 46),
                 width: getProportionalWidth(context, 292),
                 label: 'Sign up with google',
-                image: 'assets/icons/google.png',
+                image: 'assets/icons/google.svg',
                 backgorundColor: Colors.transparent,
                 textColor: Colors.black,
                 borderColor: kmainTextColor,

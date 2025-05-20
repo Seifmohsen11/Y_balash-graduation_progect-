@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -55,7 +56,7 @@ class CustomButtom extends StatelessWidget {
                   padding: EdgeInsets.only(
                     right: getProportionalWidth(context, 8),
                   ), // Space between image and text
-                  child: Image.asset(
+                  child: SvgPicture.asset(
                     image!,
                     height: getProportionalHeight(
                         context, 24), // Adjust size if needed
@@ -69,7 +70,19 @@ class CustomButtom extends StatelessWidget {
                     fontFamily: kInriaSansFont,
                     fontSize: getProportionalWidth(context, 20)),
               ),
-              if (arrowForSplash != null) SvgPicture.asset(arrowForSplash!)
+              SizedBox(
+                width: 8.w,
+              ),
+              arrowForSplash != null
+                  ? SvgPicture.asset(
+                      arrowForSplash!,
+                      height: 18.h,
+                      width: 18.w,
+                    )
+                  : SizedBox(
+                      height: 18.h,
+                      width: 18.w,
+                    ),
             ],
           ),
         ),

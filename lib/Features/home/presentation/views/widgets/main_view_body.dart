@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:y_balash/Features/home/presentation/views/account_view.dart';
 import 'package:y_balash/Features/home/presentation/views/chat_bot_view.dart';
 import 'package:y_balash/Features/home/presentation/views/favourite_view.dart';
@@ -19,32 +21,30 @@ class _MainViewBodyState extends State<MainViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.green,
         backgroundColor: kPrimaryColor,
         items: <Widget>[
-          ImageIcon(
-            const AssetImage("assets/icons/home.png"),
-            size: screenHeight * (50 / 932),
+          SvgPicture.asset(
+            "assets/icons/home.svg",
+            height: 50.h,
           ),
-          ImageIcon(
-            const AssetImage("assets/icons/search.png"),
-            size: screenHeight * (50 / 932),
+          SvgPicture.asset(
+            "assets/icons/mainSearch.svg",
+            height: 50.h,
           ),
-          ImageIcon(
-            const AssetImage("assets/icons/chatBot.png"),
-            size: screenHeight * (50 / 932),
+          SvgPicture.asset(
+            "assets/icons/chatbot.svg",
+            height: 50.h,
           ),
-          ImageIcon(
-            const AssetImage("assets/icons/favourite.png"),
-            size: screenHeight * (50 / 932),
+          SvgPicture.asset(
+            "assets/icons/favourite.svg",
+            height: 50.h,
           ),
-          ImageIcon(
-            const AssetImage("assets/icons/account.png"),
-            size: screenHeight * (50 / 932),
+          SvgPicture.asset(
+            "assets/icons/account.svg",
+            height: 50.h,
           ),
         ],
         onTap: (index) {
@@ -59,9 +59,9 @@ class _MainViewBodyState extends State<MainViewBody> {
 }
 
 List<Widget> pages = [
-  HomeView(),
-  SearchView(),
-  ChatPotView(),
-  FavouriteView(),
-  AccountView(),
+  const HomeView(),
+  const SearchView(),
+  const ChatPotView(),
+  const FavouriteView(),
+  const AccountView(),
 ];
