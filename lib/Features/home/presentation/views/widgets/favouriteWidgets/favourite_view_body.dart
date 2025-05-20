@@ -32,7 +32,7 @@ class _FavouriteViewBodyState extends State<FavouriteViewBody> {
               ),
               AppBarOfCartView(
                 screenWidth: screenWidth,
-                iconImage: 'assets/icons/Arrow.png',
+                iconImage: 'assets/icons/arrow.svg',
                 title: 'Favorites',
                 onPressed: () {
                   Navigator.popAndPushNamed(context, MainView.id);

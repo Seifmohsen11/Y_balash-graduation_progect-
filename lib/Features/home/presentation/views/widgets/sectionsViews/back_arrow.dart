@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BackArrow extends StatelessWidget {
   const BackArrow({
@@ -16,14 +17,11 @@ class BackArrow extends StatelessWidget {
           SafeArea(
             bottom: false,
             child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const ImageIcon(
-                AssetImage('assets/icons/Arrow.png'),
-              ),
-            ),
-          ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: SvgPicture.asset('assets/icons/arrow.svg')),
+          )
         ],
       ),
     );

@@ -100,7 +100,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                     SafeArea(
                       child: AppBarOfCartView(
                         screenWidth: getProportionalWidth(context, 430),
-                        iconImage: 'assets/icons/Arrow.png',
+                        iconImage: 'assets/icons/arrow.svg',
                         title: 'Profile',
                         onPressed: () {
                           Navigator.popAndPushNamed(context, MainView.id);

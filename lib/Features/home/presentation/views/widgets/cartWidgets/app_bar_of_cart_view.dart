@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class AppBarOfCartView extends StatelessWidget {
@@ -21,13 +22,10 @@ class AppBarOfCartView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         IconButton(
-          onPressed: () {
-            onPressed();
-          },
-          icon: ImageIcon(
-            AssetImage(iconImage),
-          ),
-        ),
+            onPressed: () {
+              onPressed();
+            },
+            icon: SvgPicture.asset(iconImage)),
         Padding(
           padding: EdgeInsets.only(
               left: screenWidth * (10 / 430), right: screenWidth * (10 / 430)),

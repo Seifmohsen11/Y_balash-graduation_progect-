@@ -137,9 +137,9 @@ class _CartProductState extends State<CartProduct> {
                         fontSize: widget.screenWidth * (16 / 430),
                         color: kTextFieldAndButtomColor),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
-                    '\$${widget.price}',
+                    widget.price,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

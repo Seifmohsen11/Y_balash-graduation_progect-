@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BackArrow extends StatelessWidget {
   const BackArrow({
@@ -16,10 +17,11 @@ class BackArrow extends StatelessWidget {
               width: 29.w,
             ),
             GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Image.asset('assets/icons/Arrow.png'))
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SvgPicture.asset('assets/icons/arrow.svg'),
+            )
           ],
         )
       ],

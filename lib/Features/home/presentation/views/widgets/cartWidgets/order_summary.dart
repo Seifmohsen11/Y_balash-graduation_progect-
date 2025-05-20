@@ -41,12 +41,13 @@ class OrderSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildRow("Items ($itemCount)", "\$${totalPrice.toStringAsFixed(2)}",
+          buildRow("Items ($itemCount)", '${totalPrice.toStringAsFixed(2)} EGP',
               Colors.grey[600]!),
           SizedBox(height: getProportionalHeight(context, 4)),
-          buildRow("Shipping", "\$$shipping", Colors.grey[600]!),
+          buildRow("Shipping", "$shipping" ' EGP', Colors.grey[600]!),
           SizedBox(height: getProportionalHeight(context, 4)),
-          buildRow("Import charges", "\$$importCharges", Colors.grey[600]!),
+          buildRow(
+              "Import charges", "$importCharges" ' EGP', Colors.grey[600]!),
           SizedBox(height: getProportionalHeight(context, 4)),
           Divider(
               thickness: getProportionalHeight(context, 1.2),
@@ -54,7 +55,8 @@ class OrderSummary extends StatelessWidget {
           SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(
               "Total Price",
-              "\$${((totalPrice) + (shipping) + (importCharges)).toStringAsFixed(2)}",
+              "${((totalPrice) + (shipping) + (importCharges)).toStringAsFixed(2)}"
+                  ' EGP',
               Colors.green[800]!,
               isBold: true),
         ],

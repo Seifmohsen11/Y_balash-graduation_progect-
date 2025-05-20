@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -25,13 +26,10 @@ class AppBarOfItemDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const ImageIcon(
-                      AssetImage('assets/icons/Arrow.png'),
-                    ),
-                  ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: SvgPicture.asset('assets/icons/arrow.svg')),
                   IconButton(
                       iconSize: 28,
                       color: kTextFieldAndButtomColor,

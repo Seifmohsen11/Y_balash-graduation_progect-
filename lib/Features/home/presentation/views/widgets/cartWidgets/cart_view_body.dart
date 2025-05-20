@@ -53,7 +53,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                   bottom: false,
                   child: AppBarOfCartView(
                     screenWidth: screenWidth,
-                    iconImage: 'assets/icons/Arrow.png',
+                    iconImage: 'assets/icons/arrow.svg',
                     title: 'Cart',
                     onPressed: () {
                       Navigator.pop(context);
