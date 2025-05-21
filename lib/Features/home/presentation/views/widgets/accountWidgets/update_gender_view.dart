@@ -15,7 +15,7 @@ class UpdateGenderView extends StatefulWidget {
 }
 
 class _UpdateGenderViewState extends State<UpdateGenderView> {
-  final List<String> genderOptions = ['Male', 'Female', 'Other'];
+  final List<String> genderOptions = ['male', 'female'];
   String? selectedGender;
 
   bool _isLoading = false;

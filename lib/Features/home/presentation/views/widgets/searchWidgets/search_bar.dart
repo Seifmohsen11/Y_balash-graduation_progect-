@@ -11,12 +11,10 @@ class CustomSearchBar extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.screenHeight,
-    this.isSearchScreen = false,
   });
 
   final double screenHeight;
   final double screenWidth;
-  final bool isSearchScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -118,24 +116,8 @@ class CustomSearchBar extends StatelessWidget {
                 Icons.search,
                 size: screenWidth * (24 / 430),
               ),
-              suffixIcon: isSearchScreen
-                  ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.close,
-                            size: 22.h,
-                          ),
-                          onPressed: () => controller.clear(),
-                        ),
-                      ],
-                    )
-                  : null,
               border: OutlineInputBorder(
-                borderRadius: isSearchScreen
-                    ? BorderRadius.circular(screenWidth * (16 / 430))
-                    : BorderRadius.circular(screenWidth * (32 / 430)),
+                borderRadius: BorderRadius.circular(screenWidth * (32 / 430)),
               ),
               filled: true,
               fillColor: kPrimaryColor,

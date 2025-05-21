@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/favouriteWidgets/favourite_product_card.dart';
 import 'package:y_balash/core/data/services/home/get_favourite_product_service.dart';
 
@@ -62,7 +64,12 @@ class _ListOfFavoritesProductsState extends State<ListOfFavoritesProducts> {
     if (isLoading) {
       return SizedBox(
           height: widget.screenHeight * 0.3,
-          child: const Center(child: CircularProgressIndicator()));
+          child: Center(
+            child: SpinKitThreeBounce(
+              color: Colors.blue,
+              size: 28.h,
+            ),
+          ));
     }
 
     if (products.isEmpty) {

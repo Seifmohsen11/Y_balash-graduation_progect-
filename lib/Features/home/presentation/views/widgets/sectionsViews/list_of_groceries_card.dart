@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/bakery_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/beverages_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/dairy_view.dart';
@@ -57,7 +59,12 @@ class _ListOfGroceriesCardState extends State<ListOfGroceriesCard> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const Center(child: CircularProgressIndicator())
+        ? Center(
+            child: SpinKitThreeBounce(
+              color: Colors.blue,
+              size: 24.h,
+            ),
+          )
         : hasError
             ? const Center(child: Text('Failed to load categories'))
             : ListView.builder(

@@ -28,7 +28,7 @@ class _MainViewBodyState extends State<MainViewBody> {
         items: <Widget>[
           SvgPicture.asset(
             "assets/icons/home.svg",
-            height: 50.h,
+            height: 60.h,
           ),
           SvgPicture.asset(
             "assets/icons/mainSearch.svg",

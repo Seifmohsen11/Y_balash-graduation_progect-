@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -130,10 +131,20 @@ class _CustomSearchBarState extends State<SearchBarForSearchView> {
 
         // Search Results as Cards
         if (isLoading)
-          const SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()))
-        else if (searchResults.isEmpty && _controller.text.isNotEmpty)
-          const SliverToBoxAdapter(child: Center(child: Text('No Results')))
+          SliverToBoxAdapter(
+              child: Center(
+            child: SpinKitThreeBounce(
+              color: Colors.blue,
+              size: 22.h,
+            ),
+          ))
+        else if (searchResults.isEmpty && _controller.text.length >= 2)
+          SliverToBoxAdapter(
+              child: Center(
+                  child: Text(
+            'No Results',
+            style: TextStyle(fontSize: 18.sp, color: kTextFieldAndButtomColor),
+          )))
         else
           SliverPadding(
             padding: EdgeInsets.symmetric(

@@ -78,45 +78,46 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
       body: Padding(
         padding:
             EdgeInsets.symmetric(horizontal: getProportionalWidth(context, 16)),
-        child: Column(
-          children: [
-            SizedBox(height: getProportionalHeight(context, 42)),
-            AppBarOfCartView(
-              screenWidth: screenWidth,
-              iconImage: 'assets/icons/Arrow.png',
-              title: 'Payment Method',
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            SizedBox(height: getProportionalHeight(context, 44)),
-            CustomButtom(
-              label: 'Online Payment',
-              height: getProportionalHeight(context, 58),
-              width: getProportionalWidth(context, 375),
-              backgorundColor: Colors.white,
-              textColor: kTextFieldAndButtomColor,
-              borderColor: Colors.grey.withOpacity(.5),
-              onTap: handlePayment,
-              borderRadiusSize: getProportionalWidth(context, 32),
-            ),
-            SizedBox(height: getProportionalHeight(context, 14)),
-            CustomButtom(
-              label: 'Cash on delivery',
-              height: getProportionalHeight(context, 58),
-              width: getProportionalWidth(context, 375),
-              backgorundColor: Colors.white,
-              textColor: kTextFieldAndButtomColor,
-              borderColor: Colors.grey.withOpacity(.5),
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return SuccessAfterPaymentView();
-                }));
-              },
-              borderRadiusSize: getProportionalWidth(context, 32),
-            )
-          ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              AppBarOfCartView(
+                screenWidth: screenWidth,
+                iconImage: 'assets/icons/arrow.svg',
+                title: 'Payment Method',
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              SizedBox(height: getProportionalHeight(context, 44)),
+              CustomButtom(
+                label: 'Online Payment',
+                height: getProportionalHeight(context, 58),
+                width: getProportionalWidth(context, 375),
+                backgorundColor: Colors.white,
+                textColor: kTextFieldAndButtomColor,
+                borderColor: Colors.grey.withOpacity(.5),
+                onTap: handlePayment,
+                borderRadiusSize: getProportionalWidth(context, 32),
+              ),
+              SizedBox(height: getProportionalHeight(context, 14)),
+              CustomButtom(
+                label: 'Cash on delivery',
+                height: getProportionalHeight(context, 58),
+                width: getProportionalWidth(context, 375),
+                backgorundColor: Colors.white,
+                textColor: kTextFieldAndButtomColor,
+                borderColor: Colors.grey.withOpacity(.5),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return SuccessAfterPaymentView();
+                  }));
+                },
+                borderRadiusSize: getProportionalWidth(context, 32),
+              )
+            ],
+          ),
         ),
       ),
     );

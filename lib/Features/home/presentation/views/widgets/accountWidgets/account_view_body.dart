@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
@@ -84,11 +86,11 @@ class _AccountViewBodyState extends State<AccountViewBody> {
           );
         },
         child: isLoading
-            ? const Center(
+            ? Center(
                 key: ValueKey('loading'),
-                child: CircularProgressIndicator(
-                  color: Colors.blueAccent,
-                  strokeWidth: 4,
+                child: SpinKitThreeBounce(
+                  color: Colors.blue,
+                  size: 28.h,
                 ),
               )
             : Padding(

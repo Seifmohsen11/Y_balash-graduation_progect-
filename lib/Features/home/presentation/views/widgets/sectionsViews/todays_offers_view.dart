@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/back_arrow.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/grid_view_of_todays_offers.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -53,7 +55,12 @@ class _TodaysOffersViewState extends State<TodaysOffersView> {
           ),
           Expanded(
             child: isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? Center(
+                    child: SpinKitThreeBounce(
+                      color: Colors.blue,
+                      size: 28.h,
+                    ),
+                  )
                 : hasError
                     ? const Center(child: Text('Failed to load offers'))
                     : GridViewOfTodaysOffers(

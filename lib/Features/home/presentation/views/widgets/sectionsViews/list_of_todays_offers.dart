@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 import 'package:y_balash/core/data/services/home/get_items_service.dart';
 
@@ -44,7 +46,12 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(
+        child: SpinKitThreeBounce(
+          color: Colors.blue,
+          size: 24.h,
+        ),
+      );
     }
 
     if (products.isEmpty) {

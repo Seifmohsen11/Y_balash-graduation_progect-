@@ -77,7 +77,7 @@ class SplashViewState extends State<SplashView> {
               if (showButton)
                 CustomButtom(
                   label: 'Get started for free',
-                  arrowForSplash: 'assets/icons/back.svg',
+                  arrowForSplash: true,
                   height: getProportionalHeight(context, 58),
                   width: getProportionalWidth(context, 232),
                   backgorundColor: kTextFieldAndButtomColor,
