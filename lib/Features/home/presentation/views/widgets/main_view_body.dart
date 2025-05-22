@@ -23,11 +23,13 @@ class _MainViewBodyState extends State<MainViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: Colors.green,
+        buttonBackgroundColor: Colors.green.withOpacity(.7),
         backgroundColor: kPrimaryColor,
         items: <Widget>[
           SvgPicture.asset(
             "assets/icons/home.svg",
+            // ignore: deprecated_member_use
+            color: Colors.black,
             height: 60.h,
           ),
           SvgPicture.asset(
@@ -35,8 +37,8 @@ class _MainViewBodyState extends State<MainViewBody> {
             height: 50.h,
           ),
           SvgPicture.asset(
-            "assets/icons/chatbot.svg",
-            height: 50.h,
+            "assets/icons/chat_bot.svg",
+            height: 60.h,
           ),
           SvgPicture.asset(
             "assets/icons/favourite.svg",
