@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/categoriesView
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/grid_view_of_products.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/view_items_in_categories_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 
 class BeveragesView extends StatefulWidget {
@@ -31,9 +32,17 @@ class _BeveragesViewState extends State<BeveragesView> {
   Future<void> fetchProducts() async {
     try {
       final data = await productService.fetchProducts(categoryId);
+      final favoriteIds = await getFavoriteIds();
+      final updatedProducts = data.map((product) {
+        final isFav = favoriteIds.contains(product['_id']);
+        return {
+          ...product,
+          'isFavorite': isFav, // ✅ إضافة isFavorite لكل منتج
+        };
+      }).toList();
       if (mounted) {
         setState(() {
-          products = data;
+          products = updatedProducts;
           isLoading = false;
         });
       }

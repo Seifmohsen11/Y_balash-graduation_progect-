@@ -4,7 +4,6 @@ import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_cart.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/update_cart_service.dart';
-import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 
 class CartProduct extends StatefulWidget {
@@ -18,6 +17,7 @@ class CartProduct extends StatefulWidget {
     required this.itemId,
     required this.onRemove,
     required this.quantity,
+    required this.initialIsFavorite,
   });
 
   final double screenHeight;
@@ -28,6 +28,8 @@ class CartProduct extends StatefulWidget {
   final String itemId;
   final int quantity;
   final VoidCallback onRemove;
+  final bool initialIsFavorite;
+
   @override
   State<CartProduct> createState() => _CartProductState();
 }
@@ -40,15 +42,7 @@ class _CartProductState extends State<CartProduct> {
   void initState() {
     super.initState();
     currentQuantity = widget.quantity;
-    checkIfFavorite();
-  }
-
-  void checkIfFavorite() async {
-    bool favoriteStatus = await isProductFavorite(widget.itemId);
-    if (!mounted) return;
-    setState(() {
-      isFavorite = favoriteStatus;
-    });
+    isFavorite = widget.initialIsFavorite;
   }
 
   void updateQuantity(int newQuantity) async {

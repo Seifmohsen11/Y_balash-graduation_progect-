@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/cart_product.dart';
 import 'package:y_balash/core/data/services/home/get_cart_product_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ListOfCartProducts extends StatefulWidget {
   const ListOfCartProducts({
@@ -35,9 +36,17 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
   Future<void> fetchProducts() async {
     try {
       final items = await getCartProduct();
+      final favoriteIds = await getFavoriteIds();
+      final updatedProducts = items.map((product) {
+        final isFav = favoriteIds.contains(product['itemId']['_id']);
+        return {
+          ...product,
+          'isFavorite': isFav,
+        };
+      }).toList();
       if (mounted) {
         setState(() {
-          products = items;
+          products = updatedProducts;
           isLoading = false;
         });
         widget.onProductsFetched(products);
@@ -85,6 +94,8 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             final product = products[index]['itemId'];
+            final isFavorite = products[index]['isFavorite'] ?? false;
+
             return Padding(
               padding: EdgeInsets.only(bottom: widget.screenHeight * (8 / 932)),
               child: CartProduct(
@@ -98,6 +109,7 @@ class _ListOfCartProductsState extends State<ListOfCartProducts> {
                 onRemove: () {
                   removeProductFromList();
                 },
+                initialIsFavorite: isFavorite,
               ),
             );
           },

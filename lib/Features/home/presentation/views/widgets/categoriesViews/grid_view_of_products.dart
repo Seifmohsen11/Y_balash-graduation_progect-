@@ -38,6 +38,7 @@ class GridViewOfProducts extends StatelessWidget {
             description: product['quantity'],
             price: product['price'],
             id: product['_id'] ?? '0.00',
+            isFavorite: product['isFavorite'] ?? false,
           );
         },
       ),

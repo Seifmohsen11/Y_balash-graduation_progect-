@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 import 'package:y_balash/core/data/services/home/get_items_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ListOfTodaysOffers extends StatefulWidget {
   const ListOfTodaysOffers({super.key});
@@ -24,9 +25,16 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
   Future<void> fetchProducts() async {
     try {
       final items = await getItems(); // Call the service
+      final favoriteIds = await getFavoriteIds();
       if (mounted) {
         setState(() {
-          products = items; // Store the fetched data
+          products = items.map((item) {
+            final isFav = favoriteIds.contains(item['_id']);
+            return {
+              ...item,
+              'isFavorite': isFav,
+            };
+          }).toList();
           isLoading = false;
         });
       }
@@ -74,6 +82,7 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
             description: product['quantity'] ?? 'No Quantity Info',
             price: product['price'] ?? '0.00',
             id: product["_id"] ?? '0.00',
+            isFavorite: product['isFavorite'] ?? false,
           ),
         );
       },

@@ -18,6 +18,7 @@ class ProductCard extends StatefulWidget {
     required this.description,
     required this.price,
     required this.id,
+    required this.isFavorite,
   });
 
   final double screenWidth;
@@ -27,27 +28,19 @@ class ProductCard extends StatefulWidget {
   final String description;
   final String price;
   final String id;
+  final bool isFavorite;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool isRed = false;
+  late bool isRed;
 
   @override
   void initState() {
     super.initState();
-    checkIfFavorite();
-  }
-
-  Future<void> checkIfFavorite() async {
-    bool isFav = await isProductFavorite(widget.id);
-    if (!mounted)
-      return; // Ensure the widget is still in the widget tree before calling setState()
-    setState(() {
-      isRed = isFav;
-    });
+    isRed = widget.isFavorite;
   }
 
   @override
@@ -57,6 +50,7 @@ class _ProductCardState extends State<ProductCard> {
     return GestureDetector(
       onTap: () async {
         final productData = await FetchItemDetails(widget.id);
+
         if (productData != null) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return ItemDetailsView(
@@ -65,6 +59,7 @@ class _ProductCardState extends State<ProductCard> {
               description: 'Quantity: ${productData['quantity']}',
               price: productData['price'].toString(),
               image: productData['imageUrl'],
+              isFavorite: widget.isFavorite,
             );
           }));
         }

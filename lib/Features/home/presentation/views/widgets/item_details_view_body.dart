@@ -18,6 +18,7 @@ class ItemDetailsViewBody extends StatefulWidget {
     required this.description,
     required this.price,
     required this.image,
+    required this.isFavorite,
   });
   final String itemId;
   final Function(String) onRemove;
@@ -25,6 +26,7 @@ class ItemDetailsViewBody extends StatefulWidget {
   final String description;
   final String price;
   final String image;
+  final bool isFavorite;
 
   @override
   State<ItemDetailsViewBody> createState() => _ItemDetailsViewBodyState();
@@ -46,14 +48,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
   void initState() {
     super.initState();
     currentQuantity = 1;
-    checkIfFavorite();
-  }
-
-  void checkIfFavorite() async {
-    bool favoriteStatus = await isProductFavorite(widget.itemId);
-    setState(() {
-      isFavorite = favoriteStatus;
-    });
+    isFavorite = widget.isFavorite;
   }
 
   void toggleFavorite() async {

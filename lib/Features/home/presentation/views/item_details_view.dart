@@ -8,12 +8,15 @@ class ItemDetailsView extends StatelessWidget {
       required this.title,
       required this.description,
       required this.price,
-      required this.image});
+      required this.image,
+      required this.isFavorite});
   final String itemId;
   final String title;
   final String description;
   final String price;
   final String image;
+  final bool isFavorite;
+
   @override
   Widget build(BuildContext context) {
     return ItemDetailsViewBody(
@@ -23,6 +26,7 @@ class ItemDetailsView extends StatelessWidget {
       description: description,
       price: price,
       image: image,
+      isFavorite: isFavorite,
     );
   }
 }

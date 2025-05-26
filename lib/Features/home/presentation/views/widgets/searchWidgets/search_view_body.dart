@@ -6,6 +6,7 @@ import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/search_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -67,9 +68,18 @@ class _CustomSearchBarState extends State<SearchBarForSearchView> {
     });
 
     final results = await searchProductsByName(pattern);
+    final favoriteIds = await getFavoriteIds();
+
+    final updatedResults = results.map<Map<String, dynamic>>((product) {
+      final isFav = favoriteIds.contains(product['_id']);
+      return {
+        ...product,
+        'isFavorite': isFav,
+      };
+    }).toList();
 
     setState(() {
-      searchResults = results;
+      searchResults = updatedResults;
       isLoading = false;
     });
   }
@@ -169,6 +179,7 @@ class _CustomSearchBarState extends State<SearchBarForSearchView> {
                       description: 'Quantity: ${product['quantity']}',
                       price: product['price'].toString(),
                       id: product['_id'],
+                      isFavorite: product['isFavorite'] ?? false,
                     );
                   },
                   childCount: searchResults.length,

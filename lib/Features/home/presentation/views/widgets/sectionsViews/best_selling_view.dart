@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/categoriesView
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/grid_view_of_products.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/get_best_selling_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 
 class BestSellingView extends StatefulWidget {
@@ -28,8 +29,16 @@ class _BestSellingViewState extends State<BestSellingView> {
   Future<void> fetchBestSelling() async {
     try {
       final items = await getBestSelling();
+      final favoriteIds = await getFavoriteIds();
+      final updatedProducts = items.map((product) {
+        final isFav = favoriteIds.contains(product['_id']);
+        return {
+          ...product,
+          'isFavorite': isFav, // ✅ إضافة isFavorite لكل منتج
+        };
+      }).toList();
       setState(() {
-        products = items;
+        products = updatedProducts;
         isLoading = false;
       });
     } catch (e) {

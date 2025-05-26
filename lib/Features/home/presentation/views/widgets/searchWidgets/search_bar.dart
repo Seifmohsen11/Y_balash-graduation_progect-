@@ -5,8 +5,9 @@ import 'package:y_balash/Features/home/presentation/views/item_details_view.dart
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/get_item_details_service.dart';
 import 'package:y_balash/core/data/services/home/search_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
-class CustomSearchBar extends StatelessWidget {
+class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({
     super.key,
     required this.screenWidth,
@@ -17,10 +18,15 @@ class CustomSearchBar extends StatelessWidget {
   final double screenWidth;
 
   @override
+  State<CustomSearchBar> createState() => _CustomSearchBarState();
+}
+
+class _CustomSearchBarState extends State<CustomSearchBar> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: screenWidth * (345 / 430),
-      height: screenHeight * (53 / 932),
+      width: widget.screenWidth * (345 / 430),
+      height: widget.screenHeight * (53 / 932),
       child: TypeAheadField<Map<String, dynamic>>(
         suggestionsCallback: (String pattern) async {
           if (pattern.length < 2) return [];
@@ -86,7 +92,12 @@ class CustomSearchBar extends StatelessWidget {
           print('Selected: ${suggestion['name']}');
 
           final productData = await FetchItemDetails(suggestion['_id'] ?? '');
+
           if (productData != null) {
+            final favoriteIds = await getFavoriteIds();
+            final isFav = favoriteIds.contains(productData['_id']);
+
+            productData['isFavorite'] = isFav;
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return ItemDetailsView(
                 itemId: suggestion['_id'] ?? '',
@@ -94,6 +105,7 @@ class CustomSearchBar extends StatelessWidget {
                 description: 'Quantity: ${productData['quantity']}',
                 price: productData['price'].toString(),
                 image: productData['imageUrl'],
+                isFavorite: productData['isFavorite'] ?? false,
               );
             }));
           }
@@ -109,20 +121,21 @@ class CustomSearchBar extends StatelessWidget {
               hintText: 'Search',
               hintStyle: TextStyle(
                 color: const Color(0xff8A8A8A),
-                fontSize: screenWidth * (20 / 430),
+                fontSize: widget.screenWidth * (20 / 430),
                 fontFamily: kInriaSansFont,
               ),
               prefixIcon: Icon(
                 Icons.search,
-                size: screenWidth * (24 / 430),
+                size: widget.screenWidth * (24 / 430),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * (32 / 430)),
+                borderRadius:
+                    BorderRadius.circular(widget.screenWidth * (32 / 430)),
               ),
               filled: true,
               fillColor: kPrimaryColor,
               contentPadding: EdgeInsets.symmetric(
-                vertical: screenHeight * (10 / 932),
+                vertical: widget.screenHeight * (10 / 932),
               ),
             ),
           );

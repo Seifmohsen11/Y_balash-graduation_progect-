@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/product_card.dart';
 import 'package:y_balash/core/data/services/home/get_best_selling_service.dart';
+import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ListOfBestSelling extends StatefulWidget {
   const ListOfBestSelling({super.key});
@@ -24,9 +25,16 @@ class ListOfBestSellingState extends State<ListOfBestSelling> {
   Future<void> fetchBestSelling() async {
     try {
       final items = await getBestSelling(); // Fetch data from API
+      final favoriteIds = await getFavoriteIds();
       if (mounted) {
         setState(() {
-          products = items;
+          products = items.map((item) {
+            final isFav = favoriteIds.contains(item['_id']);
+            return {
+              ...item,
+              'isFavorite': isFav,
+            };
+          }).toList();
           isLoading = false;
         });
       }
@@ -74,6 +82,7 @@ class ListOfBestSellingState extends State<ListOfBestSelling> {
             description: product['quantity'] ?? 'No Quantity Info',
             price: product['price'] ?? '0.00',
             id: product['_id'] ?? '0.00',
+            isFavorite: product['isFavorite'] ?? false,
           ),
         );
       },
