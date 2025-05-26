@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/categoriesView
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/grid_view_of_products.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/get_best_selling_service.dart';
+import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 
 class BestSellingView extends StatefulWidget {
   const BestSellingView({super.key});
@@ -45,28 +46,30 @@ class _BestSellingViewState extends State<BestSellingView> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: Column(
-        children: [
-          const AppBarOfCategoryView(title: 'Best Selling'),
-          Expanded(
-            child: isLoading
-                ? Center(
-                    child: SpinKitThreeBounce(
-                      color: Colors.blue,
-                      size: 28.h,
-                    ),
-                  )
-                : hasError
-                    ? const Center(child: Text('Failed to load products'))
-                    : GridViewOfProducts(
-                        screenWidth: screenWidth,
-                        screenHeight: screenHeight,
-                        products: products,
+    return SwipeBackWrapper(
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        body: Column(
+          children: [
+            const AppBarOfCategoryView(title: 'Best Selling'),
+            Expanded(
+              child: isLoading
+                  ? Center(
+                      child: SpinKitThreeBounce(
+                        color: Colors.blue,
+                        size: 28.h,
                       ),
-          ),
-        ],
+                    )
+                  : hasError
+                      ? const Center(child: Text('Failed to load products'))
+                      : GridViewOfProducts(
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                          products: products,
+                        ),
+            ),
+          ],
+        ),
       ),
     );
   }

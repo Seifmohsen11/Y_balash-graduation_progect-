@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/update_phone_number_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
+import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class UpdatePhoneNumberView extends StatefulWidget {
@@ -62,46 +63,48 @@ class _UpdatePhoneNumberViewState extends State<UpdatePhoneNumberView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: kPrimaryColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const BackArrow(),
-            SizedBox(
-              height: 12.h,
-            ),
-            TitelAndTextFormFieldOfUserData(
-              titel: 'Phone Number',
-              hintText: widget.phoneNumber ?? '+20',
-              onChange: (value) {
-                updatedPhoneNumber = value;
-              },
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                            color: kTextFieldAndButtomColor))
-                    : CustomButtom(
-                        label: 'Save',
-                        height: 57.h,
-                        width: 343.w,
-                        backgorundColor: kTextFieldAndButtomColor,
-                        textColor: Colors.white,
-                        borderColor: kTextFieldAndButtomColor,
-                        onTap: handleUpdateNumber,
-                        borderRadiusSize: 12.w,
-                      ),
-              ],
-            ),
-            SizedBox(
-              height: 40.h,
-            )
-          ],
-        ));
+    return SwipeBackWrapper(
+      child: Scaffold(
+          backgroundColor: kPrimaryColor,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const BackArrow(),
+              SizedBox(
+                height: 12.h,
+              ),
+              TitelAndTextFormFieldOfUserData(
+                titel: 'Phone Number',
+                hintText: widget.phoneNumber ?? '+20',
+                onChange: (value) {
+                  updatedPhoneNumber = value;
+                },
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                              color: kTextFieldAndButtomColor))
+                      : CustomButtom(
+                          label: 'Save',
+                          height: 57.h,
+                          width: 343.w,
+                          backgorundColor: kTextFieldAndButtomColor,
+                          textColor: Colors.white,
+                          borderColor: kTextFieldAndButtomColor,
+                          onTap: handleUpdateNumber,
+                          borderRadiusSize: 12.w,
+                        ),
+                ],
+              ),
+              SizedBox(
+                height: 40.h,
+              )
+            ],
+          )),
+    );
   }
 }

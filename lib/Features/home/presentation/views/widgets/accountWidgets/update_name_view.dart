@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/update_user_name_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
+import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class UpdateNameView extends StatefulWidget {
@@ -61,56 +62,58 @@ class _UpdateNameViewState extends State<UpdateNameView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: kPrimaryColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const BackArrow(),
-            SizedBox(
-              height: 12.h,
-            ),
-            TitelAndTextFormFieldOfUserData(
-              titel: 'First Name',
-              hintText: widget.firstName ?? 'Enter your first name',
-              onChange: (value) {
-                updatedFirstName = value;
-              },
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            TitelAndTextFormFieldOfUserData(
-              titel: 'Last Name',
-              hintText: widget.lastName ?? 'Enter your last name',
-              onChange: (value) {
-                updatedLastName = value;
-              },
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                            color: kTextFieldAndButtomColor))
-                    : CustomButtom(
-                        label: 'Save',
-                        height: 57.h,
-                        width: 343.w,
-                        backgorundColor: kTextFieldAndButtomColor,
-                        textColor: Colors.white,
-                        borderColor: kTextFieldAndButtomColor,
-                        onTap: handleUpdateName,
-                        borderRadiusSize: 12.w,
-                      ),
-              ],
-            ),
-            SizedBox(
-              height: 40.h,
-            )
-          ],
-        ));
+    return SwipeBackWrapper(
+      child: Scaffold(
+          backgroundColor: kPrimaryColor,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const BackArrow(),
+              SizedBox(
+                height: 12.h,
+              ),
+              TitelAndTextFormFieldOfUserData(
+                titel: 'First Name',
+                hintText: widget.firstName ?? 'Enter your first name',
+                onChange: (value) {
+                  updatedFirstName = value;
+                },
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              TitelAndTextFormFieldOfUserData(
+                titel: 'Last Name',
+                hintText: widget.lastName ?? 'Enter your last name',
+                onChange: (value) {
+                  updatedLastName = value;
+                },
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                              color: kTextFieldAndButtomColor))
+                      : CustomButtom(
+                          label: 'Save',
+                          height: 57.h,
+                          width: 343.w,
+                          backgorundColor: kTextFieldAndButtomColor,
+                          textColor: Colors.white,
+                          borderColor: kTextFieldAndButtomColor,
+                          onTap: handleUpdateName,
+                          borderRadiusSize: 12.w,
+                        ),
+                ],
+              ),
+              SizedBox(
+                height: 40.h,
+              )
+            ],
+          )),
+    );
   }
 }

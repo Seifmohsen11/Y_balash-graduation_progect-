@@ -6,6 +6,7 @@ import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
+import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class ItemDetailsViewBody extends StatefulWidget {
@@ -80,135 +81,138 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: Column(
-        children: [
-          const AppBarOfItemDetails(),
-          SizedBox(
-            height: getProportionalHeight(context, 30),
-          ),
-          Center(
-            child: Image.network(
-              widget.image,
-              height: getProportionalHeight(context, 280),
-              width: getProportionalWidth(context, 315),
-              fit: BoxFit.fill,
+    return SwipeBackWrapper(
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        body: Column(
+          children: [
+            const AppBarOfItemDetails(),
+            SizedBox(
+              height: getProportionalHeight(context, 30),
             ),
-          ),
-          SizedBox(
-            height: getProportionalHeight(context, 52),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: getProportionalWidth(context, 36),
-                right: getProportionalWidth(context, 16)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                      fontSize: getProportionalWidth(context, 24),
-                      color: kTextFieldAndButtomColor,
-                      fontFamily: kLatoBold),
-                ),
-                IconButton(
-                  onPressed: () {
-                    toggleFavorite();
-                  },
-                  icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite ? Colors.red : Colors.black),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: getProportionalHeight(context, 16),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: getProportionalWidth(context, 36)),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: getProportionalWidth(context, 320),
-                  child: Text(
-                    widget.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: getProportionalWidth(context, 20),
-                        color: const Color(0xff8A8A8A),
-                        fontFamily: kLatoLight),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: getProportionalHeight(context, 32),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: getProportionalWidth(context, 32)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: getProportionalWidth(context, 20)),
-                    IconButton(
-                        iconSize: getProportionalWidth(context, 32),
-                        onPressed: () {
-                          updateQuantity(currentQuantity - 1);
-                        },
-                        icon: const Icon(Icons.remove_circle_outline)),
-                    Text(
-                      "$currentQuantity",
-                      style: TextStyle(
-                        fontSize: getProportionalWidth(context, 18),
-                      ),
-                    ),
-                    IconButton(
-                        iconSize: getProportionalWidth(context, 32),
-                        color: Colors.yellow,
-                        onPressed: () {
-                          updateQuantity(currentQuantity + 1);
-                        },
-                        icon: const Icon(Icons.add_circle_outline)),
-                  ],
-                ),
-                Text(
-                  "${(double.parse(widget.price.replaceAll(RegExp(r'[^0-9.]'), '')) * currentQuantity).toStringAsFixed(2)} EGP",
-                  style: TextStyle(
-                      fontSize: getProportionalWidth(context, 24),
-                      color: const Color(0xFF1C573E)),
-                ),
-              ],
-            ),
-          ),
-          Flexible(
-            child: Center(
-              child: CustomButtom(
-                label: 'Add to cart',
-                height: getProportionalHeight(context, 46),
-                width: getProportionalWidth(context, 340),
-                backgorundColor: kTextFieldAndButtomColor,
-                textColor: Colors.white,
-                borderColor: kTextFieldAndButtomColor,
-                onTap: () async {
-                  await AddToCart(widget.itemId, currentQuantity);
-                  showSnackBar(context, "Added successfuly",
-                      backgroundColor: Colors.green);
-                },
-                borderRadiusSize: getProportionalWidth(context, 50),
+            Center(
+              child: Image.network(
+                widget.image,
+                height: getProportionalHeight(context, 280),
+                width: getProportionalWidth(context, 315),
+                fit: BoxFit.fill,
               ),
             ),
-          ),
-          SizedBox(
-            height: getProportionalHeight(context, 70),
-          ),
-        ],
+            SizedBox(
+              height: getProportionalHeight(context, 52),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: getProportionalWidth(context, 36),
+                  right: getProportionalWidth(context, 16)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                        fontSize: getProportionalWidth(context, 24),
+                        color: kTextFieldAndButtomColor,
+                        fontFamily: kLatoBold),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      toggleFavorite();
+                    },
+                    icon: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite ? Colors.red : Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: getProportionalHeight(context, 16),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: getProportionalWidth(context, 36)),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: getProportionalWidth(context, 320),
+                    child: Text(
+                      widget.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: getProportionalWidth(context, 20),
+                          color: const Color(0xff8A8A8A),
+                          fontFamily: kLatoLight),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: getProportionalHeight(context, 32),
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.only(right: getProportionalWidth(context, 32)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: getProportionalWidth(context, 20)),
+                      IconButton(
+                          iconSize: getProportionalWidth(context, 32),
+                          onPressed: () {
+                            updateQuantity(currentQuantity - 1);
+                          },
+                          icon: const Icon(Icons.remove_circle_outline)),
+                      Text(
+                        "$currentQuantity",
+                        style: TextStyle(
+                          fontSize: getProportionalWidth(context, 18),
+                        ),
+                      ),
+                      IconButton(
+                          iconSize: getProportionalWidth(context, 32),
+                          color: Colors.yellow,
+                          onPressed: () {
+                            updateQuantity(currentQuantity + 1);
+                          },
+                          icon: const Icon(Icons.add_circle_outline)),
+                    ],
+                  ),
+                  Text(
+                    "${(double.parse(widget.price.replaceAll(RegExp(r'[^0-9.]'), '')) * currentQuantity).toStringAsFixed(2)} EGP",
+                    style: TextStyle(
+                        fontSize: getProportionalWidth(context, 24),
+                        color: const Color(0xFF1C573E)),
+                  ),
+                ],
+              ),
+            ),
+            Flexible(
+              child: Center(
+                child: CustomButtom(
+                  label: 'Add to cart',
+                  height: getProportionalHeight(context, 46),
+                  width: getProportionalWidth(context, 340),
+                  backgorundColor: kTextFieldAndButtomColor,
+                  textColor: Colors.white,
+                  borderColor: kTextFieldAndButtomColor,
+                  onTap: () async {
+                    await AddToCart(widget.itemId, currentQuantity);
+                    showSnackBar(context, "Added successfuly",
+                        backgroundColor: Colors.green);
+                  },
+                  borderRadiusSize: getProportionalWidth(context, 50),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: getProportionalHeight(context, 70),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/payment_method_view_body.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/paymentWidgets/payment_method_view_body.dart';
 
 class PaymentMethodView extends StatelessWidget {
   const PaymentMethodView({super.key});
