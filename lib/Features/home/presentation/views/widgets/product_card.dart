@@ -5,7 +5,6 @@ import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
 import 'package:y_balash/core/data/services/home/add_to_favourite_service.dart';
 import 'package:y_balash/core/data/services/home/get_item_details_service.dart';
 import 'package:y_balash/core/data/services/home/remove_from_favourite_service.dart';
-import 'package:y_balash/core/helper/is_product_favorite.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 
 class ProductCard extends StatefulWidget {
