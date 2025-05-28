@@ -58,6 +58,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
                 backgroundColor: kPrimaryColor,
                 borderColor: kTextFieldAndButtomColor,
+                textFormFieldBorderRadius: 50,
               ),
               SizedBox(
                 height: getProportionalHeight(context, 15),
@@ -70,6 +71,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
                 backgroundColor: kPrimaryColor,
                 borderColor: kTextFieldAndButtomColor,
+                textFormFieldBorderRadius: 50,
               ),
               SizedBox(
                 height: getProportionalHeight(context, 15),

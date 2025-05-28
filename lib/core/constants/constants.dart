@@ -7,3 +7,4 @@ const kInriaSansFont = 'InriaSans-Regular';
 const kAbyssinicaSIL = 'AbyssinicaSIL-Regular';
 const kLatoBold = 'Lato-Bold';
 const kLatoLight = 'Lato-Light';
+const kPoppins = 'Poppins-Regular';

@@ -66,6 +66,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                 },
                 backgroundColor: kPrimaryColor,
                 borderColor: kTextFieldAndButtomColor,
+                textFormFieldBorderRadius: 50,
               ),
               SizedBox(
                 height: getProportionalHeight(context, 67),

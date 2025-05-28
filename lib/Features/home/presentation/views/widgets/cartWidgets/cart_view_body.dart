@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
+import 'package:y_balash/Features/home/presentation/views/location_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/coupon_input_field.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/list_of_cart_product.dart';
@@ -93,7 +93,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                       textColor: Colors.white,
                       borderColor: kTextFieldAndButtomColor,
                       onTap: () {
-                        Navigator.pushNamed(context, PaymentMethodView.id);
+                        Navigator.pushNamed(context, LocationView.id);
                       },
                       borderRadiusSize: screenWidth * (14 / 430),
                     ),

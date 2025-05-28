@@ -12,6 +12,7 @@ import 'package:y_balash/Features/home/presentation/views/cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/chat_bot_view.dart';
 import 'package:y_balash/Features/home/presentation/views/favourite_view.dart';
 import 'package:y_balash/Features/home/presentation/views/home_view.dart';
+import 'package:y_balash/Features/home/presentation/views/location_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
@@ -61,6 +62,7 @@ class YBalashApp extends StatelessWidget {
         CartView.id: (context) => const CartView(),
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
+        LocationView.id: (context) => const LocationView()
       },
       initialRoute: SplashView.id,
     );

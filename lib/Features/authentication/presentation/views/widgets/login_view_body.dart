@@ -55,6 +55,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 },
                 backgroundColor: kPrimaryColor,
                 borderColor: kTextFieldAndButtomColor,
+                textFormFieldBorderRadius: 50,
               ),
               SizedBox(height: getProportionalHeight(context, 15)),
               TitleAndPasswordField(

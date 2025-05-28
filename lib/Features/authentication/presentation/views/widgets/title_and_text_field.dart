@@ -13,6 +13,7 @@ class TitleAndTextField extends StatelessWidget {
     this.titleFontSize,
     this.spaceBetweenTitleAndField,
     this.horizontalPaddingOfField,
+    required this.textFormFieldBorderRadius,
   });
 
   final String title;
@@ -23,6 +24,7 @@ class TitleAndTextField extends StatelessWidget {
   final double? titleFontSize;
   final double? spaceBetweenTitleAndField;
   final double? horizontalPaddingOfField;
+  final double textFormFieldBorderRadius;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -45,7 +47,7 @@ class TitleAndTextField extends StatelessWidget {
           backgroundColor: backgroundColor,
           borderColor: borderColor,
           horizontalPadding: horizontalPaddingOfField,
-          borderRadius: 50,
+          borderRadius: textFormFieldBorderRadius,
         ),
       ],
     );
