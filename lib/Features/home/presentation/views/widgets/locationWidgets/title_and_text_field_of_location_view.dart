@@ -7,12 +7,14 @@ class TitelAndTextFieldOfLocationView extends StatelessWidget {
   final String title;
   final String hintText;
   final Icon? prefixIcon;
+  final Function(String)? onChange;
 
   const TitelAndTextFieldOfLocationView({
     super.key,
     required this.title,
     required this.hintText,
     this.prefixIcon,
+    required this.onChange,
   });
 
   @override
@@ -28,6 +30,7 @@ class TitelAndTextFieldOfLocationView extends StatelessWidget {
             prefixIcon: prefixIcon,
             backgroundColor: Colors.white,
             borderColor: Colors.white,
+            onChange: onChange,
             borderRadius: 8,
             contentPadding: 12),
       ],
