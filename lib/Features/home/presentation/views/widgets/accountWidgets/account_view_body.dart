@@ -71,7 +71,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
     await SharedPrefHelper.clearToken();
 
     // Navigate to the Login screen
-    Navigator.pushReplacementNamed(context, LoginView.id);
+    Navigator.popAndPushNamed(context, LoginView.id);
   }
 
   @override

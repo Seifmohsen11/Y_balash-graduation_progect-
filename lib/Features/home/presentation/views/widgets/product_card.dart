@@ -48,6 +48,8 @@ class _ProductCardState extends State<ProductCard> {
     double cardHeight = widget.screenHeight * (243 / 932);
     return GestureDetector(
       onTap: () async {
+        FocusScope.of(context).unfocus();
+
         final productData = await FetchItemDetails(widget.id);
 
         if (productData != null) {

@@ -88,8 +88,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           );
         },
         onSelected: (Map<String, dynamic> suggestion) async {
-          // هنا تقدر تعمل أي حاجة بعد اختيار suggestion
-          print('Selected: ${suggestion['name']}');
+          FocusScope.of(context).unfocus();
 
           final productData = await FetchItemDetails(suggestion['_id'] ?? '');
 
