@@ -154,14 +154,15 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     TitleOfSectionAndSeeAll(
                       screenHeight: screenHeight,
                       screenWidth: screenWidth,
-                      label: "Today's Offers",
+                      label: "Flash Sale",
+                      imageIcon: 'assets/images/sale.svg',
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return const TodaysOffersView();
                         }));
                       },
-                      spaceBetween: screenWidth * (165 / 430),
+                      spaceBetween: screenWidth * (220 / 430),
                     ),
                     SizedBox(height: screenHeight * (3 / 932)),
                     SizedBox(

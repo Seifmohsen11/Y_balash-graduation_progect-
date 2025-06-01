@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
 class TitleOfSectionAndSeeAll extends StatelessWidget {
@@ -8,10 +9,12 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
       required this.screenWidth,
       required this.label,
       required this.onTap,
-      required this.spaceBetween});
+      required this.spaceBetween,
+      this.imageIcon});
   final double screenHeight;
   final double screenWidth;
   final String label;
+  final String? imageIcon;
   final VoidCallback onTap;
   final double spaceBetween;
   @override
@@ -31,6 +34,7 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
                   fontSize: screenHeight * (24 / 932)),
             ),
           ),
+          if (imageIcon != null) SvgPicture.asset(imageIcon!),
           SizedBox(width: spaceBetween),
           TextButton(
             onPressed: onTap,
