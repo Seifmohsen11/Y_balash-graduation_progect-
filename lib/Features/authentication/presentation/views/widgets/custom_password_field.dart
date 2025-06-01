@@ -75,6 +75,10 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
             color: kmainTextColor,
             fontFamily: kInriaSansFont,
           ),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: getProportionalHeight(context, 16),
+            horizontal: getProportionalWidth(context, 16),
+          ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
                 getProportionalWidth(context, 50),
