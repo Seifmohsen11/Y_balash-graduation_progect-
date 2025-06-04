@@ -1,107 +1,9 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:y_balash/core/constants/constants.dart';
-
-// class ChatPotViewBody extends StatefulWidget {
-//   const ChatPotViewBody({super.key});
-
-//   @override
-//   State<ChatPotViewBody> createState() => _ChatPotViewBodyState();
-// }
-
-// class _ChatPotViewBodyState extends State<ChatPotViewBody>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   late Animation<double> _scaleAnimation;
-//   late Animation<Offset> _slideAnimation;
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     _controller = AnimationController(
-//       vsync: this,
-//       duration: const Duration(seconds: 2),
-//     )..repeat(reverse: true);
-
-//     _scaleAnimation = Tween<double>(begin: 0.9, end: 1.1).animate(
-//       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-//     );
-
-//     _slideAnimation = Tween<Offset>(
-//       begin: const Offset(0, 0.05),
-//       end: const Offset(0, -0.05),
-//     ).animate(
-//       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-//     );
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         decoration: const BoxDecoration(
-//           gradient: LinearGradient(
-//             colors: [
-//               Color.fromARGB(255, 174, 166, 149),
-//               Color.fromARGB(255, 189, 185, 177),
-//               kPrimaryColor
-//             ],
-//             begin: Alignment.topLeft,
-//             end: Alignment.bottomRight,
-//           ),
-//         ),
-//         child: Center(
-//           child: SlideTransition(
-//             position: _slideAnimation,
-//             child: ScaleTransition(
-//               scale: _scaleAnimation,
-//               child: Column(
-//                 mainAxisSize: MainAxisSize.min,
-//                 children: [
-//                   SizedBox(
-//                     height: 120,
-//                     child: SvgPicture.asset(
-//                       'assets/icons/chat_bot.svg',
-//                       fit: BoxFit.contain,
-//                     ),
-//                   ),
-//                   Text(
-//                     'Coming Soon',
-//                     style: TextStyle(
-//                       fontSize: 40,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.white,
-//                       shadows: [
-//                         Shadow(
-//                           blurRadius: 20,
-//                           color: Colors.black.withOpacity(0.3),
-//                           offset: const Offset(2, 2),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/chatpotWidgets/app_bar_of_chat_bot.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/send_question_to_chat_bot_service.dart';
 
 class ChatPotViewBody extends StatefulWidget {
   const ChatPotViewBody({super.key});
@@ -113,9 +15,11 @@ class ChatPotViewBody extends StatefulWidget {
 class _ChatPotViewBodyState extends State<ChatPotViewBody> {
   // List فيها الرسائل (سؤال - رد)
   final List<Map<String, String>> _messages = [];
+  String selectedLanguage = 'ar';
 
   // Controller علشان ناخد النص اللي المستخدم كتبه
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   // دالة لبناء كل رسالة (user أو bot)
   Widget _buildMessage(String role, String text) {
@@ -172,40 +76,123 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 
   // أزرار ثابتة تحت الشات
   Widget _buildBottomButtons() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _ChatBottomButton(text: "❓ What is WappGPT?"),
-          _ChatBottomButton(text: "💰 Pricing"),
-          _ChatBottomButton(text: "📄 FAQs"),
+          _ChatBottomButton(
+            text: "❓ What is WappGPT?",
+            onTap: () => _sendMessage("What is WappGPT?"),
+          ),
+          _ChatBottomButton(
+            text: "💰 Pricing",
+            onTap: () => _sendMessage("Pricing"),
+          ),
+          _ChatBottomButton(
+            text: "📄 FAQs",
+            onTap: () => _sendMessage("FAQs"),
+          ),
         ],
       ),
     );
   }
 
-  // إرسال الرسالة (هنا المفروض هنبعت API و نستقبل الرد)
-  void _sendMessage() async {
-    final text = _controller.text.trim();
+// اختيار اللغه
+  void _showLanguageDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        barrierDismissible: false, // المستخدم لازم يختار
+        builder: (context) => AlertDialog(
+          title: const Text("اختر اللغة / Select Language"),
+          content: const Text("يرجى اختيار اللغة التي تفضلها."),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                setState(() {
+                  selectedLanguage = 'ar';
+                });
+                Navigator.of(context).pop();
+                final response = await sendChatQuestion(
+                  language: selectedLanguage,
+                  question: '',
+                );
+                setState(() {
+                  _messages.add({'role': 'bot', 'text': response});
+                });
+                _scrollToBottom();
+              },
+              child: const Text("العربية"),
+            ),
+            TextButton(
+              onPressed: () async {
+                setState(() {
+                  selectedLanguage = 'en';
+                });
+                Navigator.of(context).pop();
+                final response = await sendChatQuestion(
+                  language: selectedLanguage,
+                  question: '',
+                );
+                setState(() {
+                  _messages.add({'role': 'bot', 'text': response});
+                });
+                _scrollToBottom();
+              },
+              child: const Text("English"),
+            ),
+          ],
+        ),
+      );
+    });
+  }
 
-    if (text.isEmpty) return;
+  // إرسال الرسالة (هنا المفروض هنبعت API و نستقبل الرد)
+  void _sendMessage(String text) async {
+    if (text.trim().isEmpty) return;
 
     setState(() {
       _messages.add({'role': 'user', 'text': text});
       _controller.clear();
     });
 
-    // هنا المفروض تبعت الرسالة للـ API وتنتظر الرد
-    await Future.delayed(const Duration(seconds: 1)); // مؤقت بدل الـ API
+    _scrollToBottom();
+    try {
+      // إرسال السؤال إلى API واستقبال الرد
+      final response = await sendChatQuestion(
+        question: text,
+        language: selectedLanguage, // en أو ar حسب لغة المستخدم
+      );
 
-    // الرد المفترض يرجع من الـ API
-    const botReply =
-        'هذا رد تجريبي. هنا هيظهر الرد الحقيقي اللي هييجي من الـ API.';
+      setState(() {
+        _messages.add({'role': 'bot', 'text': response});
+      });
+      _scrollToBottom();
+    } catch (e) {
+      setState(() {
+        _messages.add(
+            {'role': 'bot', 'text': 'حدث خطأ أثناء جلب الرد، حاول مرة أخرى.'});
+      });
+    }
+  }
 
-    setState(() {
-      _messages.add({'role': 'bot', 'text': botReply});
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _showLanguageDialog();
   }
 
   @override
@@ -218,6 +205,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
           // رسائل الشات
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               padding: EdgeInsets.zero,
               itemCount: _messages.length,
               itemBuilder: (context, index) {
@@ -232,23 +220,30 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 
           // خانة إدخال الرسالة وزر الإرسال
           Padding(
-            padding: EdgeInsets.all(8.h),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: "Type your message here...",
-                      border: OutlineInputBorder(),
-                    ),
+            padding: EdgeInsets.only(left: 8.h, right: 8.h, bottom: 42.h),
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: "Type your message here...",
+                hintStyle:
+                    TextStyle(color: const Color(0xFF646464), fontSize: 18.sp),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.w)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.w),
+                    borderSide:
+                        const BorderSide(color: kTextFieldAndButtomColor)),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                suffixIcon: IconButton(
+                  onPressed: () => _sendMessage(_controller.text.trim()),
+                  icon: SvgPicture.asset(
+                    'assets/icons/sendIcon.svg',
+                    width: 24.w,
+                    height: 24.h,
                   ),
                 ),
-                IconButton(
-                  onPressed: _sendMessage,
-                  icon: const Icon(Icons.send, color: Color(0xFF003C1C)),
-                ),
-              ],
+              ),
             ),
           ),
         ],
@@ -260,16 +255,20 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 // عنصر الأزرار السفلية (Chip)
 class _ChatBottomButton extends StatelessWidget {
   final String text;
+  final VoidCallback onTap;
 
-  const _ChatBottomButton({required this.text});
+  const _ChatBottomButton({required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      label: Text(text, style: const TextStyle(fontSize: 12)),
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+    return InkWell(
+      onTap: onTap,
+      child: Chip(
+        label: Text(text, style: const TextStyle(fontSize: 12)),
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
     );
   }

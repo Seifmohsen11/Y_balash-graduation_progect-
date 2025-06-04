@@ -62,7 +62,7 @@ class YBalashApp extends StatelessWidget {
         CartView.id: (context) => const CartView(),
         AccountView.id: (context) => const AccountView(),
         PaymentMethodView.id: (context) => const PaymentMethodView(),
-        LocationView.id: (context) => const LocationView()
+        LocationView.id: (context) => const LocationView(),
       },
       initialRoute: SplashView.id,
     );

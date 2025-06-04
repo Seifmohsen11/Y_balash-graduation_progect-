@@ -38,35 +38,39 @@ class AppBarOfChatBot extends StatelessWidget {
             SizedBox(
               width: 10.w,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Chatbot',
-                  style: TextStyle(
+            Padding(
+              padding: EdgeInsets.only(top: 8.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Chatbot',
+                    style: TextStyle(
                       fontSize: 24.sp,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      color: const Color(0xFF43EE7D),
-                      size: 14.h,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 3.w),
-                      child: Text(
-                        'Online',
-                        style: TextStyle(
-                            color: const Color(0xFF43EE7D), fontSize: 16.sp),
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.circle,
+                        color: const Color(0xFF43EE7D),
+                        size: 14.h,
                       ),
-                    ),
-                  ],
-                )
-              ],
+                      Padding(
+                        padding: EdgeInsets.only(left: 3.w),
+                        child: Text(
+                          'Online',
+                          style: TextStyle(
+                              color: const Color(0xFF43EE7D), fontSize: 16.sp),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             )
           ],
         ),

@@ -145,7 +145,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   ],
                 ),
               ),
-              //********************Section: Today's Offers***********************
+              //********************Section: Flash Sale***********************
               Padding(
                 padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
                 child: Column(
