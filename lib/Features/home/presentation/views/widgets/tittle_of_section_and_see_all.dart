@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:y_balash/core/constants/constants.dart';
 
@@ -9,33 +10,38 @@ class TitleOfSectionAndSeeAll extends StatelessWidget {
       required this.screenWidth,
       required this.label,
       required this.onTap,
-      required this.spaceBetween,
       this.imageIcon});
   final double screenHeight;
   final double screenWidth;
   final String label;
   final String? imageIcon;
   final VoidCallback onTap;
-  final double spaceBetween;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: screenHeight * (38 / 932),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: kTextFieldAndButtomColor,
-                  fontFamily: kAbyssinicaSIL,
-                  fontSize: screenHeight * (24 / 932)),
+            child: Row(
+              children: [
+                Text(
+                  label,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: kTextFieldAndButtomColor,
+                      fontFamily: kAbyssinicaSIL,
+                      fontSize: screenHeight * (24 / 932)),
+                ),
+                if (imageIcon != null)
+                  Padding(
+                    padding: EdgeInsets.only(left: 6.w),
+                    child: SvgPicture.asset(imageIcon!, height: 20),
+                  ),
+              ],
             ),
           ),
-          if (imageIcon != null) SvgPicture.asset(imageIcon!),
-          SizedBox(width: spaceBetween),
           TextButton(
             onPressed: onTap,
             style: TextButton.styleFrom(padding: EdgeInsets.zero),

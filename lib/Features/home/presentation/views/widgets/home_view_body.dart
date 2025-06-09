@@ -162,7 +162,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           return const TodaysOffersView();
                         }));
                       },
-                      spaceBetween: screenWidth * (220 / 430),
                     ),
                     SizedBox(height: screenHeight * (3 / 932)),
                     SizedBox(
@@ -193,7 +192,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           return const RestaurantsAndCafesView();
                         }));
                       },
-                      spaceBetween: screenWidth * (102 / 430),
                     ),
                     SizedBox(
                         height: screenHeight *
@@ -225,7 +223,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           return const BestSellingView();
                         }));
                       },
-                      spaceBetween: screenWidth * (193 / 430),
                     ),
                     SizedBox(height: screenHeight * (3 / 932)),
                     SizedBox(
@@ -255,7 +252,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           return const GroceriesView();
                         }));
                       },
-                      spaceBetween: screenWidth * (230 / 430),
                     ),
                     SizedBox(height: screenHeight * (3 / 932)),
                     SizedBox(
