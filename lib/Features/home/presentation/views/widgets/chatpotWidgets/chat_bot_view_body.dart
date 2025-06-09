@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/chatpotWidgets/app_bar_of_chat_bot.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/send_question_to_chat_bot_service.dart';
+import 'package:y_balash/core/helper/shared_pref_helper.dart';
 
 class ChatPotViewBody extends StatefulWidget {
   const ChatPotViewBody({super.key});
@@ -13,6 +16,9 @@ class ChatPotViewBody extends StatefulWidget {
 }
 
 class _ChatPotViewBodyState extends State<ChatPotViewBody> {
+  String? userImagePath;
+  bool isLoading = false;
+
   // List فيها الرسائل (سؤال - رد)
   final List<Map<String, String>> _messages = [];
   String selectedLanguage = 'ar';
@@ -24,32 +30,35 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
   // دالة لبناء كل رسالة (user أو bot)
   Widget _buildMessage(String role, String text) {
     final isUser = role == 'user';
+    final messageTime = TimeOfDay.now().format(context);
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
-      child: Row(
-        mainAxisAlignment:
-            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment:
+            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          // صورة البوت
-          if (!isUser)
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 24.h,
-              child: SvgPicture.asset(
-                'assets/icons/chat_bot.svg',
-              ),
-            ),
-          if (!isUser) SizedBox(width: 8.w),
-
           // الرسالة نفسها
-          Flexible(
+          Padding(
+            padding: isUser
+                ? EdgeInsets.only(right: 20.w)
+                : EdgeInsets.only(left: 20.w),
             child: Container(
               padding: EdgeInsets.all(12.h),
               decoration: BoxDecoration(
                 color: isUser ? Colors.grey[200] : const Color(0xFF003C1C),
-                borderRadius: BorderRadius.circular(12.h),
+                borderRadius: isUser
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(12.w),
+                        topRight: Radius.circular(12.w),
+                        bottomLeft: Radius.circular(12.w),
+                      )
+                    : BorderRadius.only(
+                        topLeft: Radius.circular(12.w),
+                        topRight: Radius.circular(12.w),
+                        bottomRight: Radius.circular(12.w),
+                      ),
               ),
               child: Text(
                 text,
@@ -61,14 +70,57 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
             ),
           ),
 
-          if (isUser) SizedBox(width: 8.w),
+          SizedBox(height: 4.h),
 
-          // صورة المستخدم
-          if (isUser)
-            CircleAvatar(
-              backgroundImage: const AssetImage('assets/images/user.png'),
-              radius: 20.h,
-            ),
+          // الصورة + الساعة + الصح
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: isUser
+                ? [
+                    // ترتيب اليوزر
+
+                    Text(
+                      messageTime,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(width: 4.w),
+                    Icon(
+                      Icons.done,
+                      size: 16.sp,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: 6.w),
+                    CircleAvatar(
+                      backgroundImage: userImagePath != null
+                          ? FileImage(File(userImagePath!))
+                          : const AssetImage('assets/images/user.png')
+                              as ImageProvider,
+                      radius: 20.h,
+                    ),
+                  ]
+                : [
+                    // ترتيب البوت
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 24.h,
+                      child: SvgPicture.asset(
+                        'assets/icons/chat_bot.svg',
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      messageTime,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+          ),
         ],
       ),
     );
@@ -105,8 +157,18 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
         context: context,
         barrierDismissible: false, // المستخدم لازم يختار
         builder: (context) => AlertDialog(
-          title: const Text("اختر اللغة / Select Language"),
-          content: const Text("يرجى اختيار اللغة التي تفضلها."),
+          title: Text(
+            "Select Language /اختر اللغة",
+            style: TextStyle(fontSize: 24.sp, color: kTextFieldAndButtomColor),
+          ),
+          content: Text(
+            "يرجى اختيار اللغة التي تفضلها",
+            style: TextStyle(
+                fontSize: 18.sp,
+                color: const Color.fromARGB(255, 119, 117, 117)),
+          ),
+          contentPadding: EdgeInsets.only(left: 26.w, top: 6.h, bottom: 30.h),
+          actionsPadding: EdgeInsets.only(right: 12.w, bottom: 6.h),
           actions: [
             TextButton(
               onPressed: () async {
@@ -123,7 +185,11 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
                 });
                 _scrollToBottom();
               },
-              child: const Text("العربية"),
+              child: Text(
+                "العربية",
+                style:
+                    TextStyle(fontSize: 18.sp, color: kTextFieldAndButtomColor),
+              ),
             ),
             TextButton(
               onPressed: () async {
@@ -140,7 +206,11 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
                 });
                 _scrollToBottom();
               },
-              child: const Text("English"),
+              child: Text(
+                "English",
+                style:
+                    TextStyle(fontSize: 18.sp, color: kTextFieldAndButtomColor),
+              ),
             ),
           ],
         ),
@@ -155,6 +225,8 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
     setState(() {
       _messages.add({'role': 'user', 'text': text});
       _controller.clear();
+      isLoading = true;
+      _messages.add({'role': 'bot', 'text': 'typing...'}); // مؤقت
     });
 
     _scrollToBottom();
@@ -166,13 +238,19 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
       );
 
       setState(() {
+        _messages.removeLast(); // إزالة 'typing...' المؤقتة
+
         _messages.add({'role': 'bot', 'text': response});
+        isLoading = false;
       });
       _scrollToBottom();
     } catch (e) {
       setState(() {
+        _messages.removeLast(); // إزالة 'typing...'
+
         _messages.add(
             {'role': 'bot', 'text': 'حدث خطأ أثناء جلب الرد، حاول مرة أخرى.'});
+        isLoading = false;
       });
     }
   }
@@ -189,9 +267,17 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
     });
   }
 
+  void _loadUserImage() async {
+    final path = await SharedPrefHelper.getUserImage();
+    setState(() {
+      userImagePath = path;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _loadUserImage();
     _showLanguageDialog();
   }
 

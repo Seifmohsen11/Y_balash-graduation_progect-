@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:y_balash/core/helper/shared_pref_helper.dart';
 
 class UserImageAndNameAndEmail extends StatelessWidget {
   const UserImageAndNameAndEmail({
@@ -44,6 +45,9 @@ class UserImageAndNameAndEmail extends StatelessWidget {
                     await picker.pickImage(source: ImageSource.gallery);
                 Navigator.pop(context);
                 if (pickedFile != null) {
+                  await SharedPrefHelper.saveUserImage(
+                      pickedFile.path); // ✅ حفظ الصورة
+
                   onImageChanged?.call(pickedFile);
                 }
               },
@@ -57,6 +61,9 @@ class UserImageAndNameAndEmail extends StatelessWidget {
                     await picker.pickImage(source: ImageSource.camera);
                 Navigator.pop(context);
                 if (pickedFile != null) {
+                  await SharedPrefHelper.saveUserImage(
+                      pickedFile.path); // ✅ حفظ الصورة
+
                   onImageChanged?.call(pickedFile);
                 }
               },
@@ -65,8 +72,10 @@ class UserImageAndNameAndEmail extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.delete, color: Colors.red),
                 title: const Text('Remove Image'),
-                onTap: () {
+                onTap: () async {
                   Navigator.pop(context);
+                  await SharedPrefHelper.removeUserImage(); // ✅ حذف الصورة
+
                   onImageRemoved?.call();
                 },
               ),

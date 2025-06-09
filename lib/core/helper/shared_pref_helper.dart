@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefHelper {
   static const String tokenKey = "user_token";
   static const String userIdKey = "user_id";
+  static const String userImageKey = 'user_image';
 
   /// Save user token
   static Future<void> saveToken(String token) async {
@@ -38,5 +39,23 @@ class SharedPrefHelper {
   static Future<void> clearUserData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+  }
+
+  /// Save user Image
+  static Future<void> saveUserImage(String imagePath) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(userImageKey, imagePath);
+  }
+
+  /// Get user Image
+  static Future<String?> getUserImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(userImageKey);
+  }
+
+  /// Remove user image
+  static Future<void> removeUserImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(userImageKey);
   }
 }
