@@ -18,41 +18,73 @@ class SplashView extends StatefulWidget {
   SplashViewState createState() => SplashViewState();
 }
 
-class SplashViewState extends State<SplashView> {
+class SplashViewState extends State<SplashView> with TickerProviderStateMixin {
+  late AnimationController _imageController;
+  late AnimationController _logoController;
+  late AnimationController _textController;
+  late Animation<double> _imageAnimation;
+  late Animation<double> _logoAnimation;
+  late Animation<double> _textAnimation;
+
   bool showButton = false;
-
-  double getProportionalHeight(BuildContext context, double originalHeight) {
-    return (originalHeight / 932) * MediaQuery.of(context).size.height;
-  }
-
-  double getProportionalWidth(BuildContext context, double originalWidth) {
-    return (originalWidth / 430) * MediaQuery.of(context).size.width;
-  }
 
   @override
   void initState() {
     super.initState();
-    _startSplashSequence();
+
+    _imageController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _logoController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _textController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+
+    _imageAnimation = Tween<double>(begin: 0, end: 1).animate(_imageController);
+    _logoAnimation = Tween<double>(begin: 0, end: 1).animate(_logoController);
+    _textAnimation = Tween<double>(begin: 0, end: 1).animate(_textController);
+
+    _startAnimations();
   }
 
-  Future<void> _startSplashSequence() async {
-    await Future.delayed(const Duration(seconds: 2)); // تنتظر شوية لعرض الصورة
-    String? token = await SharedPrefHelper.getToken();
-    print('token is $token');
+  Future<void> _startAnimations() async {
+    await Future.delayed(const Duration(milliseconds: 400));
+    _imageController.forward();
+    await Future.delayed(const Duration(milliseconds: 400));
+    _logoController.forward();
+    await Future.delayed(const Duration(milliseconds: 400));
+    _textController.forward();
+    await Future.delayed(const Duration(milliseconds: 400));
 
+    _checkTokenAndNavigate();
+  }
+
+  Future<void> _checkTokenAndNavigate() async {
+    await Future.delayed(const Duration(seconds: 1));
+    String? token = await SharedPrefHelper.getToken();
     bool isValid = token != null && !isTokenExpired(token);
+    print('token is $token');
 
     if (isValid) {
       Navigator.pushReplacementNamed(context, MainView.id);
     } else {
-      // لو التوكن مش صالح، أظهر الزر بعد كمان ثانية (يبقى الإجمالي 3 ثواني مثلاً)
-      await Future.delayed(const Duration(seconds: 1));
-      if (mounted) {
-        setState(() {
-          showButton = true;
-        });
-      }
+      setState(() {
+        showButton = true;
+      });
     }
+  }
+
+  @override
+  void dispose() {
+    _imageController.dispose();
+    _logoController.dispose();
+    _textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -64,29 +96,42 @@ class SplashViewState extends State<SplashView> {
           padding: EdgeInsets.only(top: 57.h),
           child: Column(
             children: [
-              Image.asset(
-                'assets/images/shoping.png',
-                width: 386.w,
-                height: 452.h,
-              ),
-              LogoName(
-                height: 109.h,
-                width: 344.w,
-              ),
-              Text(
-                "Your Go-To for Discounted",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: const Color(0xffFFC433),
-                  fontFamily: kInriaSansFont,
+              FadeTransition(
+                opacity: _imageAnimation,
+                child: Image.asset(
+                  'assets/images/shoping.png',
+                  width: 386.w,
+                  height: 452.h,
                 ),
               ),
-              Text(
-                "Freshness",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: const Color(0xffFFC433),
-                  fontFamily: kInriaSansFont,
+              FadeTransition(
+                opacity: _logoAnimation,
+                child: LogoName(
+                  height: 109.h,
+                  width: 344.w,
+                ),
+              ),
+              FadeTransition(
+                opacity: _textAnimation,
+                child: Column(
+                  children: [
+                    Text(
+                      "Your Go-To for Discounted",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: const Color(0xffFFC433),
+                        fontFamily: kInriaSansFont,
+                      ),
+                    ),
+                    Text(
+                      "Freshness",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: const Color(0xffFFC433),
+                        fontFamily: kInriaSansFont,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const Spacer(),
@@ -94,25 +139,17 @@ class SplashViewState extends State<SplashView> {
                 CustomButtom(
                   label: 'Get started for free',
                   arrowForSplash: true,
-                  height: getProportionalHeight(context, 58),
-                  width: getProportionalWidth(context, 232),
+                  height: 58.h,
+                  width: 232.w,
                   backgorundColor: kTextFieldAndButtomColor,
                   textColor: Colors.white,
                   borderColor: kTextFieldAndButtomColor,
                   onTap: () async {
-                    String? token = await SharedPrefHelper.getToken();
-                    print('token is $token');
-
-                    bool isValid = token != null && !isTokenExpired(token);
-
-                    String targetRoute = isValid ? MainView.id : SignUpView.id;
-                    Navigator.pushReplacementNamed(context, targetRoute);
+                    Navigator.pushReplacementNamed(context, SignUpView.id);
                   },
                   borderRadiusSize: 50.w,
                 ),
-              SizedBox(
-                height: 33.h,
-              )
+              SizedBox(height: 33.h),
             ],
           ),
         ),
