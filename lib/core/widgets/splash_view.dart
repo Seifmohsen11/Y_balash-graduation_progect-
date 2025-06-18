@@ -32,11 +32,27 @@ class SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      setState(() {
-        showButton = true;
-      });
-    });
+    _startSplashSequence();
+  }
+
+  Future<void> _startSplashSequence() async {
+    await Future.delayed(const Duration(seconds: 2)); // تنتظر شوية لعرض الصورة
+    String? token = await SharedPrefHelper.getToken();
+    print('token is $token');
+
+    bool isValid = token != null && !isTokenExpired(token);
+
+    if (isValid) {
+      Navigator.pushReplacementNamed(context, MainView.id);
+    } else {
+      // لو التوكن مش صالح، أظهر الزر بعد كمان ثانية (يبقى الإجمالي 3 ثواني مثلاً)
+      await Future.delayed(const Duration(seconds: 1));
+      if (mounted) {
+        setState(() {
+          showButton = true;
+        });
+      }
+    }
   }
 
   @override
