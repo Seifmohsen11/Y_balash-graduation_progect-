@@ -4,10 +4,8 @@ import 'package:y_balash/Features/authentication/presentation/views/widgets/titl
 import 'package:y_balash/Features/authentication/presentation/views/widgets/title_and_text_field.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/auth/sign_up_service.dart';
-import 'package:y_balash/core/data/services/auth/sign_up_with_google_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
-import 'package:y_balash/core/widgets/custom_text_divider.dart';
 import 'package:y_balash/core/widgets/logo_name.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
 
@@ -94,7 +92,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               SizedBox(
-                height: getProportionalHeight(context, 37),
+                height: getProportionalHeight(context, 50),
               ),
               _isLoading
                   ? const CircularProgressIndicator(
@@ -143,29 +141,29 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 firstText: 'Already have an account ?',
                 secondText: 'Login',
               ),
-              const CusttomTextDivider(
-                text: "or",
-              ),
-              SizedBox(
-                height: getProportionalHeight(context, 32),
-              ),
-              CustomButtom(
-                height: getProportionalHeight(context, 46),
-                width: getProportionalWidth(context, 292),
-                label: 'Sign up with google',
-                image: 'assets/icons/google.svg',
-                backgorundColor: Colors.transparent,
-                textColor: Colors.black,
-                borderColor: kmainTextColor,
-                onTap: () async {
-                  try {
-                    await signUpWithGoogle();
-                  } catch (error) {
-                    showSnackBar(context, 'Error: $error');
-                  }
-                },
-                borderRadiusSize: getProportionalWidth(context, 50),
-              ),
+              // const CusttomTextDivider(
+              //   text: "or",
+              // ),
+              // SizedBox(
+              //   height: getProportionalHeight(context, 32),
+              // ),
+              // CustomButtom(
+              //   height: getProportionalHeight(context, 46),
+              //   width: getProportionalWidth(context, 292),
+              //   label: 'Sign up with google',
+              //   image: 'assets/icons/google.svg',
+              //   backgorundColor: Colors.transparent,
+              //   textColor: Colors.black,
+              //   borderColor: kmainTextColor,
+              //   onTap: () async {
+              //     try {
+              //       await signUpWithGoogle();
+              //     } catch (error) {
+              //       showSnackBar(context, 'Error: $error');
+              //     }
+              //   },
+              //   borderRadiusSize: getProportionalWidth(context, 50),
+              // ),
               SizedBox(
                 height: getProportionalHeight(context, 32),
               ),

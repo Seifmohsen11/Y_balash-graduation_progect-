@@ -8,7 +8,6 @@ import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/auth/login_service.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
-import 'package:y_balash/core/widgets/custom_text_divider.dart';
 import 'package:y_balash/core/widgets/logo_name.dart';
 import 'package:y_balash/core/widgets/text_under_buttom.dart';
 
@@ -134,20 +133,20 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   Navigator.popAndPushNamed(context, SignUpView.id);
                 },
               ),
-              SizedBox(height: getProportionalHeight(context, 8)),
-              const CusttomTextDivider(text: "or"),
-              SizedBox(height: getProportionalHeight(context, 52)),
-              CustomButtom(
-                height: getProportionalHeight(context, 46),
-                width: getProportionalWidth(context, 292),
-                label: 'Login with google',
-                image: 'assets/icons/google.svg',
-                backgorundColor: Colors.transparent,
-                textColor: Colors.black,
-                borderColor: kmainTextColor,
-                onTap: () {},
-                borderRadiusSize: getProportionalWidth(context, 50),
-              ),
+              // SizedBox(height: getProportionalHeight(context, 8)),
+              // const CusttomTextDivider(text: "or"),
+              // SizedBox(height: getProportionalHeight(context, 52)),
+              // CustomButtom(
+              //   height: getProportionalHeight(context, 46),
+              //   width: getProportionalWidth(context, 292),
+              //   label: 'Login with google',
+              //   image: 'assets/icons/google.svg',
+              //   backgorundColor: Colors.transparent,
+              //   textColor: Colors.black,
+              //   borderColor: kmainTextColor,
+              //   onTap: () {},
+              //   borderRadiusSize: getProportionalWidth(context, 50),
+              // ),
             ],
           ),
         ),
