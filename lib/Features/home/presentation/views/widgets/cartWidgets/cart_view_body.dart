@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:y_balash/Features/home/presentation/views/location_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/coupon_input_field.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/redeem_points_buttom.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/list_of_cart_product.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/order_summary.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/get_cart_summary_service.dart';
 import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
@@ -17,25 +18,48 @@ class CartViewBody extends StatefulWidget {
 
 class _CartViewBodyState extends State<CartViewBody> {
   int itemCount = 0;
+  double totalItemsPrice = 0.0;
+  double shippingCost = 0.0;
+  double discount = 0.0;
   double totalPrice = 0.0;
 
-  void updateOrderSummary(List<dynamic> products) {
-    setState(() {
-      itemCount = products.length;
-      totalPrice = products.fold(0.0, (sum, item) {
-        double price = double.tryParse((item['itemId']['price'] ?? '0')
-                .toString()
-                .replaceAll(RegExp(r'[^0-9.]'), '')) ??
-            0.0;
-
-        int quantity = item['quantity'] ?? 1;
-        return sum + (price * quantity);
-      });
-    });
-  }
+  bool isProductsLoaded = false;
 
   void refreshCart() {
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateOrderSummary();
+  }
+
+  void updateOrderSummary() async {
+    try {
+      final cartSummary = await getCartSummary();
+      final cartData = cartSummary['cartSummary'];
+      if (cartData != null) {
+        if (!mounted) return;
+
+        setState(() {
+          itemCount = cartData['totalItems'] ?? 0;
+          totalItemsPrice =
+              double.tryParse(cartData['totalItemsPrice'] ?? '0') ?? 0;
+          shippingCost = double.tryParse(cartData['shippingCost'] ?? '0') ?? 0;
+          discount =
+              double.tryParse(cartData['discountFromPoints'] ?? '0') ?? 0;
+          totalPrice = double.tryParse(cartData['totalPrice'] ?? '0') ?? 0;
+        });
+      } else {
+        print("No cart summary data found");
+      }
+    } catch (e) {
+      print("Error fetching cart summary: $e");
+      if (!mounted) return;
+
+      setState(() {});
+    }
   }
 
   @override
@@ -66,21 +90,30 @@ class _CartViewBodyState extends State<CartViewBody> {
                   ListOfCartProducts(
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
-                    onCartUpdated: refreshCart,
-                    onProductsFetched: updateOrderSummary,
+                    onCartUpdated: () {
+                      refreshCart();
+                    },
+                    onProductsFetched: (_) {
+                      updateOrderSummary();
+                      setState(() {
+                        isProductsLoaded = true;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: screenHeight * (18 / 932),
                   ),
-                  if (itemCount > 0) ...[
-                    const CouponInputField(),
+                  if (isProductsLoaded) ...[
+                    const RedeemPointsButtom(),
                     SizedBox(
                       height: screenHeight * (8 / 932),
                     ),
                     OrderSummary(
                       itemCount: itemCount,
-                      totalPrice: totalPrice,
-                      shipping: 50,
+                      totalPrice: totalItemsPrice,
+                      shipping: shippingCost,
+                      grandTotal: totalPrice,
+                      discount: discount,
                     ),
                     SizedBox(
                       height: screenHeight * (8 / 932),

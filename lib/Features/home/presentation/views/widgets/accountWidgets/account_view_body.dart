@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:y_balash/Features/authentication/presentation/views/login_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
@@ -12,6 +13,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets
 import 'package:y_balash/Features/home/presentation/views/widgets/accountWidgets/user_data.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/get_user_coins_service.dart';
 import 'package:y_balash/core/data/services/home/get_user_info_service.dart';
 import 'package:y_balash/core/data/services/home/update_profile_image_service.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
@@ -29,6 +31,7 @@ class _AccountViewBodyState extends State<AccountViewBody> {
   Map<String, dynamic> userInfo = {};
   bool isLoading = true;
   bool isImageUpdating = false;
+  int coinsBalance = 0;
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
     return (originalHeight / 932) * MediaQuery.of(context).size.height;
@@ -41,7 +44,31 @@ class _AccountViewBodyState extends State<AccountViewBody> {
   @override
   void initState() {
     fetchUserInfo();
+    fetchCoins();
     super.initState();
+  }
+
+  Future<void> fetchCoins() async {
+    final coins = await getCoinsBalance();
+    if (mounted) {
+      setState(() {
+        coinsBalance = coins;
+      });
+    }
+  }
+
+  String formatCoins(dynamic coins) {
+    if (coins == null) return '0';
+    try {
+      int value = int.parse(coins.toString());
+      if (value > 9999) {
+        return '9999+';
+      } else {
+        return value.toString();
+      }
+    } catch (_) {
+      return '0';
+    }
   }
 
   Future<void> fetchUserInfo() async {
@@ -105,13 +132,59 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                   child: Column(
                     children: [
                       SafeArea(
-                        child: AppBarOfCartView(
-                          screenWidth: getProportionalWidth(context, 430),
-                          iconImage: 'assets/icons/arrow.svg',
-                          title: 'Profile',
-                          onPressed: () {
-                            Navigator.popAndPushNamed(context, MainView.id);
-                          },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            AppBarOfCartView(
+                              screenWidth: getProportionalWidth(context, 430),
+                              iconImage: 'assets/icons/arrow.svg',
+                              title: 'Profile',
+                              onPressed: () {
+                                Navigator.popAndPushNamed(context, MainView.id);
+                              },
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 21.w),
+                              child: Container(
+                                height: 22.h,
+                                width: 72.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.w),
+                                  border: Border.all(
+                                      color: kTextFieldAndButtomColor,
+                                      width: 1),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black
+                                          .withOpacity(0.4), // ظل خفيف
+                                      spreadRadius: 1,
+                                      blurRadius: 4,
+                                      offset:
+                                          const Offset(0, 2), // الاتجاه: للأسفل
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4.w),
+                                      child: SvgPicture.asset(
+                                          'assets/icons/coin.svg'),
+                                    ),
+                                    Text(
+                                      formatCoins(coinsBalance),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: kTextFieldAndButtomColor),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(height: getProportionalHeight(context, 32)),

@@ -8,7 +8,6 @@ import 'package:y_balash/Features/home/presentation/views/widgets/categoriesView
 import 'package:y_balash/Features/home/presentation/views/widgets/categoriesViews/dessert_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/green-circle_in_home.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/items_of_category.dart';
-import 'package:y_balash/Features/home/presentation/views/widgets/list_of_gift_card.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_restaurants.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_best_selling.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_of_groceries_card.dart';
@@ -268,19 +267,19 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               SizedBox(
                 height: screenHeight * (20 / 930),
               ),
-              //********************section of Gift card************************
-              Padding(
-                padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: ListOfGiftCards(
-                          screenHeight: screenHeight, screenWidth: screenWidth),
-                    )
-                  ],
-                ),
-              ),
+              // //********************section of Gift card************************
+              // Padding(
+              //   padding: EdgeInsets.only(left: screenWidth * (15 / 430)),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     children: [
+              //       Expanded(
+              //         child: ListOfGiftCards(
+              //             screenHeight: screenHeight, screenWidth: screenWidth),
+              //       )
+              //     ],
+              //   ),
+              // ),
 
               SizedBox(
                 height: screenHeight * (45 / 930),

@@ -5,12 +5,16 @@ class OrderSummary extends StatelessWidget {
   final int itemCount;
   final double totalPrice;
   final double shipping;
+  final double discount;
+  final double grandTotal;
 
   const OrderSummary({
     super.key,
     required this.itemCount,
     required this.totalPrice,
     required this.shipping,
+    required this.discount,
+    required this.grandTotal,
   });
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
@@ -23,8 +27,6 @@ class OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double importCharges = totalPrice / 4;
-
     return Container(
       padding: EdgeInsets.all(getProportionalWidth(context, 16)),
       decoration: BoxDecoration(
@@ -41,50 +43,48 @@ class OrderSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildRow("Items ($itemCount)", '${totalPrice.toStringAsFixed(2)} EGP',
-              Colors.grey[600]!),
-          SizedBox(height: getProportionalHeight(context, 4)),
-          buildRow("Shipping", "$shipping" ' EGP', Colors.grey[600]!),
+          buildRow(
+            "Items ($itemCount)",
+            '${totalPrice.toStringAsFixed(2)} EGP',
+          ),
           SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(
-              "Import charges", "$importCharges" ' EGP', Colors.grey[600]!),
+            "Shipping",
+            '${shipping.toStringAsFixed(2)} EGP',
+          ),
+          SizedBox(height: getProportionalHeight(context, 4)),
+          buildRow(
+            "Discount",
+            '${discount.toStringAsFixed(2)} EGP',
+          ),
           SizedBox(height: getProportionalHeight(context, 4)),
           Divider(
               thickness: getProportionalHeight(context, 1.2),
               color: Colors.grey),
           SizedBox(height: getProportionalHeight(context, 4)),
-          buildRow(
-              "Total Price",
-              "${((totalPrice) + (shipping) + (importCharges)).toStringAsFixed(2)}"
-                  ' EGP',
-              Colors.green[800]!,
+          buildRow("Total Price", '${grandTotal.toStringAsFixed(2)} EGP',
               isBold: true),
         ],
       ),
     );
   }
 
-  Widget buildRow(String title, String amount, Color color,
-      {bool isBold = false}) {
+  Widget buildRow(String label, String value, {bool isBold = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16.h,
-            color: color,
-            fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
-          ),
-        ),
-        Text(
-          amount,
-          style: TextStyle(
-            fontSize: 16.h,
-            color: color,
-            fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
-          ),
-        ),
+        Text(label,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
+              color: isBold ? Colors.black : Colors.grey[600],
+            )),
+        Text(value,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
+              color: isBold ? Colors.green[800] : Colors.grey[600],
+            )),
       ],
     );
   }

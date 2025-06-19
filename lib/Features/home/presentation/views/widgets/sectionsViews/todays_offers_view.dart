@@ -28,12 +28,14 @@ class _TodaysOffersViewState extends State<TodaysOffersView> {
   Future<void> fetchTodaysOffers() async {
     try {
       final items = await getTodaysOffers();
+      if (!mounted) return;
       setState(() {
         products = items;
         isLoading = false;
       });
     } catch (e) {
       print('Error fetching todays offers: $e');
+      if (!mounted) return;
       setState(() {
         isLoading = false;
         hasError = true;
