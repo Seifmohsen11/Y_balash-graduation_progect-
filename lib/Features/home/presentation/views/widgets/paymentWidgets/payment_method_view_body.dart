@@ -122,8 +122,8 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
                     try {
                       print('total price = ${widget.totalPrice}');
                       await cashPayment();
-                      await addPointsAfterPayment(
-                          totalAmount: widget.totalPrice); //add points
+                      // await addPointsAfterPayment(            //اروي عملتها من عندها بعد م السيلر يعمل كونفيرم
+                      //     totalAmount: widget.totalPrice); //add points
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return const SuccessAfterPaymentView();

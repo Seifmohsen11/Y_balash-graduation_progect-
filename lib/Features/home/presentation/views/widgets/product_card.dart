@@ -42,6 +42,22 @@ class _ProductCardState extends State<ProductCard> {
     isRed = widget.isFavorite;
   }
 
+  String _formatPrice(String priceString) {
+    try {
+      double price = double.parse(priceString);
+      // لو السعر أكبر من 9999، خليه 9999 (عشان مش يبوز الـ UI)
+      if (price >= 10000) {
+        return '9999';
+      }
+      // رجع السعر بدون كسور لو كان صحيح، أو رقم عشري من رقمين فقط
+      return price % 1 == 0
+          ? price.toStringAsFixed(0)
+          : price.toStringAsFixed(2);
+    } catch (e) {
+      return '0';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double cardWidth = widget.screenWidth * (175 / 430);
@@ -165,7 +181,7 @@ class _ProductCardState extends State<ProductCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.price,
+                            '${_formatPrice(widget.price)} EGP',
                             style: TextStyle(
                                 fontFamily: kAbyssinicaSIL,
                                 fontSize: cardWidth * (18 / 175)),
