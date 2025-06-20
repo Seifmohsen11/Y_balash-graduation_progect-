@@ -6,6 +6,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/li
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/order_summary.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/get_cart_summary_service.dart';
+import 'package:y_balash/core/helper/show_snackbar.dart';
 import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
@@ -24,6 +25,7 @@ class _CartViewBodyState extends State<CartViewBody> {
   double totalPrice = 0.0;
 
   bool isProductsLoaded = false;
+  bool isCartNull = true;
 
   void refreshCart() {
     setState(() {});
@@ -35,11 +37,12 @@ class _CartViewBodyState extends State<CartViewBody> {
     updateOrderSummary();
   }
 
-  void updateOrderSummary() async {
+  void updateOrderSummary({bool usePoints = false}) async {
     try {
-      final cartSummary = await getCartSummary();
+      final cartSummary = await getCartSummary(usePoints: usePoints);
       final cartData = cartSummary['cartSummary'];
       if (cartData != null) {
+        print(cartData);
         if (!mounted) return;
 
         setState(() {
@@ -51,6 +54,11 @@ class _CartViewBodyState extends State<CartViewBody> {
               double.tryParse(cartData['discountFromPoints'] ?? '0') ?? 0;
           totalPrice = double.tryParse(cartData['totalPrice'] ?? '0') ?? 0;
         });
+        if (itemCount == 0) {
+          setState(() {
+            isCartNull = false;
+          });
+        }
       } else {
         print("No cart summary data found");
       }
@@ -103,8 +111,14 @@ class _CartViewBodyState extends State<CartViewBody> {
                   SizedBox(
                     height: screenHeight * (18 / 932),
                   ),
-                  if (isProductsLoaded) ...[
-                    const RedeemPointsButtom(),
+                  if (isProductsLoaded && isCartNull == true) ...[
+                    RedeemPointsButtom(
+                        onPointsRedeemed: (bool usePoints) async {
+                      updateOrderSummary(usePoints: usePoints);
+
+                      showSnackBar(context, 'Points redeemed successfully!',
+                          backgroundColor: Colors.green);
+                    }),
                     SizedBox(
                       height: screenHeight * (8 / 932),
                     ),
