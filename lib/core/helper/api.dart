@@ -54,12 +54,15 @@ class ApiService {
   // POST request
   Future<dynamic> post({
     required String endpoint,
-    required Map<String, dynamic> body,
+    Map<String, dynamic>? body,
     String? token,
   }) async {
     try {
-      final response = await _dio.post(endpoint,
-          data: body, options: _buildOptions(token: token));
+      final response = await _dio.post(
+        endpoint,
+        data: body ?? {}, // <== لو null هيبعت body فاضي
+        options: _buildOptions(token: token),
+      );
       return _handleResponse(response);
     } on DioException catch (e) {
       throw _handleDioException(e);

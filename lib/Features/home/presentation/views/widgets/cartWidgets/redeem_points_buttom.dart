@@ -80,11 +80,11 @@ class _RedeemPointsButtomState extends State<RedeemPointsButtom> {
           TextButton(
             onPressed: () async {
               Navigator.of(dialogContext).pop(); // Use dialogContext
-              if (coins != 0) {
+              if (coins >= 10) {
                 setState(() => hasRedeemed = true); // Mark as redeemed
                 widget.onPointsRedeemed(true);
               } else {
-                showSnackBar(context, 'No enough Points',
+                showSnackBar(context, 'Points must be 10 or more',
                     backgroundColor: Colors.red);
               }
             },
