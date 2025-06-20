@@ -14,7 +14,8 @@ import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class LocationViewBody extends StatefulWidget {
-  const LocationViewBody({super.key});
+  const LocationViewBody({super.key, required this.totalPrice});
+  final double totalPrice;
 
   @override
   State<LocationViewBody> createState() => _LocationViewBodyState();
@@ -150,8 +151,11 @@ class _LocationViewBodyState extends State<LocationViewBody> {
                           );
                           showSnackBar(context, 'Address added successfully',
                               backgroundColor: Colors.green);
-                          Navigator.pushNamed(context, PaymentMethodView.id)
-                              .then((_) {
+                          Navigator.pushNamed(
+                            context,
+                            PaymentMethodView.id,
+                            arguments: widget.totalPrice,
+                          ).then((_) {
                             setState(() => isLoading = false);
                           });
                         } catch (error) {

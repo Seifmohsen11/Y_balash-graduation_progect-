@@ -6,6 +6,8 @@ class LocationView extends StatelessWidget {
   static String id = 'locationView';
   @override
   Widget build(BuildContext context) {
-    return const LocationViewBody();
+    final double totalPrice =
+        ModalRoute.of(context)!.settings.arguments as double;
+    return LocationViewBody(totalPrice: totalPrice);
   }
 }

@@ -6,6 +6,9 @@ class PaymentMethodView extends StatelessWidget {
   static String id = 'paymentMethodView';
   @override
   Widget build(BuildContext context) {
-    return const PaymentMethodViewBody();
+    final double totalPrice =
+        ModalRoute.of(context)!.settings.arguments as double;
+
+    return PaymentMethodViewBody(totalPrice: totalPrice);
   }
 }

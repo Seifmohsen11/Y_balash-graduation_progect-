@@ -3,6 +3,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/paymentWidgets/success_after_payment_view.dart';
 import 'package:y_balash/core/constants/constants.dart';
+import 'package:y_balash/core/data/services/home/add_points_after_payment_service.dart';
 import 'package:y_balash/core/data/services/home/cash_payment_service.dart';
 import 'package:y_balash/core/helper/api.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
@@ -11,7 +12,8 @@ import 'package:y_balash/core/helper/swip_back_wrapper.dart';
 import 'package:y_balash/core/widgets/custom_buttom.dart';
 
 class PaymentMethodViewBody extends StatefulWidget {
-  const PaymentMethodViewBody({super.key});
+  const PaymentMethodViewBody({super.key, required this.totalPrice});
+  final double totalPrice;
 
   @override
   State<PaymentMethodViewBody> createState() => _PaymentMethodViewBodyState();
@@ -26,6 +28,7 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
     });
 
     try {
+      print('total price = ${widget.totalPrice}');
       // get the token
       String? token = await SharedPrefHelper.getToken();
       if (token == null) throw Exception('Authentication token not found');
@@ -48,8 +51,12 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
       // present payment sheet
       await Stripe.instance.presentPaymentSheet();
 
-      showSnackBar(context, 'payment Successful',
-          backgroundColor: Colors.green);
+      showSnackBar(
+        context,
+        'payment Successful',
+        backgroundColor: Colors.green,
+      );
+      await addPointsAfterPayment(totalAmount: widget.totalPrice); //add points
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return const SuccessAfterPaymentView();
       }));
@@ -113,7 +120,10 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
                   borderColor: Colors.grey.withOpacity(.5),
                   onTap: () async {
                     try {
+                      print('total price = ${widget.totalPrice}');
                       await cashPayment();
+                      await addPointsAfterPayment(
+                          totalAmount: widget.totalPrice); //add points
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return const SuccessAfterPaymentView();

@@ -140,7 +140,11 @@ class _CartViewBodyState extends State<CartViewBody> {
                       textColor: Colors.white,
                       borderColor: kTextFieldAndButtomColor,
                       onTap: () {
-                        Navigator.pushNamed(context, LocationView.id);
+                        Navigator.pushNamed(
+                          context,
+                          LocationView.id,
+                          arguments: totalPrice,
+                        );
                       },
                       borderRadiusSize: screenWidth * (14 / 430),
                     ),
