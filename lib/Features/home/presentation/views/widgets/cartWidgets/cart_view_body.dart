@@ -20,8 +20,8 @@ class CartViewBody extends StatefulWidget {
 class _CartViewBodyState extends State<CartViewBody> {
   int itemCount = 0;
   double totalItemsPrice = 0.0;
-  double shippingCost = 0.0;
   double discount = 0.0;
+  double importCharges = 0.0;
   double totalPrice = 0.0;
 
   bool isProductsLoaded = false;
@@ -49,7 +49,8 @@ class _CartViewBodyState extends State<CartViewBody> {
           itemCount = cartData['totalItems'] ?? 0;
           totalItemsPrice =
               double.tryParse(cartData['totalItemsPrice'] ?? '0') ?? 0;
-          shippingCost = double.tryParse(cartData['shippingCost'] ?? '0') ?? 0;
+          importCharges =
+              double.tryParse(cartData['importCharges'] ?? '0') ?? 0;
           discount =
               double.tryParse(cartData['discountFromPoints'] ?? '0') ?? 0;
           totalPrice = double.tryParse(cartData['totalPrice'] ?? '0') ?? 0;
@@ -125,9 +126,9 @@ class _CartViewBodyState extends State<CartViewBody> {
                     OrderSummary(
                       itemCount: itemCount,
                       totalPrice: totalItemsPrice,
-                      shipping: shippingCost,
                       grandTotal: totalPrice,
                       discount: discount,
+                      importCharges: importCharges,
                     ),
                     SizedBox(
                       height: screenHeight * (8 / 932),

@@ -174,10 +174,12 @@ class _CustomSearchBarState extends State<SearchBarForSearchView> {
                     return ProductCard(
                       screenWidth: widget.screenWidth,
                       screenHeight: widget.screenHeight,
-                      image: product['imageUrl'],
-                      title: product['name'],
+                      image: product['imageUrl']?.toString() ?? '',
+                      title: product['name']?.toString() ?? 'No Name',
                       description: 'Quantity: ${product['quantity']}',
-                      price: product['price'].toString(),
+                      finalPrice:
+                          product['discountedPrice']?.toString() ?? '0.00',
+                      originalPrice: product['originalPrice']?.toString(),
                       id: product['_id'],
                       isFavorite: product['isFavorite'] ?? false,
                     );

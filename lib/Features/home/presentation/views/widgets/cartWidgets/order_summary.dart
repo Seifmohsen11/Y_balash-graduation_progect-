@@ -4,17 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class OrderSummary extends StatelessWidget {
   final int itemCount;
   final double totalPrice;
-  final double shipping;
   final double discount;
+  final double importCharges;
   final double grandTotal;
 
   const OrderSummary({
     super.key,
     required this.itemCount,
     required this.totalPrice,
-    required this.shipping,
     required this.discount,
     required this.grandTotal,
+    required this.importCharges,
   });
 
   double getProportionalHeight(BuildContext context, double originalHeight) {
@@ -49,8 +49,8 @@ class OrderSummary extends StatelessWidget {
           ),
           SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(
-            "Shipping",
-            '${shipping.toStringAsFixed(2)} EGP',
+            "Import Charges",
+            '${importCharges.toStringAsFixed(2)} EGP',
           ),
           SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(

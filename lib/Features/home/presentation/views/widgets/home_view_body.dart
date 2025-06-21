@@ -153,7 +153,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     TitleOfSectionAndSeeAll(
                       screenHeight: screenHeight,
                       screenWidth: screenWidth,
-                      label: "Flash Sale",
+                      label: "Today's Offers",
                       imageIcon: 'assets/images/sale.svg',
                       onTap: () {
                         Navigator.push(context,
@@ -165,7 +165,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SizedBox(height: screenHeight * (3 / 932)),
                     SizedBox(
                       height: screenHeight * (245 / 932),
-                      child: const ListOfTodaysOffers(),
+                      child: const ListOfTodaysOffers(
+                        limit: 10,
+                      ),
                     ),
                   ],
                 ),
@@ -227,7 +229,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SizedBox(
                       height: screenHeight *
                           (245 / 932), // Keep ListView constrained
-                      child: const ListOfBestSelling(),
+                      child: const ListOfBestSelling(
+                        limit: 10,
+                      ),
                     ),
                   ],
                 ),

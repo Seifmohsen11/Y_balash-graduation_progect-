@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/app_bar_of_item_details.dart';
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_to_cart_service.dart';
@@ -15,15 +16,17 @@ class ItemDetailsViewBody extends StatefulWidget {
     required this.onRemove,
     required this.title,
     required this.description,
-    required this.price,
+    required this.finalPrice,
     required this.image,
     required this.isFavorite,
+    required this.originalPrice,
   });
   final String itemId;
   final Function(String) onRemove;
   final String title;
   final String description;
-  final String price;
+  final String finalPrice;
+  final String? originalPrice;
   final String image;
   final bool isFavorite;
 
@@ -73,8 +76,21 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
     });
   }
 
+  double? parsePrice(String? priceString) {
+    if (priceString == null || priceString.trim().isEmpty) return null;
+
+    try {
+      final cleaned = priceString.replaceAll(RegExp(r'[^0-9.]'), '');
+      return double.parse(cleaned);
+    } catch (_) {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final double? originalPriceDouble = parsePrice(widget.originalPrice);
+
     return SwipeBackWrapper(
       child: Scaffold(
         backgroundColor: kPrimaryColor,
@@ -175,11 +191,29 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                           icon: const Icon(Icons.add_circle_outline)),
                     ],
                   ),
-                  Text(
-                    "${(double.parse(widget.price.replaceAll(RegExp(r'[^0-9.]'), '')) * currentQuantity).toStringAsFixed(2)} EGP",
-                    style: TextStyle(
-                        fontSize: getProportionalWidth(context, 24),
-                        color: const Color(0xFF1C573E)),
+                  Row(
+                    children: [
+                      if (originalPriceDouble != null)
+                        Text(
+                          "${(originalPriceDouble * currentQuantity).toStringAsFixed(2)} EGP",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: const Color(0xffBDB092),
+                            decoration: TextDecoration.lineThrough,
+                            decorationColor: const Color(0xffBDB092),
+                          ),
+                        ),
+                      if (originalPriceDouble != null)
+                        SizedBox(width: getProportionalWidth(context, 8)),
+                      Text(
+                        "${(double.parse(widget.finalPrice.replaceAll(RegExp(r'[^0-9.]'), '')) * currentQuantity).toStringAsFixed(2)} EGP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.sp,
+                          color: const Color(0xFF1C573E),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

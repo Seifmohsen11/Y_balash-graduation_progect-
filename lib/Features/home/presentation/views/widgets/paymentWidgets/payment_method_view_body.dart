@@ -5,6 +5,7 @@ import 'package:y_balash/Features/home/presentation/views/widgets/paymentWidgets
 import 'package:y_balash/core/constants/constants.dart';
 import 'package:y_balash/core/data/services/home/add_points_after_payment_service.dart';
 import 'package:y_balash/core/data/services/home/cash_payment_service.dart';
+import 'package:y_balash/core/data/services/home/send_order_id_to_get_points_service.dart';
 import 'package:y_balash/core/helper/api.dart';
 import 'package:y_balash/core/helper/shared_pref_helper.dart';
 import 'package:y_balash/core/helper/show_snackbar.dart';
@@ -121,7 +122,8 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
                   onTap: () async {
                     try {
                       print('total price = ${widget.totalPrice}');
-                      await cashPayment();
+                      final orderId = await cashPayment();
+                      await sendOrderIdToGetPoints(orderId);
                       // await addPointsAfterPayment(            //اروي عملتها من عندها بعد م السيلر يعمل كونفيرم
                       //     totalAmount: widget.totalPrice); //add points
                       Navigator.pushReplacement(context,

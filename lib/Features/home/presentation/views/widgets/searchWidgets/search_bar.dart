@@ -102,9 +102,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 itemId: suggestion['_id'] ?? '',
                 title: productData['name'],
                 description: 'Quantity: ${productData['quantity']}',
-                price: productData['price'].toString(),
+                finalPrice: productData['discountedPrice'].toString(),
                 image: productData['imageUrl'],
                 isFavorite: productData['isFavorite'] ?? false,
+                originalPrice: productData['originalPrice'].toString(),
               );
             }));
           }

@@ -6,7 +6,8 @@ import 'package:y_balash/core/data/services/home/get_best_selling_service.dart';
 import 'package:y_balash/core/helper/is_product_favorite.dart';
 
 class ListOfBestSelling extends StatefulWidget {
-  const ListOfBestSelling({super.key});
+  const ListOfBestSelling({super.key, this.limit});
+  final int? limit;
 
   @override
   ListOfBestSellingState createState() => ListOfBestSellingState();
@@ -26,15 +27,23 @@ class ListOfBestSellingState extends State<ListOfBestSelling> {
     try {
       final items = await getBestSelling(); // Fetch data from API
       final favoriteIds = await getFavoriteIds();
+
       if (mounted) {
+        List<dynamic> mappedProducts = items.map((item) {
+          final isFav = favoriteIds.contains(item['_id']);
+          return {
+            ...item,
+            'isFavorite': isFav,
+          };
+        }).toList();
+
+        // ✅ تطبيق limit لو موجود
+        if (widget.limit != null && widget.limit! < mappedProducts.length) {
+          mappedProducts = mappedProducts.sublist(0, widget.limit!);
+        }
+
         setState(() {
-          products = items.map((item) {
-            final isFav = favoriteIds.contains(item['_id']);
-            return {
-              ...item,
-              'isFavorite': isFav,
-            };
-          }).toList();
+          products = mappedProducts;
           isLoading = false;
         });
       }
@@ -80,7 +89,8 @@ class ListOfBestSellingState extends State<ListOfBestSelling> {
             image: product['imageUrl'] ?? '',
             title: product['name'] ?? 'No Name',
             description: product['quantity'] ?? 'No Quantity Info',
-            price: product['price'] ?? '0.00',
+            finalPrice: product['discountedPrice']?.toString() ?? '0.00',
+            originalPrice: product['originalPrice']?.toString(),
             id: product['_id'] ?? '0.00',
             isFavorite: product['isFavorite'] ?? false,
           ),

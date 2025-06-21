@@ -33,10 +33,11 @@ class GridViewOfProducts extends StatelessWidget {
           return ProductCard(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            image: product['imageUrl'],
-            title: product['name'],
-            description: product['quantity'],
-            price: product['price'],
+            image: product['imageUrl']?.toString() ?? '',
+            title: product['name']?.toString() ?? 'No Name',
+            description: product['quantity'] ?? 'No Quantity Info',
+            finalPrice: product['discountedPrice']?.toString() ?? '0.00',
+            originalPrice: product['originalPrice']?.toString(),
             id: product['_id'] ?? '0.00',
             isFavorite: product['isFavorite'] ?? false,
           );

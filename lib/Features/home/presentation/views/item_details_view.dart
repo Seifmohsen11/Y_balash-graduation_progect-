@@ -7,13 +7,15 @@ class ItemDetailsView extends StatelessWidget {
       required this.itemId,
       required this.title,
       required this.description,
-      required this.price,
+      required this.finalPrice,
       required this.image,
-      required this.isFavorite});
+      required this.isFavorite,
+      required this.originalPrice});
   final String itemId;
   final String title;
   final String description;
-  final String price;
+  final String finalPrice;
+  final String? originalPrice;
   final String image;
   final bool isFavorite;
 
@@ -24,9 +26,10 @@ class ItemDetailsView extends StatelessWidget {
       onRemove: (String id) {},
       title: title,
       description: description,
-      price: price,
+      finalPrice: finalPrice,
       image: image,
       isFavorite: isFavorite,
+      originalPrice: originalPrice,
     );
   }
 }

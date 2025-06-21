@@ -15,9 +15,10 @@ class ProductCard extends StatefulWidget {
     required this.image,
     required this.title,
     required this.description,
-    required this.price,
+    required this.finalPrice,
     required this.id,
     required this.isFavorite,
+    this.originalPrice,
   });
 
   final double screenWidth;
@@ -25,7 +26,9 @@ class ProductCard extends StatefulWidget {
   final String image;
   final String title;
   final String description;
-  final String price;
+  final String finalPrice;
+  final String? originalPrice;
+
   final String id;
   final bool isFavorite;
 
@@ -74,9 +77,10 @@ class _ProductCardState extends State<ProductCard> {
               itemId: widget.id,
               title: productData['name'],
               description: 'Quantity: ${productData['quantity']}',
-              price: productData['price'].toString(),
+              finalPrice: productData['discountedPrice'].toString(),
               image: productData['imageUrl'],
               isFavorite: widget.isFavorite,
+              originalPrice: productData['originalPrice'].toString(),
             );
           }));
         }
@@ -180,11 +184,30 @@ class _ProductCardState extends State<ProductCard> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            '${_formatPrice(widget.price)} EGP',
-                            style: TextStyle(
-                                fontFamily: kAbyssinicaSIL,
-                                fontSize: cardWidth * (18 / 175)),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (widget.originalPrice != null &&
+                                  widget.originalPrice!.isNotEmpty)
+                                Text(
+                                  '${_formatPrice(widget.originalPrice!.replaceAll(RegExp(r'[^0-9.]'), ''))} EGP',
+                                  style: TextStyle(
+                                    fontSize: cardWidth * (14 / 175),
+                                    color: const Color(0xffBDB092),
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationColor: const Color(0xffBDB092),
+                                  ),
+                                ),
+                              Text(
+                                '${_formatPrice(widget.finalPrice)} EGP',
+                                style: TextStyle(
+                                  color: kTextFieldAndButtomColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: kAbyssinicaSIL,
+                                  fontSize: cardWidth * (18 / 175),
+                                ),
+                              ),
+                            ],
                           ),
                           Container(
                             height: cardHeight * (43 / 243),
