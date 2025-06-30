@@ -128,24 +128,39 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 
   // أزرار ثابتة تحت الشات
   Widget _buildBottomButtons() {
+    final isArabic = selectedLanguage == 'ar';
+
+    final buttons = isArabic
+        ? [
+            _ChatBottomButton(
+              text: "مين اللي يقدر يستخدم يابلاش؟",
+              fontSize: 13.sp,
+              onTap: () => _sendMessage("مين اللي يقدر يستخدم يابلاش؟"),
+            ),
+            _ChatBottomButton(
+              text: "نسيت كلمة السر - أعمل ايه؟",
+              fontSize: 13.sp,
+              onTap: () => _sendMessage("نسيت كلمة السر - أعمل ايه؟"),
+            ),
+          ]
+        : [
+            _ChatBottomButton(
+              text: "Who can use Y-Balash?",
+              fontSize: 12.sp,
+              onTap: () => _sendMessage("Who can use Y-Balash?"),
+            ),
+            _ChatBottomButton(
+              text: "I forget my password - what do I do?",
+              fontSize: 11.sp,
+              onTap: () => _sendMessage("I forget my password - what do I do?"),
+            ),
+          ];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _ChatBottomButton(
-            text: "❓ What is WappGPT?",
-            onTap: () => _sendMessage("What is WappGPT?"),
-          ),
-          _ChatBottomButton(
-            text: "💰 Pricing",
-            onTap: () => _sendMessage("Pricing"),
-          ),
-          _ChatBottomButton(
-            text: "📄 FAQs",
-            onTap: () => _sendMessage("FAQs"),
-          ),
-        ],
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: buttons,
       ),
     );
   }
@@ -341,16 +356,27 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 // عنصر الأزرار السفلية (Chip)
 class _ChatBottomButton extends StatelessWidget {
   final String text;
+  final double fontSize;
   final VoidCallback onTap;
 
-  const _ChatBottomButton({required this.text, required this.onTap});
+  const _ChatBottomButton({
+    required this.text,
+    required this.onTap,
+    required this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Chip(
-        label: Text(text, style: const TextStyle(fontSize: 12)),
+        label: Text(
+          text,
+          style: TextStyle(fontSize: fontSize),
+          overflow: TextOverflow.ellipsis, // لو كبر أوي يتقص
+          maxLines: 1,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

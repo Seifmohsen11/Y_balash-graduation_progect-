@@ -133,10 +133,12 @@ class _CartProductState extends State<CartProduct> {
                   ),
                   const Spacer(),
                   Text(
-                    widget.price,
+                    '${widget.price} EGP',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
+                      color: kTextFieldAndButtomColor,
+                      fontWeight: FontWeight.bold,
                       fontFamily: kAbyssinicaSIL,
                       fontSize: widget.screenWidth * (18 / 430),
                     ),

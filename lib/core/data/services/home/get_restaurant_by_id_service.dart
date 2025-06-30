@@ -1,6 +1,6 @@
 import 'package:y_balash/core/helper/api.dart';
 
-final apiService = ApiService(baseUrl: 'https://y-balash.vercel.app/api/');
+final apiService = ApiService(baseUrl: 'https://y-balash.onrender.com/api/');
 
 Future<Map<String, dynamic>> getRestaurantsById(String id) async {
   try {

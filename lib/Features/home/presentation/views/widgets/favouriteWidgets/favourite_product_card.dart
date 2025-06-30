@@ -88,8 +88,10 @@ class _FavouriteProductCardState extends State<FavouriteProductCard> {
                   height: widget.screenHeight * (1 / 430),
                 ),
                 Text(
-                  widget.price,
+                  '${widget.price} EGP',
                   style: TextStyle(
+                    color: kTextFieldAndButtomColor,
+                    fontWeight: FontWeight.bold,
                     fontFamily: kAbyssinicaSIL,
                     fontSize: widget.screenWidth * (18 / 430),
                   ),

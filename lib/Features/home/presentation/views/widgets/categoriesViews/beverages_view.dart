@@ -33,7 +33,9 @@ class _BeveragesViewState extends State<BeveragesView> {
     try {
       final data = await productService.fetchProducts(categoryId);
       final favoriteIds = await getFavoriteIds();
-      final updatedProducts = data.map((product) {
+      final updatedProducts = data
+          .where((product) => product != null && product['_id'] != null)
+          .map((product) {
         final isFav = favoriteIds.contains(product['_id']);
         return {
           ...product,
