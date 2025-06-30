@@ -59,7 +59,7 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
       showSnackBar(context, 'Removed Successfully',
           backgroundColor: Colors.green);
     } else {
-      await AddToFavourite(widget.itemId);
+      await addToFavourite(widget.itemId);
       showSnackBar(context, 'Added Successfully',
           backgroundColor: Colors.green);
     }

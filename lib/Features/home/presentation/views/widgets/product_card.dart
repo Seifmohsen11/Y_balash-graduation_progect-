@@ -135,7 +135,7 @@ class _ProductCardState extends State<ProductCard> {
                         });
 
                         if (isRed) {
-                          await AddToFavourite(widget.id);
+                          await addToFavourite(widget.id);
                           showSnackBar(context, "Added successfuly",
                               backgroundColor: Colors.green);
                         } else {

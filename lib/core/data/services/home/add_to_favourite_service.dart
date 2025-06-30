@@ -3,7 +3,7 @@ import 'package:y_balash/core/helper/shared_pref_helper.dart';
 
 final apiService = ApiService(baseUrl: 'https://y-balash.vercel.app/api/');
 
-Future<void> AddToFavourite(
+Future<void> addToFavourite(
   String itemId,
 ) async {
   final itemData = {
