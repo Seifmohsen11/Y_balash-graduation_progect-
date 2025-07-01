@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:y_balash/Features/home/presentation/views/widgets/searchWidgets/search_bar_for_cafes_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/back_arrow.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/sectionsViews/list_view_of_cafes.dart';
 import 'package:y_balash/core/constants/constants.dart';
@@ -24,7 +26,17 @@ class _RestaurantsAndCafesViewState extends State<RestaurantsAndCafesView> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const BackArrow(),
+            SafeArea(
+              child: Row(
+                children: [
+                  const BackArrow(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.h, left: 8.w, right: 8.w),
+                    child: const SearchBarForCafes(),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: ListViewOfCafes(
                 screenWidth: screenWidth,

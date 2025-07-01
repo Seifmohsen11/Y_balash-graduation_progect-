@@ -73,6 +73,7 @@ class _ListViewOfCafesState extends State<ListViewOfCafes> {
             imageUrl: cafe['imageUrl'] ?? '',
             name: cafe['name'] ?? 'Unknown Cafe',
             color: colors[index % colors.length],
+            cafeId: cafe['_id'] ?? '',
           );
         },
       ),
