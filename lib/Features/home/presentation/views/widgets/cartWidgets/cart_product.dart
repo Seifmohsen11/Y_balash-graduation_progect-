@@ -111,6 +111,7 @@ class _CartProductState extends State<CartProduct> {
               image: productData['imageUrl'],
               isFavorite: widget.initialIsFavorite,
               originalPrice: productData['originalPrice'].toString(),
+              cafeName: productData['restaurant']['name'] ?? 'Unknown',
             );
           }));
         }

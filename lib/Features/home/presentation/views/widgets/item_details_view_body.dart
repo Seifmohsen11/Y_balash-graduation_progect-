@@ -20,10 +20,12 @@ class ItemDetailsViewBody extends StatefulWidget {
     required this.image,
     required this.isFavorite,
     required this.originalPrice,
+    required this.cafeName,
   });
   final String itemId;
   final Function(String) onRemove;
   final String title;
+  final String cafeName;
   final String description;
   final String finalPrice;
   final String? originalPrice;
@@ -136,24 +138,36 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                 ],
               ),
             ),
-            SizedBox(
-              height: getProportionalHeight(context, 16),
-            ),
             Padding(
               padding: EdgeInsets.only(left: getProportionalWidth(context, 36)),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: getProportionalWidth(context, 320),
-                    child: Text(
-                      widget.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: getProportionalWidth(context, 20),
-                          color: const Color(0xff8A8A8A),
-                          fontFamily: kLatoLight),
+                  Text(
+                    widget.cafeName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: getProportionalWidth(context, 20),
+                      color: const Color.fromARGB(255, 102, 99, 99),
+                      fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: getProportionalWidth(context, 320),
+                        child: Text(
+                          widget.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: getProportionalWidth(context, 20),
+                              color: const Color.fromARGB(255, 102, 99, 99),
+                              fontFamily: kLatoLight),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

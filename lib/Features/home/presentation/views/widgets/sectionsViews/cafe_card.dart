@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/restaurantAndCafesWidgets/cafe_view.dart';
 
 class CafesCard extends StatelessWidget {
@@ -43,8 +44,8 @@ class CafesCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(screenWidth * (32 / 430)),
                   child: Image.network(
                     imageUrl,
-                    height: screenHeight * (63 / 932),
-                    width: screenWidth * (56 / 430),
+                    height: 63.h,
+                    width: 63.h,
                     fit: BoxFit.cover,
                   ),
                 ),

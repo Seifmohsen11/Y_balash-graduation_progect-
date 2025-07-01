@@ -106,6 +106,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 image: productData['imageUrl'],
                 isFavorite: productData['isFavorite'] ?? false,
                 originalPrice: productData['originalPrice'].toString(),
+                cafeName: productData['restaurant']['name'] ?? 'Unknown',
               );
             }));
           }

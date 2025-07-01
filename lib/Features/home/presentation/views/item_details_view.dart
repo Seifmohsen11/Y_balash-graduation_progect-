@@ -10,9 +10,11 @@ class ItemDetailsView extends StatelessWidget {
       required this.finalPrice,
       required this.image,
       required this.isFavorite,
-      required this.originalPrice});
+      required this.originalPrice,
+      required this.cafeName});
   final String itemId;
   final String title;
+  final String cafeName;
   final String description;
   final String finalPrice;
   final String? originalPrice;
@@ -30,6 +32,7 @@ class ItemDetailsView extends StatelessWidget {
       image: image,
       isFavorite: isFavorite,
       originalPrice: originalPrice,
+      cafeName: cafeName,
     );
   }
 }
