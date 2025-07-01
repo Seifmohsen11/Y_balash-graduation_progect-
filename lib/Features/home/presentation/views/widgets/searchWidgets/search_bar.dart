@@ -72,7 +72,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         ),
                         SizedBox(height: 4.h),
                         Text(
-                          suggestion['price'] ?? '',
+                          suggestion['price'] + ' EGP' ?? '',
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.grey[600],
