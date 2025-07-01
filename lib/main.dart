@@ -15,6 +15,7 @@ import 'package:y_balash/Features/home/presentation/views/location_view.dart';
 import 'package:y_balash/Features/home/presentation/views/main_view.dart';
 import 'package:y_balash/Features/home/presentation/views/payment_method_view.dart';
 import 'package:y_balash/Features/home/presentation/views/search_view.dart';
+import 'package:y_balash/core/helper/connectivity_wrapper.dart';
 import 'package:y_balash/core/widgets/splash_view.dart';
 
 void main() {
@@ -46,6 +47,9 @@ class YBalashApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return ConnectivityWrapper(child: child!);
+      },
       routes: {
         SplashView.id: (context) => const SplashView(),
         SignUpView.id: (context) => const SignUpView(),
