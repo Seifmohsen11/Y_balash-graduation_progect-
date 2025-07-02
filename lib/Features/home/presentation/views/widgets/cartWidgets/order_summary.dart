@@ -55,7 +55,7 @@ class OrderSummary extends StatelessWidget {
           SizedBox(height: getProportionalHeight(context, 4)),
           buildRow(
             "Discount",
-            '${discount.toStringAsFixed(2)} EGP',
+            '-${discount.toStringAsFixed(2)} EGP',
           ),
           SizedBox(height: getProportionalHeight(context, 4)),
           Divider(
