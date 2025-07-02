@@ -64,6 +64,7 @@ class _FavouriteProductCardState extends State<FavouriteProductCard> {
               isFavorite: true,
               originalPrice: productData['originalPrice'].toString(),
               cafeName: productData['restaurant']['name'] ?? 'Unknown',
+              description2: productData['description'] ?? '',
             );
           }));
         }

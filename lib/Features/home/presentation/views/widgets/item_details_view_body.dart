@@ -21,12 +21,14 @@ class ItemDetailsViewBody extends StatefulWidget {
     required this.isFavorite,
     required this.originalPrice,
     required this.cafeName,
+    required this.description2,
   });
   final String itemId;
   final Function(String) onRemove;
   final String title;
   final String cafeName;
   final String description;
+  final String description2;
   final String finalPrice;
   final String? originalPrice;
   final String image;
@@ -153,18 +155,37 @@ class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  // Row(
+                  //   children: [
+                  //     SizedBox(
+                  //       width: getProportionalWidth(context, 320),
+                  //       child: Text(
+                  //         widget.description,
+                  //         maxLines: 2,
+                  //         overflow: TextOverflow.ellipsis,
+                  //         style: TextStyle(
+                  //             fontSize: getProportionalWidth(context, 20),
+                  //             color: const Color.fromARGB(255, 102, 99, 99),
+                  //             fontFamily: kLatoLight),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                   Row(
                     children: [
                       SizedBox(
                         width: getProportionalWidth(context, 320),
                         child: Text(
-                          widget.description,
+                          widget.description2,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontSize: getProportionalWidth(context, 20),
-                              color: const Color.fromARGB(255, 102, 99, 99),
-                              fontFamily: kLatoLight),
+                            fontSize: getProportionalWidth(context, 20),
+                            color: const Color.fromARGB(255, 147, 140, 140),
+                          ),
                         ),
                       ),
                     ],
