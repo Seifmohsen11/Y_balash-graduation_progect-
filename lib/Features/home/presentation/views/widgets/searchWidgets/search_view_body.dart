@@ -176,7 +176,7 @@ class _CustomSearchBarState extends State<SearchBarForSearchView> {
                       screenHeight: widget.screenHeight,
                       image: product['imageUrl'] ?? '',
                       title: product['name'] ?? 'No Name',
-                      description: product['quantity'] ?? 'No Quantity Info',
+                      cafeName: product['restaurant']['name'] ?? 'UnKnown',
                       finalPrice:
                           product['discountedPrice']?.toString() ?? '0.00',
                       originalPrice: product['originalPrice']?.toString(),

@@ -35,7 +35,7 @@ class GridViewOfProducts extends StatelessWidget {
             screenHeight: screenHeight,
             image: product['imageUrl']?.toString() ?? '',
             title: product['name']?.toString() ?? 'No Name',
-            description: product['quantity'] ?? 'No Quantity Info',
+            cafeName: product['restaurant']['name'] ?? 'UnKnown',
             finalPrice: product['discountedPrice']?.toString() ?? '0.00',
             originalPrice: product['originalPrice']?.toString(),
             id: product['_id'] ?? '0.00',

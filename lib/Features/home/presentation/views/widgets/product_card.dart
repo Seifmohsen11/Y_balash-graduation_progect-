@@ -14,18 +14,18 @@ class ProductCard extends StatefulWidget {
     required this.screenHeight,
     required this.image,
     required this.title,
-    required this.description,
     required this.finalPrice,
     required this.id,
     required this.isFavorite,
     this.originalPrice,
+    required this.cafeName,
   });
 
   final double screenWidth;
   final double screenHeight;
   final String image;
   final String title;
-  final String description;
+  final String cafeName;
   final String finalPrice;
   final String? originalPrice;
 
@@ -171,7 +171,7 @@ class _ProductCardState extends State<ProductCard> {
                           fontSize: cardWidth * (16 / 175)),
                     ),
                     Text(
-                      widget.description,
+                      widget.cafeName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

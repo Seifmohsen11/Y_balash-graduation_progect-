@@ -88,7 +88,7 @@ class ListOfTodaysOffersState extends State<ListOfTodaysOffers> {
             screenHeight: screenHeight,
             image: product['imageUrl'] ?? '',
             title: product['name'] ?? 'No Name',
-            description: product['quantity'] ?? 'No Quantity Info',
+            cafeName: product['restaurant']['name'] ?? 'UnKnown',
             finalPrice: product['discountedPrice']?.toString() ?? '0.00',
             id: product["_id"] ?? '0.00',
             isFavorite: product['isFavorite'] ?? false,
