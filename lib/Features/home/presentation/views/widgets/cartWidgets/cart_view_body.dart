@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:y_balash/Features/home/presentation/views/location_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/app_bar_of_cart_view.dart';
 import 'package:y_balash/Features/home/presentation/views/widgets/cartWidgets/redeem_points_buttom.dart';
@@ -77,52 +78,56 @@ class _CartViewBodyState extends State<CartViewBody> {
     double screenHeight = MediaQuery.of(context).size.height;
     return SwipeBackWrapper(
       child: Scaffold(
-          backgroundColor: kPrimaryColor,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: screenWidth * (16 / 430)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SafeArea(
-                    bottom: false,
-                    child: AppBarOfCartView(
-                      screenWidth: screenWidth,
-                      iconImage: 'assets/icons/arrow.svg',
-                      title: 'Cart',
-                      onPressed: () {
-                        Navigator.pop(context);
+        backgroundColor: kPrimaryColor,
+
+        // ======= جسم الصفحة =========
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * (16 / 430)),
+          child: Column(
+            children: [
+              SafeArea(
+                bottom: false,
+                child: AppBarOfCartView(
+                  screenWidth: screenWidth,
+                  iconImage: 'assets/icons/arrow.svg',
+                  title: 'Cart',
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+              Expanded(
+                child: ListOfCartProducts(
+                  screenHeight: screenHeight,
+                  screenWidth: screenWidth,
+                  onCartUpdated: refreshCart,
+                  onProductsFetched: (_) {
+                    updateOrderSummary();
+                    setState(() => isProductsLoaded = true);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // ======= الجزء اللي تحت =========
+        bottomNavigationBar: isProductsLoaded && isCartNull
+            ? Container(
+                color: kPrimaryColor,
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * (16 / 430),
+                  vertical: 12.h,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RedeemPointsButtom(
+                      onPointsRedeemed: (usePoints) {
+                        updateOrderSummary(usePoints: usePoints);
+                        showSnackBar(context, 'Points redeemed successfully!',
+                            backgroundColor: Colors.green);
                       },
                     ),
-                  ),
-                  ListOfCartProducts(
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                    onCartUpdated: () {
-                      refreshCart();
-                    },
-                    onProductsFetched: (_) {
-                      updateOrderSummary();
-                      setState(() {
-                        isProductsLoaded = true;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: screenHeight * (18 / 932),
-                  ),
-                  if (isProductsLoaded && isCartNull == true) ...[
-                    RedeemPointsButtom(
-                        onPointsRedeemed: (bool usePoints) async {
-                      updateOrderSummary(usePoints: usePoints);
-
-                      showSnackBar(context, 'Points redeemed successfully!',
-                          backgroundColor: Colors.green);
-                    }),
-                    SizedBox(
-                      height: screenHeight * (8 / 932),
-                    ),
+                    SizedBox(height: 8.h),
                     OrderSummary(
                       itemCount: itemCount,
                       totalPrice: totalItemsPrice,
@@ -130,9 +135,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                       discount: discount,
                       importCharges: importCharges,
                     ),
-                    SizedBox(
-                      height: screenHeight * (8 / 932),
-                    ),
+                    SizedBox(height: 8.h),
                     CustomButtom(
                       label: 'Check Out',
                       height: screenHeight * (57 / 932),
@@ -149,11 +152,11 @@ class _CartViewBodyState extends State<CartViewBody> {
                       },
                       borderRadiusSize: screenWidth * (14 / 430),
                     ),
-                  ]
-                ],
-              ),
-            ),
-          )),
+                  ],
+                ),
+              )
+            : null,
+      ),
     );
   }
 }

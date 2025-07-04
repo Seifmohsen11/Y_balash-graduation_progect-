@@ -195,6 +195,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
                   language: selectedLanguage,
                   question: '',
                 );
+                if (!mounted) return;
                 setState(() {
                   _messages.add({'role': 'bot', 'text': response});
                 });
@@ -216,6 +217,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
                   language: selectedLanguage,
                   question: '',
                 );
+                if (!mounted) return;
                 setState(() {
                   _messages.add({'role': 'bot', 'text': response});
                 });
@@ -251,7 +253,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
         question: text,
         language: selectedLanguage, // en أو ar حسب لغة المستخدم
       );
-
+      if (!mounted) return;
       setState(() {
         _messages.removeLast(); // إزالة 'typing...' المؤقتة
 
@@ -260,6 +262,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
       });
       _scrollToBottom();
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _messages.removeLast(); // إزالة 'typing...'
 
@@ -284,6 +287,7 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
 
   void _loadUserImage() async {
     final path = await SharedPrefHelper.getUserImage();
+    if (!mounted) return;
     setState(() {
       userImagePath = path;
     });
@@ -350,6 +354,13 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 }
 

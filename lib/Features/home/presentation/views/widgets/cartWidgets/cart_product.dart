@@ -165,16 +165,17 @@ class _CartProductState extends State<CartProduct> {
                         color: kTextFieldAndButtomColor,
                         fontWeight: FontWeight.bold,
                         fontFamily: kAbyssinicaSIL,
-                        fontSize: widget.screenWidth * (18 / 430),
+                        fontSize: widget.screenWidth * (16 / 430),
                       ),
                     ),
                     SizedBox(
-                      height: widget.screenHeight * (12 / 932),
+                      height: widget.screenHeight * (8 / 932),
                     ),
                   ],
                 ),
               ),
-              Expanded(
+              Flexible(
+                flex: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
