@@ -167,18 +167,25 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                                   ],
                                 ),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 4.w),
                                       child: SvgPicture.asset(
-                                          'assets/icons/coin.svg'),
+                                        'assets/icons/coin.svg',
+                                        height: 14.h,
+                                        width: 14.h,
+                                      ),
                                     ),
                                     Text(
                                       formatCoins(coinsBalance),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: kTextFieldAndButtomColor),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: kTextFieldAndButtomColor,
+                                        fontSize: 13.sp,
+                                      ),
                                     )
                                   ],
                                 ),

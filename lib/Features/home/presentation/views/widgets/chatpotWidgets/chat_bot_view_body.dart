@@ -146,12 +146,12 @@ class _ChatPotViewBodyState extends State<ChatPotViewBody> {
         : [
             _ChatBottomButton(
               text: "Who can use Y-Balash?",
-              fontSize: 12.sp,
+              fontSize: 10.sp,
               onTap: () => _sendMessage("Who can use Y-Balash?"),
             ),
             _ChatBottomButton(
               text: "I forget my password - what do I do?",
-              fontSize: 11.sp,
+              fontSize: 10.sp,
               onTap: () => _sendMessage("I forget my password - what do I do?"),
             ),
           ];
@@ -367,19 +367,22 @@ class _ChatBottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Chip(
-        label: Text(
-          text,
-          style: TextStyle(fontSize: fontSize),
-          overflow: TextOverflow.ellipsis, // لو كبر أوي يتقص
-          maxLines: 1,
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+    return FittedBox(
+      fit: BoxFit.scaleDown, // يخلي الشيب يصغر لو المكان ضيق
+      child: InkWell(
+        onTap: onTap,
+        child: Chip(
+          label: Text(
+            text,
+            style: TextStyle(fontSize: fontSize),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
       ),
     );
